@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate JSON Schemas for the two LLM calls from the CDBO ontology.
 
-Usage: python build_json_schema.py cdbo-core-v0.3.ttl out/
+Usage: python build_json_schema.py ../ontologies/cdbo-core-v0.4.1.ttl out/
 
 Writes:
   study.schema.json   object with one key per LLM-extracted Study field

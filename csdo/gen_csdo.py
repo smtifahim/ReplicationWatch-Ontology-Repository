@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the Claim Similarity Dimension Ontology (CSDO) from this file and the query sources in queries/.
 
-Usage: python gen_csdo.py ../cdbo-core-v0.3.ttl ../csdo-core-v0.1.ttl
+Usage: python gen_csdo.py ../ontologies/cdbo-core-v0.4.1.ttl ../ontologies/csdo-core-v0.1.ttl
 The SPARQL queries are stored as annotation property values, so the ontology is the single place where the loader
 and the portal get them from.
 """

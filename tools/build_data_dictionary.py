@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the data dictionary (CSV and Markdown) from the CDBO ontology.
 
-Usage: python build_data_dictionary.py cdbo-core-v0.3.ttl out/
+Usage: python build_data_dictionary.py ../ontologies/cdbo-core-v0.4.1.ttl out/
 
 One row per field property. 'Field_Key' is the skos:altLabel, the key used in
 JSON output, spreadsheet columns and the relational views.

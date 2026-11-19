@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the curation workbook (empty template) from the CDBO ontology and the layout file.
 
-Usage: python build_excel_template.py cdbo-core-v0.3.ttl config/excel_layout.json out/cdbo_template.xlsx
+Usage: python build_excel_template.py ../ontologies/cdbo-core-v0.4.1.ttl config/excel_layout.json out/cdbo_template.xlsx
 
 Workbook design
   * One tab per major group listed in the layout file.

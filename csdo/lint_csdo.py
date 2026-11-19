@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks for the CSDO file. Usage: python lint_csdo.py csdo-core-v0.1.ttl [cdbo-core-v0.3.ttl]
+"""Checks for the CSDO file. Usage: python lint_csdo.py ../ontologies/csdo-core-v0.1.ttl [../ontologies/cdbo-core-v0.4.1.ttl]
 Exit code 1 on any error. Parses every stored query with Oxigraph when pyoxigraph is installed."""
 import re
 import sys

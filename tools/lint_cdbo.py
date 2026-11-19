@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Build checks for the ClaimsDB Ontology (CDBO).
 
-Usage: python lint_cdbo.py cdbo-core-v0.3.ttl
+Usage: python lint_cdbo.py ../ontologies/cdbo-core-v0.4.1.ttl
 Exit code 1 if any ERROR is found. WARN lines are advisory.
 """
 import re
 import sys
+from pathlib import Path
 from collections import Counter
 from cdbo_common import Cdbo
+
+DEFAULT_TTL = str(Path(__file__).resolve().parent.parent / "ontologies" / "cdbo-core-v0.4.1.ttl")
 
 ALT = re.compile(r"[A-Z][A-Za-z0-9]*(_[A-Za-z0-9]+)*$")
 PROMPT_PROP = {"Study": "hasStudyMetadataExtractionPrompt", "Claim": "hasClaimExtractionPrompt"}
@@ -108,4 +111,4 @@ def main(path):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else "cdbo-core-v0.3.ttl"))
+    sys.exit(main(sys.argv[1] if len(sys.argv) > 1 else DEFAULT_TTL))

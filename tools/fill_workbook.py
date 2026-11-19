@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Write LLM output (and any script-filled values) into the curation workbook.
 
-Usage: python fill_workbook.py cdbo-core-v0.3.ttl config/excel_layout.json template.xlsx batch.json out.xlsx
+Usage: python fill_workbook.py ../ontologies/cdbo-core-v0.4.1.ttl config/excel_layout.json template.xlsx batch.json out.xlsx
 
 batch.json is a list of records, one per article:
   {"publication": {"Publication_ID": "...", ...any publication-level keys},

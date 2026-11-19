@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble the prompt for one LLM call from the CDBO ontology.
 
-Usage: python assemble_prompt.py cdbo-core-v0.3.ttl study|claims [out.json]
+Usage: python assemble_prompt.py ../ontologies/cdbo-core-v0.4.1.ttl study|claims [out.json]
 
 The system prompt is the root general prompt plus the call's general prompt.
 The fragments are the per-field prompts. Both come from the ontology, so
