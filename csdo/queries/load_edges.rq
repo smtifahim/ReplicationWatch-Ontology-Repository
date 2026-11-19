@@ -1,0 +1,26 @@
+# Pass 2 (load). One RDF-star edge for each pair of Claim Groups that share the anchor of the default criteria set
+# (same grounded condition and same grounded region). Pairs are written once, in IRI order. The edge is also asserted
+# explicitly so that stores that do not assert quoted triples behave the same way.
+CONSTRUCT {
+  ?g1 csdo:comparableTo ?g2 .
+  << ?g1 csdo:comparableTo ?g2 >> csdo:criteriaSet csdo:DefaultAnchor ;
+     csdo:lateralityRelation ?latRel ; csdo:measureRelation ?meaRel ; csdo:directionRelation ?dirRel ;
+     csdo:computedWithVersions "__VERSIONS__" .
+}
+WHERE {
+  ?g1 a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg .
+  ?g2 a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg .
+  FILTER (STR(?g1) < STR(?g2))
+  OPTIONAL { ?g1 csdo:hasLaterality ?lat1 } OPTIONAL { ?g2 csdo:hasLaterality ?lat2 }
+  OPTIONAL { ?g1 csdo:hasMeasure ?mea1 }    OPTIONAL { ?g2 csdo:hasMeasure ?mea2 }
+  OPTIONAL { ?g1 csdo:hasDirection ?dir1 }  OPTIONAL { ?g2 csdo:hasDirection ?dir2 }
+  VALUES (?dir1 ?pol1 ?kind1) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  VALUES (?dir2 ?pol2 ?kind2) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  BIND (IF(!BOUND(?lat1) || !BOUND(?lat2) || ?lat1 = "Not Specified" || ?lat2 = "Not Specified", "Unknown",
+           IF(?lat1 = ?lat2, "Same", "Different")) AS ?latRel)
+  BIND (IF(!BOUND(?mea1) || !BOUND(?mea2), "Unknown", IF(?mea1 = ?mea2, "Same", "Different")) AS ?meaRel)
+  BIND (IF(?kind1 != ?kind2, "NotComparable",
+           IF(?pol1 = ?pol2, "Concordant", IF(?pol1 * ?pol2 = -1, "Opposite", "NullVsEffect"))) AS ?dirRel)
+}

@@ -1,0 +1,1067 @@
+@prefix cdbo: <https://w3id.org/replicationwatch/cdbo/> .
+@prefix csdo: <https://w3id.org/replicationwatch/csdo/> .
+@prefix grp: <https://w3id.org/replicationwatch/csdo/group/> .
+@prefix rwid: <https://w3id.org/replicationwatch/claimsdb/id/> .
+@prefix pub: <https://w3id.org/replicationwatch/claimsdb/id/pub/> .
+@prefix study: <https://w3id.org/replicationwatch/claimsdb/id/study/> .
+@prefix claim: <https://w3id.org/replicationwatch/claimsdb/id/claim/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix nidm: <http://purl.org/nidash/nidm#> .
+
+# ClaimsDB content for one article (SE-P1). Turtle-star: quoted triples are written << s p o >>.
+# Source PDF content hash: sha256:0dfba6f26225eb69a9e214952c383a69e3ebf5d6b895ab170ce82d81c6dddf2c
+
+# ===== Publication =====
+
+pub:SE-P1
+    rdf:type cdbo:CDBO_0000001 ;
+    cdbo:hasArticleTitle "Role of Bilingualism in the Neuroanatomical Differences in Children With Reading Disability (dyslexia)" ;
+    cdbo:hasListedAuthors "Alison K. Schug; Guinevere F. Eden" ;
+    cdbo:hasPublicationYear "2026"^^xsd:gYear ;
+    cdbo:hasPublicationLink "https://doi.org/10.1111/desc.70086"^^xsd:anyURI ;
+    cdbo:hasDOILink "https://doi.org/10.1111/desc.70086"^^xsd:anyURI ;
+    cdbo:hasPublicationVenue "Developmental Science" ;
+    cdbo:hasExtractionDate "2026-11-06T23:26:38Z"^^xsd:dateTime ;
+    cdbo:hasExtractionModelID "claude-sonnet-5-5 (configured model; calls run in-session, not through the API; the serving model may differ)" ;
+    cdbo:hasExtractionPromptVersion "CDBO 0.4.1-draft prompts (claims.prompt.json + study.prompt.json, sha256 1ed3ad9a142a)" ;
+    cdbo:hasOntologyVersion "CDBO 0.4.1-draft; CSDO 0.1.0-draft" ;
+    cdbo:hasParserVersion "pdftotext (poppler 24.02.0) used as fallback; Docling not installed in this run; bibliographic fields read from the PDF, no Crossref lookup" ;
+    cdbo:hasArticleClassification "Primary" ;
+    cdbo:hasAvailableSections "Title, Abstract, Introduction, Methods, Results, Discussion, References, Tables, Figures" ;
+    cdbo:hasContentHash "sha256:0dfba6f26225eb69a9e214952c383a69e3ebf5d6b895ab170ce82d81c6dddf2c" ;
+    cdbo:hasDocumentType "Native PDF" ;
+    cdbo:hasFullTextAvailable "Yes" ;
+    cdbo:hasPublicationID "SE-P1" ;
+    cdbo:hasReportedStudyID "SE-S1" .
+
+# ===== Study =====
+
+study:SE-S1
+    rdf:type cdbo:CDBO_0000002 ;
+    cdbo:hasAnalysisSettings "GMV: SPM12 VBM, images co-registered to the white matter tissue probability map, segmented, study-specific template spatially normalized to MNI space with DARTEL, 8 mm FWHM Gaussian smoothing, intensity threshold 0.2. CT: custom tissue probability map from Template-O-Matic (TOM8), segmentation in CAT12, 10 mm smoothing. Both: 2 x 2 full factorial model, voxel-wise height threshold p < 0.005 uncorrected, cluster-level extent threshold p < 0.05 FDR corrected." ;
+    cdbo:hasAnalysisSoftware "SPM12; CAT12; Template-O-Matic (TOM8) toolbox; label4MRI" ;
+    cdbo:hasAnalysisSoftwareVersion "Not Specified" ;
+    cdbo:hasAtlasParcellation "Brodmann areas and anatomical labels assigned with the label4MRI package" ;
+    cdbo:hasMorphometryMethod "Voxel-Based Morphometry" ;
+    cdbo:hasOperatingSystem "Not Specified" ;
+    cdbo:hasStudyDataset "ABCD Study, Annual Release 3.0, baseline time point (NDA DOI 10.15154/gx74-8w05)" ;
+    cdbo:hasImageResolution "1 x 1 x 1 mm3 voxel resolution" ;
+    cdbo:hasImagingModality "Structural MRI (whole-brain T1-weighted)" ;
+    cdbo:hasImagingModalityMappedCurie "[\"nidm:MagneticResonanceImaging\", \"nidm:Structural\", \"nidm:T1Weighted\"]"^^rdf:JSON ;
+    cdbo:hasMagneticFieldStrength "3T" ;
+    cdbo:hasPulseSequence "T1-weighted; acquisition parameters are not given in the article (referred to the ABCD imaging protocol document)" ;
+    cdbo:hasScannerManufacturerModel "Not Specified" ;
+    cdbo:hasCovariates "GMV: total GMV, study site, scanner type, ADHD scores. CT: study site, scanner type, ADHD scores. Age and sex were not included." ;
+    cdbo:hasMultipleComparisonCorrection "Cluster-level FDR correction at p < 0.05 (voxel-wise height threshold p < 0.005, uncorrected)" ;
+    cdbo:hasStatisticalTest "2 x 2 full factorial analysis (ANOVA): main effect of Reading Ability, main effect of Language Background, and their interaction" ;
+    cdbo:hasStudyDesignType "2 x 2 factorial group comparison (Reading Ability by Language Background) on ABCD baseline data" ;
+    cdbo:hasPublicationID "SE-P1" ;
+    cdbo:hasStudyID "SE-S1" .
+
+# ===== Claim records (CDBO) =====
+
+claim:SE-C01
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C01" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|?|Left|PATO:0000918+UBERON:0002020|Decreased" ;
+    cdbo:hasClaimKeyComplete "No" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Decreased" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "cerebellum lobule VI" ;
+    cdbo:hasUnmappableClaimRegion "cerebellum lobule VI" ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "the RD Groups (Bilingual and Monolingual combined) had less GMV than the Control Groups (Bilingual and Monolingual combined) in two regions: (1) left cerebellum lobule VI and (2) right precentral gyrus (BA 6) extending to the superior frontal gyrus (BA 6)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have less gray matter volume in the left cerebellum lobule VI than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:ec72de5feb4ebd8741201b8b22c798b3a09e3296 .
+
+claim:SE-C02
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C02" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002703|Right|PATO:0000918+UBERON:0002020|Decreased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Decreased" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "precentral gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002703 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002703\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "the RD Groups (Bilingual and Monolingual combined) had less GMV than the Control Groups (Bilingual and Monolingual combined) in two regions: (1) left cerebellum lobule VI and (2) right precentral gyrus (BA 6) extending to the superior frontal gyrus (BA 6)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have less gray matter volume in the right precentral gyrus than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:9687b67e467d323c040e82c0f4acea88cc6c9595 .
+
+claim:SE-C03
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C03" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002581|Left|PATO:0000918+UBERON:0002020|Increased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Increased" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "postcentral gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002581 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002581\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "For the opposite contrast, there were four regions where the Control Groups had less GMV than the RD Groups. In the left hemisphere: (1) postcentral gyrus (BA 4) and (2) middle temporal gyrus (BA 22 & 21). In the right hemisphere: (1) insula (BA 47 & 13) and (2) lingual gyrus (BA 19)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have more gray matter volume in the left postcentral gyrus than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:349986ecb0fdca7b555955477c68c286138db7db .
+
+claim:SE-C04
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C04" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002771|Left|PATO:0000918+UBERON:0002020|Increased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Increased" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "middle temporal gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002771 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002771\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "For the opposite contrast, there were four regions where the Control Groups had less GMV than the RD Groups. In the left hemisphere: (1) postcentral gyrus (BA 4) and (2) middle temporal gyrus (BA 22 & 21). In the right hemisphere: (1) insula (BA 47 & 13) and (2) lingual gyrus (BA 19)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have more gray matter volume in the left middle temporal gyrus than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:6126bf70785713254ff18323090fa1e634b9aae8 .
+
+claim:SE-C05
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C05" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002022|Right|PATO:0000918+UBERON:0002020|Increased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Increased" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "insula" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002022 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002022\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "For the opposite contrast, there were four regions where the Control Groups had less GMV than the RD Groups. In the left hemisphere: (1) postcentral gyrus (BA 4) and (2) middle temporal gyrus (BA 22 & 21). In the right hemisphere: (1) insula (BA 47 & 13) and (2) lingual gyrus (BA 19)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have more gray matter volume in the right insula than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:6a4931804f148a9ada4fe4ea006d00eabfe4512c .
+
+claim:SE-C06
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C06" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002943|Right|PATO:0000918+UBERON:0002020|Increased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Increased" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "lingual gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002943 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002943\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "For the opposite contrast, there were four regions where the Control Groups had less GMV than the RD Groups. In the left hemisphere: (1) postcentral gyrus (BA 4) and (2) middle temporal gyrus (BA 22 & 21). In the right hemisphere: (1) insula (BA 47 & 13) and (2) lingual gyrus (BA 19)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S1" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have more gray matter volume in the right lingual gyrus than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:5bbcf84c903162cc522a827622324b54dde6fa2b .
+
+claim:SE-C07
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C07" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Yes" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002586|Left|PATO:0000915|Decreased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Control Groups" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Decreased" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "cortical thickness" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000915\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "calcarine fissure" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002586 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002586\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "The main effect of Reading Ability (Figure 3 and Table S3) revealed one region where the RD Groups had less CT than the Control Groups, the left calcarine fissure (BA 18)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table S3" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with reading disability have less cortical thickness in the left calcarine fissure than control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:bc8588a0edb6e864e088a02b0c2c917a2096ff77 .
+
+claim:SE-C08
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C08" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "t(264) = −3.368, p = 0.005" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Monolinguals; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "66 Monolingual RD; 65 Monolingual Control" ;
+    cdbo:hasClaimSexDistribution "Monolingual RD 36 F, 30 M; Monolingual Control 32 F, 33 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002702|Right|PATO:0000918+UBERON:0002020|Decreased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Monolinguals without RD" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Decreased" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "middle frontal gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002702 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002702\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "while there was less GMV in Monolinguals with RD relative to Monolinguals without RD in right middle frontal gyrus (t(264) = −3.368, p = 0.005) and middle temporal gyrus (t(264) = −3.2804, p = 0.006), this was not the case for the Bilinguals with and without RD (t(264) = 0.220, p = 0.996; and t(264) = −1.6137, p = 0.373, respectively)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table 2" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Monolingual children aged 9 to 10 years with reading disability have less gray matter volume in the right middle frontal gyrus than monolingual children without reading disability." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:4ae92c45a8c1354a9481c9101102c199b35ec2d8 .
+
+claim:SE-C09
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C09" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "t(264) = −3.2804, p = 0.006" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Monolinguals; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "66 Monolingual RD; 65 Monolingual Control" ;
+    cdbo:hasClaimSexDistribution "Monolingual RD 36 F, 30 M; Monolingual Control 32 F, 33 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002771|Right|PATO:0000918+UBERON:0002020|Decreased" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Monolinguals without RD" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "Decreased" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "middle temporal gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002771 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002771\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "while there was less GMV in Monolinguals with RD relative to Monolinguals without RD in right middle frontal gyrus (t(264) = −3.368, p = 0.005) and middle temporal gyrus (t(264) = −3.2804, p = 0.006), this was not the case for the Bilinguals with and without RD (t(264) = 0.220, p = 0.996; and t(264) = −1.6137, p = 0.373, respectively)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table 2" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Monolingual children aged 9 to 10 years with reading disability have less gray matter volume in the right middle temporal gyrus than monolingual children without reading disability." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:44320f73deb82e2f89a1966de379e343ec4abd90 .
+
+claim:SE-C10
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C10" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "t(264) = 0.220, p = 0.996" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; early Spanish-English bilinguals; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "69 Bilingual RD; 68 Bilingual Control" ;
+    cdbo:hasClaimSexDistribution "Bilingual RD 35 F, 34 M; Bilingual Control 39 F, 29 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002702|Right|PATO:0000918+UBERON:0002020|No Difference" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Bilinguals without RD" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "No Difference" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "middle frontal gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002702 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002702\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "while there was less GMV in Monolinguals with RD relative to Monolinguals without RD in right middle frontal gyrus (t(264) = −3.368, p = 0.005) and middle temporal gyrus (t(264) = −3.2804, p = 0.006), this was not the case for the Bilinguals with and without RD (t(264) = 0.220, p = 0.996; and t(264) = −1.6137, p = 0.373, respectively)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table 2" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Bilingual children aged 9 to 10 years with reading disability show no difference in gray matter volume in the right middle frontal gyrus from bilingual children without reading disability." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:e4994846e604226820e57ab5f21f80f5bc5f5592 .
+
+claim:SE-C11
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C11" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "t(264) = −1.6137, p = 0.373" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; early Spanish-English bilinguals; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "69 Bilingual RD; 68 Bilingual Control" ;
+    cdbo:hasClaimSexDistribution "Bilingual RD 35 F, 34 M; Bilingual Control 39 F, 29 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "HP:0010522|UBERON:0002771|Right|PATO:0000918+UBERON:0002020|No Difference" ;
+    cdbo:hasClaimKeyComplete "Yes" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Bilinguals without RD" ;
+    cdbo:hasClaimCondition "reading disability" ;
+    cdbo:hasMappedClaimCondition obo:HP_0010522 ;
+    cdbo:hasMappedClaimConditionCurie "[\"HP:0010522\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "No Difference" ;
+    cdbo:hasClaimLaterality "Right" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000007\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "middle temporal gyrus" ;
+    cdbo:hasMappedClaimRegion obo:UBERON_0002771 ;
+    cdbo:hasMappedClaimRegionCurie "[\"UBERON:0002771\"]"^^rdf:JSON ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "while there was less GMV in Monolinguals with RD relative to Monolinguals without RD in right middle frontal gyrus (t(264) = −3.368, p = 0.005) and middle temporal gyrus (t(264) = −3.2804, p = 0.006), this was not the case for the Bilinguals with and without RD (t(264) = 0.220, p = 0.996; and t(264) = −1.6137, p = 0.373, respectively)." ;
+    cdbo:hasClaimRole "Supporting" ;
+    cdbo:hasClaimSourceReference "Table 2" ;
+    cdbo:hasClaimSourceSection "Results" ;
+    cdbo:hasClaimStatement "Bilingual children aged 9 to 10 years with reading disability show no difference in gray matter volume in the right middle temporal gyrus from bilingual children without reading disability." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:c03e5839629829a88dda651f594c863d9608032d .
+
+claim:SE-C12
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C12" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "MONDO:0005489|?|Left|PATO:0000918+UBERON:0002020|No Difference" ;
+    cdbo:hasClaimKeyComplete "No" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Controls" ;
+    cdbo:hasClaimCondition "dyslexia" ;
+    cdbo:hasMappedClaimCondition obo:MONDO_0005489 ;
+    cdbo:hasMappedClaimConditionCurie "[\"MONDO:0005489\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "No Difference" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "gray matter volume" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000918\", \"UBERON:0002020\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "language cortex" ;
+    cdbo:hasUnmappableClaimRegion "language cortex" ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "They also reveal no differences in left-hemisphere language cortex in dyslexia (main effects analysis of RD vs. Controls), suggesting that prior results of GMV and CT differences in these regions from smaller studies may not have been robust." ;
+    cdbo:hasClaimRole "Main" ;
+    cdbo:hasClaimSourceSection "Abstract" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with dyslexia show no difference in gray matter volume in left-hemisphere language cortex from control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:680919a9020a09fc1185a4f933ec3f06e76582cb .
+
+claim:SE-C13
+    rdf:type cdbo:CDBO_0000003 ;
+    cdbo:hasClaimID "SE-C13" ;
+    cdbo:hasClaimAgeGroup "Child" ;
+    cdbo:hasClaimAgeRange "9–10 years" ;
+    cdbo:hasClaimDiagnosticCriteria "NIH Toolbox Oral Reading Recognition Test (TORRT) standard score below 85" ;
+    cdbo:hasClaimEffectSize "Not Specified" ;
+    cdbo:hasClaimPValue "Not Specified" ;
+    cdbo:hasClaimPopulationQualifiers "ABCD Study; Bilingual and Monolingual groups combined; matched on nonverbal reasoning and socioeconomic status" ;
+    cdbo:hasClaimSampleSize "135 children with RD; 133 controls" ;
+    cdbo:hasClaimSexDistribution "RD 71 F, 64 M; controls 71 F, 62 M" ;
+    cdbo:hasClaimSexGroup "Mixed" ;
+    cdbo:hasClaimSurvivedCorrection "Not Specified" ;
+    cdbo:hasClaimKey "MONDO:0005489|?|Left|PATO:0000915|No Difference" ;
+    cdbo:hasClaimKeyComplete "No" ;
+    cdbo:hasGroundingOntologyVersions "{\"UBERON\": \"sha256:af71fe0b6e23\", \"MONDO\": \"sha256:510054a0b4b9\", \"HP\": \"hp/releases/2026-09-01\", \"PATO\": \"slice 62acac98393e\", \"BSPO\": \"slice 772a69d85c0c\", \"NIDM\": \"slice dc0d8360b5f5\", \"grounding_seed\": \"28dff6de314a\"}"^^rdf:JSON ;
+    cdbo:hasClaimComparator "Controls" ;
+    cdbo:hasClaimCondition "dyslexia" ;
+    cdbo:hasMappedClaimCondition obo:MONDO_0005489 ;
+    cdbo:hasMappedClaimConditionCurie "[\"MONDO:0005489\"]"^^rdf:JSON ;
+    cdbo:hasClaimDirection "No Difference" ;
+    cdbo:hasClaimLaterality "Left" ;
+    cdbo:hasMappedClaimLateralityCurie "[\"BSPO:0000000\"]"^^rdf:JSON ;
+    cdbo:hasClaimMeasure "cortical thickness" ;
+    cdbo:hasMappedClaimMeasureCurie "[\"PATO:0000915\"]"^^rdf:JSON ;
+    cdbo:hasClaimRegion "language cortex" ;
+    cdbo:hasUnmappableClaimRegion "language cortex" ;
+    cdbo:hasClaimVariableType "Diagnosis" ;
+    cdbo:hasClaimEvidenceLevel "Full Text" ;
+    cdbo:hasClaimEvidenceQuote "They also reveal no differences in left-hemisphere language cortex in dyslexia (main effects analysis of RD vs. Controls), suggesting that prior results of GMV and CT differences in these regions from smaller studies may not have been robust." ;
+    cdbo:hasClaimRole "Main" ;
+    cdbo:hasClaimSourceSection "Abstract" ;
+    cdbo:hasClaimStatement "Children aged 9 to 10 years with dyslexia show no difference in cortical thickness in left-hemisphere language cortex from control children." ;
+    cdbo:hasReportingPublicationID "SE-P1" ;
+    cdbo:hasSourceStudyID "SE-S1" ;
+    csdo:inClaimGroup grp:7a2fe22d553d0824c434d69cee79323d24fa12c0 .
+
+# ===== Claim Groups (CSDO) and plain comparableTo edges =====
+
+grp:349986ecb0fdca7b555955477c68c286138db7db
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Increased" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002581 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:44320f73deb82e2f89a1966de379e343ec4abd90
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:comparableTo grp:6126bf70785713254ff18323090fa1e634b9aae8 ;
+    csdo:comparableTo grp:c03e5839629829a88dda651f594c863d9608032d ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Decreased" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002771 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:4ae92c45a8c1354a9481c9101102c199b35ec2d8
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:comparableTo grp:e4994846e604226820e57ab5f21f80f5bc5f5592 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Decreased" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002702 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:5bbcf84c903162cc522a827622324b54dde6fa2b
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Increased" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002943 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:6126bf70785713254ff18323090fa1e634b9aae8
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:comparableTo grp:c03e5839629829a88dda651f594c863d9608032d ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Increased" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002771 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:680919a9020a09fc1185a4f933ec3f06e76582cb
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:MONDO_0005489 ;
+    csdo:hasDirection "No Difference" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:isComplete "false"^^xsd:boolean .
+
+grp:6a4931804f148a9ada4fe4ea006d00eabfe4512c
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Increased" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002022 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:7a2fe22d553d0824c434d69cee79323d24fa12c0
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:MONDO_0005489 ;
+    csdo:hasDirection "No Difference" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000915\"]" ;
+    csdo:isComplete "false"^^xsd:boolean .
+
+grp:9687b67e467d323c040e82c0f4acea88cc6c9595
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Decreased" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002703 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:bc8588a0edb6e864e088a02b0c2c917a2096ff77
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Decreased" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000915\"]" ;
+    csdo:hasRegion obo:UBERON_0002586 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:c03e5839629829a88dda651f594c863d9608032d
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "No Difference" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002771 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:e4994846e604226820e57ab5f21f80f5bc5f5592
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "No Difference" ;
+    csdo:hasLaterality "Right" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:hasRegion obo:UBERON_0002702 ;
+    csdo:isComplete "true"^^xsd:boolean .
+
+grp:ec72de5feb4ebd8741201b8b22c798b3a09e3296
+    rdf:type csdo:CSDO_0000001 ;
+    csdo:hasCondition obo:HP_0010522 ;
+    csdo:hasDirection "Decreased" ;
+    csdo:hasLaterality "Left" ;
+    csdo:hasMeasure "[\"PATO:0000918\", \"UBERON:0002020\"]" ;
+    csdo:isComplete "false"^^xsd:boolean .
+
+# ===== RDF-star edge annotations (quoted triples) =====
+
+<< grp:44320f73deb82e2f89a1966de379e343ec4abd90 csdo:comparableTo grp:6126bf70785713254ff18323090fa1e634b9aae8 >>
+    csdo:computedWithVersions "CSDO 0.1.0-draft; CDBO 0.4.1-draft" ;
+    csdo:criteriaSet csdo:DefaultAnchor ;
+    csdo:directionRelation "Opposite" ;
+    csdo:lateralityRelation "Different" ;
+    csdo:measureRelation "Same" .
+
+<< grp:44320f73deb82e2f89a1966de379e343ec4abd90 csdo:comparableTo grp:c03e5839629829a88dda651f594c863d9608032d >>
+    csdo:computedWithVersions "CSDO 0.1.0-draft; CDBO 0.4.1-draft" ;
+    csdo:criteriaSet csdo:DefaultAnchor ;
+    csdo:directionRelation "NullVsEffect" ;
+    csdo:lateralityRelation "Same" ;
+    csdo:measureRelation "Same" .
+
+<< grp:4ae92c45a8c1354a9481c9101102c199b35ec2d8 csdo:comparableTo grp:e4994846e604226820e57ab5f21f80f5bc5f5592 >>
+    csdo:computedWithVersions "CSDO 0.1.0-draft; CDBO 0.4.1-draft" ;
+    csdo:criteriaSet csdo:DefaultAnchor ;
+    csdo:directionRelation "NullVsEffect" ;
+    csdo:lateralityRelation "Same" ;
+    csdo:measureRelation "Same" .
+
+<< grp:6126bf70785713254ff18323090fa1e634b9aae8 csdo:comparableTo grp:c03e5839629829a88dda651f594c863d9608032d >>
+    csdo:computedWithVersions "CSDO 0.1.0-draft; CDBO 0.4.1-draft" ;
+    csdo:criteriaSet csdo:DefaultAnchor ;
+    csdo:directionRelation "NullVsEffect" ;
+    csdo:lateralityRelation "Different" ;
+    csdo:measureRelation "Same" .
+
+# ===== Grounded ontology terms with labels and subclass closure =====
+
+obo:BSPO_0000000
+    rdf:type owl:Class ;
+    rdfs:label "left side" .
+
+obo:BSPO_0000007
+    rdf:type owl:Class ;
+    rdfs:label "right side" .
+
+obo:HP_0000001
+    rdf:type owl:Class ;
+    rdfs:label "All" .
+
+obo:HP_0000118
+    rdf:type owl:Class ;
+    rdfs:label "Phenotypic abnormality" ;
+    rdfs:subClassOf obo:HP_0000001 .
+
+obo:HP_0000707
+    rdf:type owl:Class ;
+    rdfs:label "Abnormality of the nervous system" ;
+    rdfs:subClassOf obo:HP_0000118 .
+
+obo:HP_0001328
+    rdf:type owl:Class ;
+    rdfs:label "Specific learning disability" ;
+    rdfs:subClassOf obo:HP_0012759 .
+
+obo:HP_0010522
+    rdf:type owl:Class ;
+    rdfs:label "Dyslexia" ;
+    rdfs:subClassOf obo:HP_0001328 .
+
+obo:HP_0012638
+    rdf:type owl:Class ;
+    rdfs:label "Abnormal nervous system physiology" ;
+    rdfs:subClassOf obo:HP_0000707 .
+
+obo:HP_0012759
+    rdf:type owl:Class ;
+    rdfs:label "Neurodevelopmental abnormality" ;
+    rdfs:subClassOf obo:HP_0012638 .
+
+obo:MONDO_0000001
+    rdf:type owl:Class ;
+    rdfs:label "disease" .
+
+obo:MONDO_0000592
+    rdf:type owl:Class ;
+    rdfs:label "specific developmental disorder" ;
+    rdfs:subClassOf obo:MONDO_0005503 .
+
+obo:MONDO_0001697
+    rdf:type owl:Class ;
+    rdfs:label "reading disorder" ;
+    rdfs:subClassOf obo:MONDO_0004681 .
+
+obo:MONDO_0002025
+    rdf:type owl:Class ;
+    rdfs:label "psychiatric disorder" ;
+    rdfs:subClassOf obo:MONDO_0700096 ;
+    rdfs:subClassOf obo:MONDO_7770007 .
+
+obo:MONDO_0004681
+    rdf:type owl:Class ;
+    rdfs:label "learning disability" ;
+    rdfs:subClassOf obo:MONDO_0000592 .
+
+obo:MONDO_0005084
+    rdf:type owl:Class ;
+    rdfs:label "mental disorder" ;
+    rdfs:subClassOf obo:MONDO_0002025 .
+
+obo:MONDO_0005489
+    rdf:type owl:Class ;
+    rdfs:label "dyslexia" ;
+    rdfs:subClassOf obo:MONDO_0001697 ;
+    rdfs:subClassOf obo:MONDO_0004681 .
+
+obo:MONDO_0005503
+    rdf:type owl:Class ;
+    rdfs:label "developmental disorder of mental health" ;
+    rdfs:subClassOf obo:MONDO_0005084 .
+
+obo:MONDO_0700096
+    rdf:type owl:Class ;
+    rdfs:label "human disease" ;
+    rdfs:subClassOf obo:MONDO_0000001 .
+
+obo:MONDO_7770007
+    rdf:type owl:Class ;
+    rdfs:label "disease by developmental or physiological process" ;
+    rdfs:subClassOf obo:MONDO_0700096 .
+
+obo:PATO_0000915
+    rdf:type owl:Class ;
+    rdfs:label "thickness" .
+
+obo:PATO_0000918
+    rdf:type owl:Class ;
+    rdfs:label "volume" .
+
+obo:UBERON_0000061
+    rdf:type owl:Class ;
+    rdfs:label "anatomical structure" ;
+    rdfs:subClassOf obo:UBERON_0000465 .
+
+obo:UBERON_0000062
+    rdf:type owl:Class ;
+    rdfs:label "organ" ;
+    rdfs:subClassOf obo:UBERON_0000467 ;
+    rdfs:subClassOf obo:UBERON_0010000 .
+
+obo:UBERON_0000064
+    rdf:type owl:Class ;
+    rdfs:label "organ part" ;
+    rdfs:subClassOf obo:UBERON_0000062 ;
+    rdfs:subClassOf obo:UBERON_0010000 .
+
+obo:UBERON_0000200
+    rdf:type owl:Class ;
+    rdfs:label "gyrus" ;
+    rdfs:subClassOf obo:UBERON_0000956 ;
+    rdfs:subClassOf obo:UBERON_0001869 ;
+    rdfs:subClassOf obo:UBERON_0034768 .
+
+obo:UBERON_0000203
+    rdf:type owl:Class ;
+    rdfs:label "pallium" ;
+    rdfs:subClassOf obo:UBERON_0001893 ;
+    rdfs:subClassOf obo:UBERON_0002616 .
+
+obo:UBERON_0000465
+    rdf:type owl:Class ;
+    rdfs:label "material anatomical entity" ;
+    rdfs:subClassOf obo:UBERON_0001062 .
+
+obo:UBERON_0000467
+    rdf:type owl:Class ;
+    rdfs:label "anatomical system" ;
+    rdfs:subClassOf obo:UBERON_0000061 ;
+    rdfs:subClassOf obo:UBERON_0000468 .
+
+obo:UBERON_0000468
+    rdf:type owl:Class ;
+    rdfs:label "multicellular organism" ;
+    rdfs:subClassOf obo:UBERON_0010000 .
+
+obo:UBERON_0000955
+    rdf:type owl:Class ;
+    rdfs:label "brain" ;
+    rdfs:subClassOf obo:UBERON_0000062 ;
+    rdfs:subClassOf obo:UBERON_0001017 .
+
+obo:UBERON_0000956
+    rdf:type owl:Class ;
+    rdfs:label "cerebral cortex" ;
+    rdfs:subClassOf obo:UBERON_0000203 ;
+    rdfs:subClassOf obo:UBERON_0005401 ;
+    rdfs:subClassOf obo:UBERON_0016548 .
+
+obo:UBERON_0001016
+    rdf:type owl:Class ;
+    rdfs:label "nervous system" ;
+    rdfs:subClassOf obo:UBERON_0000467 .
+
+obo:UBERON_0001017
+    rdf:type owl:Class ;
+    rdfs:label "central nervous system" ;
+    rdfs:subClassOf obo:UBERON_0001016 ;
+    rdfs:subClassOf obo:UBERON_0011216 .
+
+obo:UBERON_0001032
+    rdf:type owl:Class ;
+    rdfs:label "sensory system" ;
+    rdfs:subClassOf obo:UBERON_0004456 ;
+    rdfs:subClassOf obo:UBERON_0015203 .
+
+obo:UBERON_0001062
+    rdf:type owl:Class ;
+    rdfs:label "anatomical entity" ;
+    rdfs:subClassOf obo:UBERON_0003942 .
+
+obo:UBERON_0001869
+    rdf:type owl:Class ;
+    rdfs:label "cerebral hemisphere" ;
+    rdfs:subClassOf obo:UBERON_0000064 ;
+    rdfs:subClassOf obo:UBERON_0001893 .
+
+obo:UBERON_0001870
+    rdf:type owl:Class ;
+    rdfs:label "frontal cortex" .
+
+obo:UBERON_0001871
+    rdf:type owl:Class ;
+    rdfs:label "temporal lobe" ;
+    rdfs:subClassOf obo:UBERON_0016526 .
+
+obo:UBERON_0001872
+    rdf:type owl:Class ;
+    rdfs:label "parietal lobe" ;
+    rdfs:subClassOf obo:UBERON_0016526 .
+
+obo:UBERON_0001890
+    rdf:type owl:Class ;
+    rdfs:label "forebrain" ;
+    rdfs:subClassOf obo:UBERON_0000955 ;
+    rdfs:subClassOf obo:UBERON_0002616 .
+
+obo:UBERON_0001893
+    rdf:type owl:Class ;
+    rdfs:label "telencephalon" ;
+    rdfs:subClassOf obo:UBERON_0001890 ;
+    rdfs:subClassOf obo:UBERON_0002616 .
+
+obo:UBERON_0002020
+    rdf:type owl:Class ;
+    rdfs:label "gray matter" ;
+    rdfs:subClassOf obo:UBERON_0001017 ;
+    rdfs:subClassOf obo:UBERON_0005162 .
+
+obo:UBERON_0002021
+    rdf:type owl:Class ;
+    rdfs:label "occipital lobe" ;
+    rdfs:subClassOf obo:UBERON_0000956 ;
+    rdfs:subClassOf obo:UBERON_0016526 .
+
+obo:UBERON_0002022
+    rdf:type owl:Class ;
+    rdfs:label "insula" ;
+    rdfs:subClassOf obo:UBERON_0000956 ;
+    rdfs:subClassOf obo:UBERON_0001869 ;
+    rdfs:subClassOf obo:UBERON_0002020 .
+
+obo:UBERON_0002581
+    rdf:type owl:Class ;
+    rdfs:label "postcentral gyrus" ;
+    rdfs:subClassOf obo:UBERON_0000200 ;
+    rdfs:subClassOf obo:UBERON_0001872 .
+
+obo:UBERON_0002586
+    rdf:type owl:Class ;
+    rdfs:label "calcarine sulcus" ;
+    rdfs:subClassOf obo:UBERON_0000956 ;
+    rdfs:subClassOf obo:UBERON_0013118 .
+
+obo:UBERON_0002616
+    rdf:type owl:Class ;
+    rdfs:label "regional part of brain" .
+
+obo:UBERON_0002702
+    rdf:type owl:Class ;
+    rdfs:label "middle frontal gyrus" ;
+    rdfs:subClassOf obo:UBERON_0015593 .
+
+obo:UBERON_0002703
+    rdf:type owl:Class ;
+    rdfs:label "precentral gyrus" ;
+    rdfs:subClassOf obo:UBERON_0000200 ;
+    rdfs:subClassOf obo:UBERON_0001870 .
+
+obo:UBERON_0002771
+    rdf:type owl:Class ;
+    rdfs:label "middle temporal gyrus" ;
+    rdfs:subClassOf obo:UBERON_0000200 ;
+    rdfs:subClassOf obo:UBERON_0001871 .
+
+obo:UBERON_0002943
+    rdf:type owl:Class ;
+    rdfs:label "lingual gyrus" ;
+    rdfs:subClassOf obo:UBERON_0000200 ;
+    rdfs:subClassOf obo:UBERON_0002021 .
+
+obo:UBERON_0003942
+    rdf:type owl:Class ;
+    rdfs:label "somatosensory system" ;
+    rdfs:subClassOf obo:UBERON_0001032 .
+
+obo:UBERON_0004456
+    rdf:type owl:Class ;
+    rdfs:label "entire sense organ system" ;
+    rdfs:subClassOf obo:UBERON_0000467 .
+
+obo:UBERON_0005162
+    rdf:type owl:Class ;
+    rdfs:label "multi cell part structure" ;
+    rdfs:subClassOf obo:UBERON_0000061 .
+
+obo:UBERON_0005401
+    rdf:type owl:Class ;
+    rdfs:label "cerebral hemisphere gray matter" .
+
+obo:UBERON_0010000
+    rdf:type owl:Class ;
+    rdfs:label "multicellular anatomical structure" .
+
+obo:UBERON_0011216
+    rdf:type owl:Class ;
+    rdfs:label "organ system subdivision" ;
+    rdfs:subClassOf obo:UBERON_0000467 ;
+    rdfs:subClassOf obo:UBERON_0010000 .
+
+obo:UBERON_0013118
+    rdf:type owl:Class ;
+    rdfs:label "sulcus of brain" .
+
+obo:UBERON_0015203
+    rdf:type owl:Class ;
+    rdfs:label "non-connected functional system" ;
+    rdfs:subClassOf obo:UBERON_0034923 .
+
+obo:UBERON_0015593
+    rdf:type owl:Class ;
+    rdfs:label "frontal gyrus" .
+
+obo:UBERON_0016526
+    rdf:type owl:Class ;
+    rdfs:label "lobe of cerebral hemisphere" ;
+    rdfs:subClassOf obo:UBERON_0000064 ;
+    rdfs:subClassOf obo:UBERON_0001869 .
+
+obo:UBERON_0016548
+    rdf:type owl:Class ;
+    rdfs:label "central nervous system gray matter layer" .
+
+obo:UBERON_0034768
+    rdf:type owl:Class ;
+    rdfs:label "morphological feature" ;
+    rdfs:subClassOf obo:UBERON_0000061 ;
+    rdfs:subClassOf obo:UBERON_0000468 .
+
+obo:UBERON_0034923
+    rdf:type owl:Class ;
+    rdfs:label "disconnected anatomical group" ;
+    rdfs:subClassOf obo:UBERON_0000465 .
+
+nidm:MagneticResonanceImaging
+    rdf:type owl:Class ;
+    rdfs:label "Magnetic Resonance Imaging" .
+
+nidm:Structural
+    rdf:type owl:Class ;
+    rdfs:label "Structural" .
+
+nidm:T1Weighted
+    rdf:type owl:Class ;
+    rdfs:label "T1 Weighted" .

@@ -1,0 +1,17 @@
+{
+  "ttl": "SE-P1_claimsdb.ttl",
+  "bytes": 54399,
+  "subjects": 99,
+  "quads_in_file": 840,
+  "roundtrip_identical": true,
+  "load_query_outputs": [
+    101,
+    24
+  ],
+  "records": {
+    "pub": 1,
+    "study": 1,
+    "claims": 13
+  },
+  "terms": 67
+}

@@ -1,0 +1,12 @@
+# Portal. Support behind each group, split by age group and evidence level (the facets that let experts see whether a
+# conflict between two groups is explained by age or by abstract-only evidence).
+# Parameter: {{GROUPS}} is replaced by a space-separated list of group IRIs in angle brackets.
+SELECT ?group ?ageGroup ?evidenceLevel (COUNT(?claim) AS ?claims)
+WHERE {
+  VALUES ?group { {{GROUPS}} }
+  ?claim csdo:inClaimGroup ?group .
+  OPTIONAL { ?claim cdbo:hasClaimAgeGroup ?ag }
+  OPTIONAL { ?claim cdbo:hasClaimEvidenceLevel ?ev }
+  BIND (COALESCE(?ag, "Not Specified") AS ?ageGroup)
+  BIND (COALESCE(?ev, "Not Specified") AS ?evidenceLevel)
+} GROUP BY ?group ?ageGroup ?evidenceLevel

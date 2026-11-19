@@ -1,0 +1,20 @@
+# Pass 1 (load). Derive Claim Groups from Claim records: one group per complete Claim_Key; an incomplete record is its own group.
+# Group IRIs are deterministic hashes, so re-running after every batch is safe and the merged result is a set union.
+CONSTRUCT {
+  ?g a csdo:CSDO_0000001 ; csdo:isComplete ?complete ;
+     csdo:hasCondition ?cond ; csdo:hasRegion ?reg ; csdo:hasLaterality ?lat ;
+     csdo:hasMeasure ?mea ; csdo:hasDirection ?dir .
+  ?c csdo:inClaimGroup ?g .
+}
+WHERE {
+  ?c a cdbo:CDBO_0000003 ; cdbo:hasClaimKeyComplete ?kc .
+  OPTIONAL { ?c cdbo:hasClaimKey ?key }
+  OPTIONAL { ?c cdbo:hasMappedClaimCondition ?cond }
+  OPTIONAL { ?c cdbo:hasMappedClaimRegion ?reg }
+  OPTIONAL { ?c cdbo:hasClaimLaterality ?lat }
+  OPTIONAL { ?c cdbo:hasMappedClaimMeasureCurie ?meaRaw }
+  OPTIONAL { ?c cdbo:hasClaimDirection ?dir }
+  BIND (STR(?meaRaw) AS ?mea)
+  BIND ((?kc = "Yes" && BOUND(?key)) AS ?complete)
+  BIND (IRI(CONCAT("https://w3id.org/replicationwatch/csdo/group/", SHA1(IF(?complete, ?key, STR(?c))))) AS ?g)
+}

@@ -1,0 +1,232 @@
+{
+  "system": {
+    "pipeline": {
+      "role": "You are extracting structured metadata and claims from one full-text neuroimaging article into a predefined set of fields, guided by the ClaimsDB Ontology (CDBO).",
+      "task": "The article text is loaded once and reused, with prompt caching, across two sequential extraction calls: (1) Study Metadata (see hasStudyMetadata's hasGeneralStudyMetadataExtractionPrompt) and (2) Claims (see hasClaimRecordMetadata's hasGeneralClaimExtractionPrompt). Registry, bibliographic, SciScore, mapping and provenance fields are filled by scripts and are never requested from you.",
+      "article_classification": "Whether the article is primary or secondary is decided by the registry before extraction and is authoritative. Secondary articles (for example reviews and meta-analyses) are not sent to these calls in version 0.1.",
+      "scope": "Only MRI-based anatomical observations in humans are in scope. Ignore animal studies, functional-only measures and purely behavioral findings.",
+      "global_rules": [
+        "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+        "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+        "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+        "Do not invent identifiers, links or numbers."
+      ]
+    },
+    "this_call": {
+      "role": "You are extracting every claim that one neuroimaging article makes about regional brain anatomy from its own results.",
+      "task": "You are given the article text and a set of fields, each supplied separately as a compact fragment (field, description, example, allowed values and extraction rule). Return one JSON object with a single key 'claims', an array with one object per claim. Each object has one key per fragment, named by the fragment's 'field' value.",
+      "output_schema": {
+        "type": "object",
+        "keys": [
+          "claims"
+        ],
+        "claims": "array of objects, one per atomic claim"
+      },
+      "claim_rules": [
+        "Extract only claims that this study reports from its own data. Do not extract findings the article attributes to earlier studies, hypotheses, predictions or recommendations.",
+        "Extract every distinct main claim and every supporting claim about a brain region and an imaging-derived measure, including explicit findings of no difference or no association.",
+        "One claim covers one condition, one region, one measure and one direction against one comparator. Split a sentence that reports several regions, measures, directions or population subgroups (for example children and adults, or males and females) into several claims, each with the age, sex and sample of its own subgroup.",
+        "Every claim needs an evidence quote copied exactly from the supplied text. If no supporting passage exists, do not return the claim.",
+        "Findings given only in a figure that the text does not state are not extracted.",
+        "If the article reports no qualifying claim, return an empty array."
+      ],
+      "global_rules": [
+        "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+        "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+        "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+        "Do not invent identifiers, links or numbers."
+      ]
+    }
+  },
+  "field_fragments": [
+    {
+      "field": "Claim_Age_Group",
+      "description": "The age group of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable ages.",
+      "example": "\"Child\"",
+      "allowed_values": [
+        "Child",
+        "Adolescent",
+        "Adult",
+        "Older Adult",
+        "Mixed",
+        "Not Specified"
+      ],
+      "normalization": "Assign the age group of the participants this claim applies to. If the article names the group (for example children, adolescents, adults, older adults), use the matching value. Otherwise assign it from the reported age with these cut-offs: Child under 12 years, Adolescent 12 to 17 years, Adult 18 to 64 years, Older Adult 65 years or older. Use Mixed when the claim applies to a group that spans more than one of these groups, for example a whole-lifespan sample. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Age_Range",
+      "description": "The age of the participants to which the claim applies.",
+      "example": "\"mean 7.2 years (SD 1.1)\"",
+      "normalization": "Give the age of the participants this claim applies to, as the article reports it for the group or subgroup (range, or mean with standard deviation). If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Diagnostic_Criteria",
+      "description": "The criteria or instruments used to establish the diagnosis.",
+      "example": "\"DSM-5, confirmed with ADOS-2\"",
+      "normalization": "Give the criteria or instruments the article used to establish the diagnosis (for example DSM-5, ADOS-2). If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Effect_Size",
+      "description": "The effect size reported for the claim.",
+      "example": "\"Cohen's d = 0.35\"",
+      "normalization": "Give the effect size for this claim with the name of the statistic, as reported. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_P_Value",
+      "description": "The p-value reported for the claim.",
+      "example": "\"p = 0.002\"",
+      "normalization": "Give the p-value for this claim as reported, with its correction note if stated (for example 'p = 0.002, FWE-corrected'). If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Population_Qualifiers",
+      "description": "Other qualifiers of the population, such as comorbidity or medication status.",
+      "example": "\"comorbid ADHD excluded; unmedicated\"",
+      "normalization": "Give other population qualifiers the article reports for this claim, such as comorbidity, medication status or exclusions, separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Sample_Size",
+      "description": "The number of participants in each group the claim compares.",
+      "example": "\"48 participants with ASD and 63 typically developing controls\"",
+      "normalization": "Give the number of participants in each group that this claim compares. If the claim applies to a subgroup, give the subgroup sizes. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Sex_Distribution",
+      "description": "The sex distribution of the participants to which the claim applies.",
+      "example": "\"39 male and 9 female in the ASD group\"",
+      "normalization": "Give the sex distribution of the participants this claim applies to, as reported for the group or subgroup. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Sex_Group",
+      "description": "The sex composition of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable samples.",
+      "example": "\"Mixed\"",
+      "allowed_values": [
+        "Male Only",
+        "Female Only",
+        "Mixed",
+        "Not Specified"
+      ],
+      "normalization": "Assign the sex composition of the participants this claim applies to: Male Only, Female Only, or Mixed when both sexes are included in the group or subgroup the claim is about. Use the sex distribution you reported for this claim. If the article does not report the sex of the participants, write 'Not Specified'."
+    },
+    {
+      "field": "Claim_Survived_Correction",
+      "description": "Whether the finding remained significant after multiple-comparison correction.",
+      "example": "\"Yes\"",
+      "allowed_values": [
+        "Yes",
+        "No",
+        "Not Specified"
+      ],
+      "normalization": "Write Yes only if the article states that the finding remained significant after multiple-comparison correction. Write No if the article reports it as significant only without correction or as not surviving. Otherwise write 'Not Specified'."
+    },
+    {
+      "field": "Claim_Comparator",
+      "description": "The reference group the finding is measured against, as written in the article. It is not part of the claim key and is displayed to experts. Not Applicable for association claims.",
+      "example": "\"typically developing children\"",
+      "normalization": "Copy the words the article uses for the reference group the finding is measured against (for example typically developing controls). For an association with a continuous variable, write 'Not Applicable'. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Claim_Condition",
+      "description": "The condition or variable of interest of the claim, exactly as written in the article. It is not normalized by the LLM.",
+      "example": "\"autism spectrum disorder\"",
+      "normalization": "Copy the words the article uses for the group or variable of interest, without normalizing or expanding them (keep 'ASD' if the article writes 'ASD'). If the claim compares one group with another, give the target group here and the reference group in Claim_Comparator."
+    },
+    {
+      "field": "Claim_Direction",
+      "description": "The direction of the finding relative to the comparator, or of the association.",
+      "example": "\"Increased\"",
+      "allowed_values": [
+        "Increased",
+        "Decreased",
+        "No Difference",
+        "Positive Association",
+        "Negative Association",
+        "No Association"
+      ],
+      "normalization": "Give the direction of the finding for the target group relative to the comparator: Increased or Decreased for a group difference; Positive Association or Negative Association for a relationship with a continuous variable. Write No Difference or No Association only when the article explicitly reports no significant difference or association. A non-significant trend is No Difference."
+    },
+    {
+      "field": "Claim_Laterality",
+      "description": "The side of the brain to which the region refers.",
+      "example": "\"Right\"",
+      "allowed_values": [
+        "Left",
+        "Right",
+        "Bilateral",
+        "Not Specified"
+      ],
+      "normalization": "Write Left or Right if the article gives the side for this region, and Bilateral only if the article says bilateral or both hemispheres. If no side is given, write 'Not Specified'."
+    },
+    {
+      "field": "Claim_Measure",
+      "description": "The imaging-derived measure the claim is about, exactly as written in the article.",
+      "example": "\"gray matter volume\"",
+      "normalization": "Copy the words the article uses for the imaging-derived measure (for example gray matter volume, cortical thickness). One measure per claim."
+    },
+    {
+      "field": "Claim_Region",
+      "description": "The brain region of the claim, exactly as written in the article, without the laterality.",
+      "example": "\"medial superior frontal gyrus\"",
+      "normalization": "Copy the region name exactly as written, without the words left, right or bilateral, which belong in Claim_Laterality. Keep any other modifiers (for example 'medial superior frontal gyrus'). One region per claim."
+    },
+    {
+      "field": "Claim_Variable_Type",
+      "description": "The kind of variable the condition slot holds: a diagnosis, a trait or phenotype, an exposure, a demographic variable or something else.",
+      "example": "\"Diagnosis\"",
+      "allowed_values": [
+        "Diagnosis",
+        "Trait or Phenotype",
+        "Exposure",
+        "Demographic",
+        "Other"
+      ],
+      "normalization": "Classify the condition or variable of interest: Diagnosis for a clinical diagnosis group, Trait or Phenotype for a behavioral, cognitive or physical trait, Exposure for an environmental or lifestyle exposure, Demographic for age, sex or similar, Other otherwise."
+    },
+    {
+      "field": "Claim_Evidence_Quote",
+      "description": "The verbatim passage of the article that supports the claim. The pipeline rejects a claim whose quote cannot be found in the source text.",
+      "example": "\"Results demonstrated young children with ASD had increased gray matter volumes (GMVs) in the right medial superior frontal gyrus and left fusiform gyrus compared with the TD group.\"",
+      "normalization": "Copy the shortest passage from the supplied text that supports the claim, exactly as it appears, character for character, including hyphens, symbols and spacing. Do not paraphrase, shorten with ellipses or join separate passages. If one sentence supports several claims, repeat the same quote for each. For a table, copy the serialized row text as supplied, including its row and column labels."
+    },
+    {
+      "field": "Claim_Role",
+      "description": "Whether the claim is a main claim of the article or a supporting one.",
+      "example": "\"Main\"",
+      "allowed_values": [
+        "Main",
+        "Supporting"
+      ],
+      "normalization": "Write Main if the article states the claim as a principal finding in its abstract or conclusions. Write Supporting for any other finding of this study that the article reports."
+    },
+    {
+      "field": "Claim_Source_Reference",
+      "description": "The table or figure the claim draws on, if any.",
+      "example": "\"Table 2\"",
+      "normalization": "Give the table or figure that the claim draws on, with its label as printed (for example Table 2). If the claim rests on running text only, write an empty string."
+    },
+    {
+      "field": "Claim_Source_Section",
+      "description": "The article section from which the quote was taken.",
+      "example": "\"Results\"",
+      "allowed_values": [
+        "Abstract",
+        "Conclusion",
+        "Discussion",
+        "Figures",
+        "Introduction",
+        "Methods",
+        "References",
+        "Results",
+        "Tables",
+        "Title"
+      ],
+      "normalization": "Give the section of the article the quote was taken from. Use one of the allowed values."
+    },
+    {
+      "field": "Claim_Statement",
+      "description": "One atomic claim written as a single self-contained sentence: one finding about one condition, one region, one measure and one direction, against one comparator. A sentence that reports several regions yields several claims.",
+      "example": "\"Young children with ASD have increased gray matter volumes in the left fusiform gyrus compared with TD children.\"",
+      "normalization": "Write each claim as an AIDA sentence (Kuhn et al. 2013). Atomic: one finding about one condition, one region, one measure and one direction, against one comparator; if a sentence reports several regions, measures, directions or population subgroups (for example age groups or sexes), write one claim for each. Independent: the sentence must be understandable without the article, so name the group, the comparator and any age group stated in the article, and never use 'we', 'this effect', 'the former' or a reference to a table or figure. Declarative: a complete sentence that could be true or false. Absolute: state the finding itself in the present tense, without hedges such as 'probably' or 'suggests' and without phrases about how it was found, such as 'the analysis showed that'. Do not include p-values or other statistics in the sentence."
+    }
+  ],
+  "output_schema_file": "claims.schema.json"
+}

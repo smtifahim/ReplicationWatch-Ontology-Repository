@@ -1,0 +1,17 @@
+@prefix cdbo: <https://w3id.org/replicationwatch/cdbo/> .
+@prefix ex: <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ex:R4 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R4" ; cdbo:hasClaimKey "ASD|MedSFG|Right|GMV|No Difference" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "No Difference" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R5 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R5" ; cdbo:hasClaimKey "ASD|MedSFG|Left|GMV|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Left" .
+
+ex:R6 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R6" ; cdbo:hasClaimKey "ASD|SFG|Right|GMV|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:SFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R8 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R8" ; cdbo:hasClaimKey "ASD|MedSFG|?|GMV|Increased" ; cdbo:hasClaimKeyComplete "No" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD .
+
+ex:R9 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R9" ; cdbo:hasClaimKey "ASD|MedSFG|Right|CT|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:CT\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R11 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R11" ; cdbo:hasClaimKey "ASD|MedSFG|Right|GMV|Positive Association" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Positive Association" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R10 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R10" ; cdbo:hasClaimKey "?|MedSFG|Right|GMV|Increased" ; cdbo:hasClaimKeyComplete "No" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasClaimLaterality "Right" .

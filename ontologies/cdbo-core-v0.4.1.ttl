@@ -1,0 +1,1712 @@
+@prefix CDBO: <https://w3id.org/replicationwatch/cdbo/CDBO_> .
+@prefix cdbo: <https://w3id.org/replicationwatch/cdbo/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+obo:IAO_0000112 a owl:AnnotationProperty ;
+    rdfs:label "example of usage"@en ;
+    rdfs:subPropertyOf cdbo:iaoAnnotationProperty .
+
+obo:IAO_0000116 a owl:AnnotationProperty ;
+    rdfs:label "editor note"@en ;
+    rdfs:subPropertyOf cdbo:iaoAnnotationProperty .
+
+obo:IAO_0000119 a owl:AnnotationProperty ;
+    rdfs:label "definition source"@en ;
+    rdfs:subPropertyOf cdbo:iaoAnnotationProperty .
+
+dc:creator a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dc:date a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dc:description a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dc:title a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dcterms:bibliographicCitation a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dcterms:description a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dcterms:license a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+dcterms:type a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+cdbo:claimsdb-core.owl a owl:Ontology ;
+    dc:creator "Fahim Imam - https://orcid.org/0000-0003-4752-543X" ;
+    dc:date "November 5, 2026" ;
+    dc:description "This ontology defines the metadata schema and LLM extraction instructions for ClaimsDB, a structured, queryable repository of claims extracted from MRI-based anatomical neuroimaging publications, as used by ReplicationWatch."@en ;
+    dc:title "ClaimsDB Ontology (CDBO) Core" ;
+    rdfs:comment """DRAFT v0.4.1. Contents:
+- Five classes: Publication, Study, Claim (one claim record as reported by one publication), Disease or Disorder, and Anatomical Entity (UBERON).
+- Property groups: Registry, Bibliographic, Study, Claim Record, SciScore and Extraction Provenance metadata. Every extractable field is an annotation property whose skos:altLabel is its ASCII-safe key in the data dictionary, database schema and JSON output.
+- Field roles (dcterms:type): grouping, preprocessing, mapping, lookupOnly. Fields with no role are extracted by the LLM.
+- Restricted datatypes for categorical fields.
+- Per-field and general LLM extraction prompts (rdf:JSON), generated from the field descriptions, examples and extraction rules.
+- Grounding resources, all applied by scripts after extraction: UBERON (regions and tissues), MONDO and HP (conditions), PATO (measure qualities and bilateral), BSPO (left and right side), the NIDM-Experiment terms (imaging modality, contrast, usage) and RRIDs (software, datasets). Terms with no match, such as 'medial superior frontal gyrus' or a morphometry method, are held for curators to contribute to InterLex.
+- Standards: PICO and PECO, nanopublications, micropublications and AIDA are cited with dcterms:bibliographicCitation where they shaped a property.
+- The namespace IRI is a placeholder and no license is set yet. Examples are illustrative."""@en ;
+    owl:versionInfo "0.4.1-draft"@en .
+
+cdbo:hasAnalysisSettings a owl:AnnotationProperty ;
+    rdfs:label "Analysis Settings" ;
+    obo:IAO_0000112 "Smoothing kernel of 8 mm FWHM; default recon-all settings." ;
+    dcterms:description "Analysis settings that affect results, such as smoothing kernel, thresholds and preprocessing choices." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisMetadata ;
+    skos:altLabel "Analysis_Settings" ;
+    cdbo:hasCompactURI "cdbo:hasAnalysisSettings" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Analysis_Settings",
+  "description": "Analysis settings that affect results, such as smoothing kernel, thresholds and preprocessing choices.",
+  "example": "\\"Smoothing kernel of 8 mm FWHM; default recon-all settings.\\"",
+  "normalization": "Summarize only the settings that the article reports and that could change results (for example smoothing kernel, thresholds, preprocessing choices) in one short passage. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasAnalysisSoftwareRRID a owl:AnnotationProperty ;
+    rdfs:label "Analysis Software RRID" ;
+    dcterms:description "The RRID of the analysis software, taken from the article or the SciScore report. Derived, not extracted from free text by the LLM." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisSoftware ;
+    skos:altLabel "Analysis_Software_RRID" ;
+    cdbo:hasCompactURI "cdbo:hasAnalysisSoftwareRRID" .
+
+cdbo:hasAnalysisSoftwareVersion a owl:AnnotationProperty ;
+    rdfs:label "Analysis Software Version" ;
+    obo:IAO_0000112 "7.1.1" ;
+    dcterms:description "The version of the analysis software." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisSoftware ;
+    skos:altLabel "Analysis_Software_Version" ;
+    cdbo:hasCompactURI "cdbo:hasAnalysisSoftwareVersion" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Analysis_Software_Version",
+  "description": "The version of the analysis software.",
+  "example": "\\"7.1.1\\"",
+  "normalization": "Give the version of each tool listed in Analysis_Software, in the same order, separated by semicolons. Use 'Not Specified' for any tool whose version is not reported."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasArticleClassification a owl:AnnotationProperty ;
+    rdfs:label "Article Classification" ;
+    dcterms:description "Whether the article reports its own primary study (Primary) or synthesizes other studies, such as a review or meta-analysis (Secondary). In version 0.1 secondary articles skip study and claim extraction." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range cdbo:articleClassType ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Article_Classification" ;
+    cdbo:hasCompactURI "cdbo:hasArticleClassification" .
+
+cdbo:hasArticleTitle a owl:AnnotationProperty ;
+    rdfs:label "Article Title" ;
+    dcterms:description "The title of the article. Taken from a bibliographic lookup; extracted by the LLM only as a fallback." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasBibliographicMetadata ;
+    skos:altLabel "Article_Title" ;
+    cdbo:hasCompactURI "cdbo:hasArticleTitle" .
+
+cdbo:hasAtlasParcellation a owl:AnnotationProperty ;
+    rdfs:label "Atlas Parcellation" ;
+    obo:IAO_0000112 "Desikan-Killiany atlas" ;
+    dcterms:description "The atlas or parcellation used to define brain regions." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisMetadata ;
+    skos:altLabel "Atlas_Parcellation" ;
+    cdbo:hasCompactURI "cdbo:hasAtlasParcellation" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Atlas_Parcellation",
+  "description": "The atlas or parcellation used to define brain regions.",
+  "example": "\\"Desikan-Killiany atlas\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Name the atlas or parcellation used to define the regions."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasAvailableSections a owl:AnnotationProperty ;
+    rdfs:label "Available Sections" ;
+    dcterms:description "The article sections detected in the source file, for example Abstract, Methods, Results and Tables." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Available_Sections" ;
+    cdbo:hasCompactURI "cdbo:hasAvailableSections" .
+
+cdbo:hasClaimAgeGroup a owl:AnnotationProperty ;
+    rdfs:label "Claim Age Group" ;
+    obo:IAO_0000112 "Child" ;
+    dcterms:description "The age group of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable ages." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:ageGroupType ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Age_Group" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Age_Group",
+  "description": "The age group of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable ages.",
+  "example": "\\"Child\\"",
+  "allowed_values": [
+    "Child",
+    "Adolescent",
+    "Adult",
+    "Older Adult",
+    "Mixed",
+    "Not Specified"
+  ],
+  "normalization": "Assign the age group of the participants this claim applies to. If the article names the group (for example children, adolescents, adults, older adults), use the matching value. Otherwise assign it from the reported age with these cut-offs: Child under 12 years, Adolescent 12 to 17 years, Adult 18 to 64 years, Older Adult 65 years or older. Use Mixed when the claim applies to a group that spans more than one of these groups, for example a whole-lifespan sample. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimAgeGroup" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimAgeRange a owl:AnnotationProperty ;
+    rdfs:label "Claim Age Range" ;
+    obo:IAO_0000112 "mean 7.2 years (SD 1.1)" ;
+    dcterms:description "The age of the participants to which the claim applies." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Age_Range" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Age_Range",
+  "description": "The age of the participants to which the claim applies.",
+  "example": "\\"mean 7.2 years (SD 1.1)\\"",
+  "normalization": "Give the age of the participants this claim applies to, as the article reports it for the group or subgroup (range, or mean with standard deviation). If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimAgeRange" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimComparator a owl:AnnotationProperty ;
+    rdfs:label "Claim Comparator" ;
+    obo:IAO_0000112 "typically developing children" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The reference group the finding is measured against, as written in the article. It is not part of the claim key and is displayed to experts. Not Applicable for association claims." ;
+    rdfs:comment "Comparison (PICO and PECO): the comparison group of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Comparator" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Comparator",
+  "description": "The reference group the finding is measured against, as written in the article. It is not part of the claim key and is displayed to experts. Not Applicable for association claims.",
+  "example": "\\"typically developing children\\"",
+  "normalization": "Copy the words the article uses for the reference group the finding is measured against (for example typically developing controls). For an association with a continuous variable, write 'Not Applicable'. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimComparator" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimDiagnosticCriteria a owl:AnnotationProperty ;
+    rdfs:label "Claim Diagnostic Criteria" ;
+    obo:IAO_0000112 "DSM-5, confirmed with ADOS-2" ;
+    dcterms:description "The criteria or instruments used to establish the diagnosis." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Diagnostic_Criteria" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Diagnostic_Criteria",
+  "description": "The criteria or instruments used to establish the diagnosis.",
+  "example": "\\"DSM-5, confirmed with ADOS-2\\"",
+  "normalization": "Give the criteria or instruments the article used to establish the diagnosis (for example DSM-5, ADOS-2). If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimDiagnosticCriteria" ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasClaimDirection a owl:AnnotationProperty ;
+    rdfs:label "Claim Direction" ;
+    obo:IAO_0000112 "Increased" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The direction of the finding relative to the comparator, or of the association." ;
+    rdfs:comment "Outcome (PICO and PECO): part of the finding of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:directionType ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Direction" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Direction",
+  "description": "The direction of the finding relative to the comparator, or of the association.",
+  "example": "\\"Increased\\"",
+  "allowed_values": [
+    "Increased",
+    "Decreased",
+    "No Difference",
+    "Positive Association",
+    "Negative Association",
+    "No Association"
+  ],
+  "normalization": "Give the direction of the finding for the target group relative to the comparator: Increased or Decreased for a group difference; Positive Association or Negative Association for a relationship with a continuous variable. Write No Difference or No Association only when the article explicitly reports no significant difference or association. A non-significant trend is No Difference."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimDirection" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimEffectSize a owl:AnnotationProperty ;
+    rdfs:label "Claim Effect Size" ;
+    obo:IAO_0000112 "Cohen's d = 0.35" ;
+    dcterms:description "The effect size reported for the claim." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Effect_Size" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Effect_Size",
+  "description": "The effect size reported for the claim.",
+  "example": "\\"Cohen's d = 0.35\\"",
+  "normalization": "Give the effect size for this claim with the name of the statistic, as reported. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimEffectSize" ;
+    cdbo:hasTypicalArticleSection "Results",
+        "Tables" .
+
+cdbo:hasClaimEvidenceLevel a owl:AnnotationProperty ;
+    rdfs:label "Claim Evidence Level" ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "Whether the claim was extracted from the full text or from the abstract only. Set by the registry." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:comment "Evidence supporting the claim (micropublication) and provenance of the assertion (nanopublication)."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:evidenceLevelType ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Evidence_Level" ;
+    cdbo:hasCompactURI "cdbo:hasClaimEvidenceLevel" .
+
+cdbo:hasClaimEvidenceQuote a owl:AnnotationProperty ;
+    rdfs:label "Claim Evidence Quote" ;
+    obo:IAO_0000112 "Results demonstrated young children with ASD had increased gray matter volumes (GMVs) in the right medial superior frontal gyrus and left fusiform gyrus compared with the TD group." ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "The verbatim passage of the article that supports the claim. The pipeline rejects a claim whose quote cannot be found in the source text." ;
+    rdfs:comment "Evidence supporting the claim (micropublication) and provenance of the assertion (nanopublication)."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Evidence_Quote" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Evidence_Quote",
+  "description": "The verbatim passage of the article that supports the claim. The pipeline rejects a claim whose quote cannot be found in the source text.",
+  "example": "\\"Results demonstrated young children with ASD had increased gray matter volumes (GMVs) in the right medial superior frontal gyrus and left fusiform gyrus compared with the TD group.\\"",
+  "normalization": "Copy the shortest passage from the supplied text that supports the claim, exactly as it appears, character for character, including hyphens, symbols and spacing. Do not paraphrase, shorten with ellipses or join separate passages. If one sentence supports several claims, repeat the same quote for each. For a table, copy the serialized row text as supplied, including its row and column labels."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimEvidenceQuote" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "Claim Extraction Prompt"@en ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "Claim_Extraction_Prompt" .
+
+cdbo:hasClaimID a owl:AnnotationProperty ;
+    rdfs:label "Claim ID" ;
+    dcterms:description "A unique identifier for one Claim record, meaning one atomic claim as reported by one publication. Generated by the registry at claim registration." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Claim_ID" ;
+    cdbo:hasCompactURI "cdbo:hasClaimID" .
+
+cdbo:hasClaimKeyComplete a owl:AnnotationProperty ;
+    rdfs:label "Claim Key Complete" ;
+    dcterms:description "Whether every slot of the claim key was grounded. An incomplete key is never merged with another." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:yesNoType ;
+    rdfs:subPropertyOf cdbo:hasClaimKey ;
+    skos:altLabel "Claim_Key_Complete" ;
+    cdbo:hasCompactURI "cdbo:hasClaimKeyComplete" .
+
+cdbo:hasClaimPValue a owl:AnnotationProperty ;
+    rdfs:label "Claim P-Value" ;
+    obo:IAO_0000112 "p = 0.002" ;
+    dcterms:description "The p-value reported for the claim." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_P_Value" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_P_Value",
+  "description": "The p-value reported for the claim.",
+  "example": "\\"p = 0.002\\"",
+  "normalization": "Give the p-value for this claim as reported, with its correction note if stated (for example 'p = 0.002, FWE-corrected'). If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimPValue" ;
+    cdbo:hasTypicalArticleSection "Results",
+        "Tables" .
+
+cdbo:hasClaimPopulationQualifiers a owl:AnnotationProperty ;
+    rdfs:label "Claim Population Qualifiers" ;
+    obo:IAO_0000112 "comorbid ADHD excluded; unmedicated" ;
+    dcterms:description "Other qualifiers of the population, such as comorbidity or medication status." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Population_Qualifiers" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Population_Qualifiers",
+  "description": "Other qualifiers of the population, such as comorbidity or medication status.",
+  "example": "\\"comorbid ADHD excluded; unmedicated\\"",
+  "normalization": "Give other population qualifiers the article reports for this claim, such as comorbidity, medication status or exclusions, separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimPopulationQualifiers" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimRole a owl:AnnotationProperty ;
+    rdfs:label "Claim Role" ;
+    obo:IAO_0000112 "Main" ;
+    dcterms:description "Whether the claim is a main claim of the article or a supporting one." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:claimRoleType ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Role" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Role",
+  "description": "Whether the claim is a main claim of the article or a supporting one.",
+  "example": "\\"Main\\"",
+  "allowed_values": [
+    "Main",
+    "Supporting"
+  ],
+  "normalization": "Write Main if the article states the claim as a principal finding in its abstract or conclusions. Write Supporting for any other finding of this study that the article reports."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimRole" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimSampleSize a owl:AnnotationProperty ;
+    rdfs:label "Claim Sample Size" ;
+    obo:IAO_0000112 "48 participants with ASD and 63 typically developing controls" ;
+    dcterms:description "The number of participants in each group the claim compares." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Sample_Size" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Sample_Size",
+  "description": "The number of participants in each group the claim compares.",
+  "example": "\\"48 participants with ASD and 63 typically developing controls\\"",
+  "normalization": "Give the number of participants in each group that this claim compares. If the claim applies to a subgroup, give the subgroup sizes. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSampleSize" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimSexDistribution a owl:AnnotationProperty ;
+    rdfs:label "Claim Sex Distribution" ;
+    obo:IAO_0000112 "39 male and 9 female in the ASD group" ;
+    dcterms:description "The sex distribution of the participants to which the claim applies." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Sex_Distribution" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Sex_Distribution",
+  "description": "The sex distribution of the participants to which the claim applies.",
+  "example": "\\"39 male and 9 female in the ASD group\\"",
+  "normalization": "Give the sex distribution of the participants this claim applies to, as reported for the group or subgroup. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSexDistribution" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimSexGroup a owl:AnnotationProperty ;
+    rdfs:label "Claim Sex Group" ;
+    obo:IAO_0000112 "Mixed" ;
+    dcterms:description "The sex composition of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable samples." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:sexGroupType ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Sex_Group" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Sex_Group",
+  "description": "The sex composition of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable samples.",
+  "example": "\\"Mixed\\"",
+  "allowed_values": [
+    "Male Only",
+    "Female Only",
+    "Mixed",
+    "Not Specified"
+  ],
+  "normalization": "Assign the sex composition of the participants this claim applies to: Male Only, Female Only, or Mixed when both sexes are included in the group or subgroup the claim is about. Use the sex distribution you reported for this claim. If the article does not report the sex of the participants, write 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSexGroup" ;
+    cdbo:hasTypicalArticleSection "Methods",
+        "Results" .
+
+cdbo:hasClaimSourceReference a owl:AnnotationProperty ;
+    rdfs:label "Claim Source Reference" ;
+    obo:IAO_0000112 "Table 2" ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "The table or figure the claim draws on, if any." ;
+    rdfs:comment "Evidence supporting the claim (micropublication) and provenance of the assertion (nanopublication)."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Source_Reference" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Source_Reference",
+  "description": "The table or figure the claim draws on, if any.",
+  "example": "\\"Table 2\\"",
+  "normalization": "Give the table or figure that the claim draws on, with its label as printed (for example Table 2). If the claim rests on running text only, write an empty string."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSourceReference" ;
+    cdbo:hasTypicalArticleSection "Figures",
+        "Results",
+        "Tables" .
+
+cdbo:hasClaimSourceSection a owl:AnnotationProperty ;
+    rdfs:label "Claim Source Section" ;
+    obo:IAO_0000112 "Results" ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "The article section from which the quote was taken." ;
+    rdfs:comment "Evidence supporting the claim (micropublication) and provenance of the assertion (nanopublication)."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:articleSectionType ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Source_Section" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Source_Section",
+  "description": "The article section from which the quote was taken.",
+  "example": "\\"Results\\"",
+  "allowed_values": [
+    "Abstract",
+    "Conclusion",
+    "Discussion",
+    "Figures",
+    "Introduction",
+    "Methods",
+    "References",
+    "Results",
+    "Tables",
+    "Title"
+  ],
+  "normalization": "Give the section of the article the quote was taken from. Use one of the allowed values."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSourceSection" .
+
+cdbo:hasClaimStatement a owl:AnnotationProperty ;
+    rdfs:label "Claim Statement" ;
+    obo:IAO_0000112 "Young children with ASD have increased gray matter volumes in the left fusiform gyrus compared with TD children." ;
+    dcterms:bibliographicCitation "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613",
+        "Kuhn T, Barbano PE, Nagy ML, Krauthammer M. Broadening the scope of nanopublications. In: The Semantic Web: Semantics and Big Data (ESWC 2013). Lecture Notes in Computer Science 7882:487-501. doi:10.1007/978-3-642-38288-8_33" ;
+    dcterms:description "One atomic claim written as a single self-contained sentence: one finding about one condition, one region, one measure and one direction, against one comparator. A sentence that reports several regions yields several claims." ;
+    rdfs:comment "The statement follows the AIDA criteria (atomic, independent, declarative, absolute) and is the assertion of a nanopublication."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimStatementMetadata ;
+    skos:altLabel "Claim_Statement" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Statement",
+  "description": "One atomic claim written as a single self-contained sentence: one finding about one condition, one region, one measure and one direction, against one comparator. A sentence that reports several regions yields several claims.",
+  "example": "\\"Young children with ASD have increased gray matter volumes in the left fusiform gyrus compared with TD children.\\"",
+  "normalization": "Write each claim as an AIDA sentence (Kuhn et al. 2013). Atomic: one finding about one condition, one region, one measure and one direction, against one comparator; if a sentence reports several regions, measures, directions or population subgroups (for example age groups or sexes), write one claim for each. Independent: the sentence must be understandable without the article, so name the group, the comparator and any age group stated in the article, and never use 'we', 'this effect', 'the former' or a reference to a table or figure. Declarative: a complete sentence that could be true or false. Absolute: state the finding itself in the present tense, without hedges such as 'probably' or 'suggests' and without phrases about how it was found, such as 'the analysis showed that'. Do not include p-values or other statistics in the sentence."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimStatement" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimSurvivedCorrection a owl:AnnotationProperty ;
+    rdfs:label "Claim Survived Correction" ;
+    obo:IAO_0000112 "Yes" ;
+    dcterms:description "Whether the finding remained significant after multiple-comparison correction." ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:yesNoType ;
+    rdfs:subPropertyOf cdbo:hasClaimContextMetadata ;
+    skos:altLabel "Claim_Survived_Correction" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Survived_Correction",
+  "description": "Whether the finding remained significant after multiple-comparison correction.",
+  "example": "\\"Yes\\"",
+  "allowed_values": [
+    "Yes",
+    "No",
+    "Not Specified"
+  ],
+  "normalization": "Write Yes only if the article states that the finding remained significant after multiple-comparison correction. Write No if the article reports it as significant only without correction or as not surviving. Otherwise write 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimSurvivedCorrection" ;
+    cdbo:hasTypicalArticleSection "Results",
+        "Tables" .
+
+cdbo:hasClaimVariableType a owl:AnnotationProperty ;
+    rdfs:label "Claim Variable Type" ;
+    obo:IAO_0000112 "Diagnosis" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The kind of variable the condition slot holds: a diagnosis, a trait or phenotype, an exposure, a demographic variable or something else." ;
+    rdfs:comment "Population (PICO) or exposure group (PECO): the target group of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:variableType ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Variable_Type" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Variable_Type",
+  "description": "The kind of variable the condition slot holds: a diagnosis, a trait or phenotype, an exposure, a demographic variable or something else.",
+  "example": "\\"Diagnosis\\"",
+  "allowed_values": [
+    "Diagnosis",
+    "Trait or Phenotype",
+    "Exposure",
+    "Demographic",
+    "Other"
+  ],
+  "normalization": "Classify the condition or variable of interest: Diagnosis for a clinical diagnosis group, Trait or Phenotype for a behavioral, cognitive or physical trait, Exposure for an environmental or lifestyle exposure, Demographic for age, sex or similar, Other otherwise."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimVariableType" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasCompactURI a owl:AnnotationProperty ;
+    rdfs:label "has compact URI"@en ;
+    dcterms:description "The CURIE form of the property IRI."@en ;
+    rdfs:subPropertyOf dcterms:identifier .
+
+cdbo:hasContentHash a owl:AnnotationProperty ;
+    rdfs:label "Content Hash" ;
+    dcterms:description "A hash of the source file, used to detect byte-identical duplicates." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Content_Hash" ;
+    cdbo:hasCompactURI "cdbo:hasContentHash" .
+
+cdbo:hasCovariates a owl:AnnotationProperty ;
+    rdfs:label "Covariates" ;
+    obo:IAO_0000112 "Age, sex, site and total intracranial volume" ;
+    dcterms:description "The covariates included in the statistical model." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasStatisticalMethodsMetadata ;
+    skos:altLabel "Covariates" ;
+    cdbo:hasCompactURI "cdbo:hasCovariates" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Covariates",
+  "description": "The covariates included in the statistical model.",
+  "example": "\\"Age, sex, site and total intracranial volume\\"",
+  "normalization": "List the covariates entered into the statistical model, separated by commas. If the article states that no covariates were used, write 'None'. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasDOILink a owl:AnnotationProperty ;
+    rdfs:label "DOI Link" ;
+    dcterms:description "The DOI link of the article." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf cdbo:hasPublicationLink ;
+    skos:altLabel "DOI_Link" ;
+    cdbo:hasCompactURI "cdbo:hasDOILink" .
+
+cdbo:hasDocumentType a owl:AnnotationProperty ;
+    rdfs:label "Document Type" ;
+    dcterms:description "Whether the source file is a native PDF with a text layer or a scanned PDF that requires OCR." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range cdbo:documentType ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Document_Type" ;
+    cdbo:hasCompactURI "cdbo:hasDocumentType" .
+
+cdbo:hasDuplicateOfID a owl:AnnotationProperty ;
+    rdfs:label "Duplicate Of ID" ;
+    dcterms:description "Links a Publication to the Publication it duplicates, for example a preprint and its published version, so that both are not counted as independent confirmations." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range CDBO:0000001 ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Duplicate_Of_ID" ;
+    cdbo:hasCompactURI "cdbo:hasDuplicateOfID" .
+
+cdbo:hasExtractionDate a owl:AnnotationProperty ;
+    rdfs:label "Extraction Date" ;
+    dcterms:description "The date and time of the extraction run." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf cdbo:hasExtractionProvenanceMetadata ;
+    skos:altLabel "Extraction_Date" ;
+    cdbo:hasCompactURI "cdbo:hasExtractionDate" .
+
+cdbo:hasExtractionModelID a owl:AnnotationProperty ;
+    rdfs:label "Extraction Model ID" ;
+    dcterms:description "The identifier of the language model that performed the extraction." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasExtractionProvenanceMetadata ;
+    skos:altLabel "Extraction_Model_ID" ;
+    cdbo:hasCompactURI "cdbo:hasExtractionModelID" .
+
+cdbo:hasExtractionPromptVersion a owl:AnnotationProperty ;
+    rdfs:label "Extraction Prompt Version" ;
+    dcterms:description "The version of the prompts, assembled from the ontology, used for the extraction." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasExtractionProvenanceMetadata ;
+    skos:altLabel "Extraction_Prompt_Version" ;
+    cdbo:hasCompactURI "cdbo:hasExtractionPromptVersion" .
+
+cdbo:hasFullTextAvailable a owl:AnnotationProperty ;
+    rdfs:label "Full Text Available" ;
+    dcterms:description "Whether the full text of the article is available. Abstract-only records are processed with evidence level Abstract Only and are not sent to SciScore." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range cdbo:yesNoType ;
+    rdfs:subPropertyOf cdbo:hasRegistryMetadata ;
+    skos:altLabel "Full_Text_Available" ;
+    cdbo:hasCompactURI "cdbo:hasFullTextAvailable" .
+
+cdbo:hasGeneralClaimExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "General Claim Extraction Prompt"@en ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "General_Claim_Extraction_Prompt" .
+
+cdbo:hasGeneralClaimsDBExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "General ClaimsDB Extraction Prompt"@en ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "General_ClaimsDB_Extraction_Prompt" .
+
+cdbo:hasGeneralStudyMetadataExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "General Study Metadata Extraction Prompt"@en ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "General_Study_Metadata_Extraction_Prompt" .
+
+cdbo:hasGroundingOntologyVersions a owl:AnnotationProperty ;
+    rdfs:label "Grounding Ontology Versions" ;
+    dcterms:description "The ontology versions used when the claim slots were grounded, so that grounding can be reproduced and re-run." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasClaimRegistrationMetadata ;
+    skos:altLabel "Grounding_Ontology_Versions" ;
+    cdbo:hasCompactURI "cdbo:hasGroundingOntologyVersions" .
+
+cdbo:hasImageResolution a owl:AnnotationProperty ;
+    rdfs:label "Image Resolution" ;
+    obo:IAO_0000112 "1 mm isotropic voxels" ;
+    dcterms:description "The spatial resolution of the acquired images." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingMetadata ;
+    skos:altLabel "Image_Resolution" ;
+    cdbo:hasCompactURI "cdbo:hasImageResolution" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Image_Resolution",
+  "description": "The spatial resolution of the acquired images.",
+  "example": "\\"1 mm isotropic voxels\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give the voxel size with units."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasImagingModalityMappedCurie a owl:AnnotationProperty ;
+    rdfs:label "Imaging Modality Mapped Curie" ;
+    dcterms:description "The CURIEs of the NIDM terms matched to the imaging modality text (acquisition modality, image contrast type and image usage type), with the term set version. Found by the grounding script." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasImagingModality ;
+    skos:altLabel "Imaging_Modality_Mapped_Curie" ;
+    cdbo:hasCompactURI "cdbo:hasImagingModalityMappedCurie" .
+
+cdbo:hasLLMSystemPrompt a owl:AnnotationProperty ;
+    rdfs:label "LLM System Prompt"@en ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "LLM_System_Prompt" .
+
+cdbo:hasLLMUserPrompt a owl:AnnotationProperty ;
+    rdfs:label "LLM User Prompt"@en ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "LLM_User_Prompt" .
+
+cdbo:hasListedAuthors a owl:AnnotationProperty ;
+    rdfs:label "Listed Authors" ;
+    dcterms:description "The authors of the article as listed. Taken from a bibliographic lookup; extracted by the LLM only as a fallback." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasBibliographicMetadata ;
+    skos:altLabel "Listed_Authors" ;
+    cdbo:hasCompactURI "cdbo:hasListedAuthors" .
+
+cdbo:hasMagneticFieldStrength a owl:AnnotationProperty ;
+    rdfs:label "Magnetic Field Strength" ;
+    obo:IAO_0000112 "3 T" ;
+    dcterms:description "The magnetic field strength of the scanner." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingMetadata ;
+    skos:altLabel "Magnetic_Field_Strength" ;
+    cdbo:hasCompactURI "cdbo:hasMagneticFieldStrength" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Magnetic_Field_Strength",
+  "description": "The magnetic field strength of the scanner.",
+  "example": "\\"3 T\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give the value with its unit (for example 3 T)."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasMappedClaimCondition a owl:AnnotationProperty ;
+    rdfs:label "Claim Condition Mapped" ;
+    dcterms:description "The ontology term for the condition, found by the deterministic grounding script (MONDO, then HP)." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range CDBO:0000004 ;
+    rdfs:subPropertyOf cdbo:hasClaimCondition ;
+    skos:altLabel "Claim_Condition_Mapped" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimCondition" .
+
+cdbo:hasMappedClaimConditionCurie a owl:AnnotationProperty ;
+    rdfs:label "Claim Condition Mapped CURIE" ;
+    dcterms:description "The CURIE of the matched condition term, with the ontology version." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasClaimCondition ;
+    skos:altLabel "Claim_Condition_Mapped_Curie" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimConditionCurie" .
+
+cdbo:hasMappedClaimLateralityCurie a owl:AnnotationProperty ;
+    rdfs:label "Claim Laterality Mapped Curie" ;
+    dcterms:description "The CURIE of the term for the side, found by the deterministic grounding script: BSPO left side or right side, and PATO bilateral. Not Specified has no term." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasClaimLaterality ;
+    skos:altLabel "Claim_Laterality_Mapped_Curie" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimLateralityCurie" .
+
+cdbo:hasMappedClaimMeasureCurie a owl:AnnotationProperty ;
+    rdfs:label "Claim Measure Mapped CURIE" ;
+    dcterms:description "The CURIEs of the terms matched to the measure text by the grounding script, as a JSON list with the ontology versions. The first is the PATO quality (for example volume, thickness, area). A tissue term from UBERON follows when the measure names one (for example gray matter), so gray matter volume and white matter volume stay different measures." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasClaimMeasure ;
+    skos:altLabel "Claim_Measure_Mapped_Curie" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimMeasureCurie" .
+
+cdbo:hasMappedClaimRegion a owl:AnnotationProperty ;
+    rdfs:label "Claim Region Mapped" ;
+    dcterms:description "The ontology term for the region, found by the deterministic grounding script (UBERON)." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range obo:UBERON_0001062 ;
+    rdfs:subPropertyOf cdbo:hasClaimRegion ;
+    skos:altLabel "Claim_Region_Mapped" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimRegion" .
+
+cdbo:hasMappedClaimRegionCurie a owl:AnnotationProperty ;
+    rdfs:label "Claim Region Mapped CURIE" ;
+    dcterms:description "The CURIE of the matched region term, with the ontology version." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasClaimRegion ;
+    skos:altLabel "Claim_Region_Mapped_Curie" ;
+    cdbo:hasCompactURI "cdbo:hasMappedClaimRegionCurie" .
+
+cdbo:hasMorphometryMethod a owl:AnnotationProperty ;
+    rdfs:label "Morphometry Method" ;
+    obo:IAO_0000112 "Voxel-Based Morphometry" ;
+    dcterms:description "The analysis technique used to measure brain structure, as a coarse category for filtering. The software, version and settings are recorded in their own fields. Candidate values for the NIDM-Terms vocabulary in InterLex." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range cdbo:morphometryMethodType ;
+    rdfs:subPropertyOf cdbo:hasAnalysisMetadata ;
+    skos:altLabel "Morphometry_Method" ;
+    cdbo:hasCompactURI "cdbo:hasMorphometryMethod" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Morphometry_Method",
+  "description": "The analysis technique used to measure brain structure, as a coarse category for filtering. The software, version and settings are recorded in their own fields. Candidate values for the NIDM-Terms vocabulary in InterLex.",
+  "example": "\\"Voxel-Based Morphometry\\"",
+  "allowed_values": [
+    "Voxel-Based Morphometry",
+    "Surface-Based Morphometry",
+    "Region-of-Interest Volumetry",
+    "Manual Tracing",
+    "Tensor-Based Morphometry",
+    "Other",
+    "Not Specified"
+  ],
+  "normalization": "Choose the category that matches how the article measured brain structure: Voxel-Based Morphometry (voxel-wise comparison of tissue maps), Surface-Based Morphometry (cortical thickness, surface area or gyrification on a reconstructed surface), Region-of-Interest Volumetry (volumes of predefined regions from automated segmentation), Manual Tracing (regions outlined by hand), Tensor-Based Morphometry (deformation fields). Use Other for any other method and Not Specified if the article does not say. If several methods are used, give the one that produced the claim's finding."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasMultipleComparisonCorrection a owl:AnnotationProperty ;
+    rdfs:label "Multiple Comparison Correction" ;
+    obo:IAO_0000112 "False discovery rate correction at q < 0.05" ;
+    dcterms:description "The method used to correct for multiple comparisons, with its threshold." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasStatisticalMethodsMetadata ;
+    skos:altLabel "Multiple_Comparison_Correction" ;
+    cdbo:hasCompactURI "cdbo:hasMultipleComparisonCorrection" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Multiple_Comparison_Correction",
+  "description": "The method used to correct for multiple comparisons, with its threshold.",
+  "example": "\\"False discovery rate correction at q < 0.05\\"",
+  "normalization": "Name the correction method and its threshold as reported (for example FDR q < 0.05). If the article states that no correction was applied, write 'None'. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasOntologyVersion a owl:AnnotationProperty ;
+    rdfs:label "Ontology Version" ;
+    dcterms:description "The version of this ontology used for the extraction." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasExtractionProvenanceMetadata ;
+    skos:altLabel "Ontology_Version" ;
+    cdbo:hasCompactURI "cdbo:hasOntologyVersion" .
+
+cdbo:hasOperatingSystem a owl:AnnotationProperty ;
+    rdfs:label "Operating System" ;
+    obo:IAO_0000112 "Ubuntu 20.04" ;
+    dcterms:description "The operating system on which the analysis ran." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisMetadata ;
+    skos:altLabel "Operating_System" ;
+    cdbo:hasCompactURI "cdbo:hasOperatingSystem" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Operating_System",
+  "description": "The operating system on which the analysis ran.",
+  "example": "\\"Ubuntu 20.04\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasPMCLink a owl:AnnotationProperty ;
+    rdfs:label "PubMed Central Link" ;
+    dcterms:description "The PubMed Central link of the article, where one exists." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf cdbo:hasPublicationLink ;
+    skos:altLabel "PMC_Link" ;
+    cdbo:hasCompactURI "cdbo:hasPMCLink" .
+
+cdbo:hasParserVersion a owl:AnnotationProperty ;
+    rdfs:label "Parser Version" ;
+    dcterms:description "The version of the document parser used to prepare the article text." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasExtractionProvenanceMetadata ;
+    skos:altLabel "Parser_Version" ;
+    cdbo:hasCompactURI "cdbo:hasParserVersion" .
+
+cdbo:hasPubMedLink a owl:AnnotationProperty ;
+    rdfs:label "PubMed Link" ;
+    dcterms:description "The PubMed link of the article." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf cdbo:hasPublicationLink ;
+    skos:altLabel "Pub_Med_Link" ;
+    cdbo:hasCompactURI "cdbo:hasPubMedLink" .
+
+cdbo:hasPublicationID a owl:AnnotationProperty ;
+    rdfs:label "Publication ID" ;
+    dcterms:description "A unique identifier for one Publication, generated by the registry when the article is first ingested." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Publication_ID" ;
+    cdbo:hasCompactURI "cdbo:hasPublicationID" .
+
+cdbo:hasPublicationVenue a owl:AnnotationProperty ;
+    rdfs:label "Publication Venue" ;
+    dcterms:description "The journal or other venue in which the article was published." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasBibliographicMetadata ;
+    skos:altLabel "Publication_Venue" ;
+    cdbo:hasCompactURI "cdbo:hasPublicationVenue" .
+
+cdbo:hasPublicationYear a owl:AnnotationProperty ;
+    rdfs:label "Publication Year" ;
+    dcterms:description "The year the article was published, derived from the publication date." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:gYear ;
+    rdfs:subPropertyOf cdbo:hasPublicationDate ;
+    skos:altLabel "Publication_Year" ;
+    cdbo:hasCompactURI "cdbo:hasPublicationYear" .
+
+cdbo:hasPulseSequence a owl:AnnotationProperty ;
+    rdfs:label "Pulse Sequence" ;
+    obo:IAO_0000112 "MPRAGE, TR 2300 ms, TE 2.98 ms, flip angle 9 degrees" ;
+    dcterms:description "The pulse sequence and its main acquisition parameters." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingMetadata ;
+    skos:altLabel "Pulse_Sequence" ;
+    cdbo:hasCompactURI "cdbo:hasPulseSequence" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Pulse_Sequence",
+  "description": "The pulse sequence and its main acquisition parameters.",
+  "example": "\\"MPRAGE, TR 2300 ms, TE 2.98 ms, flip angle 9 degrees\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Include the main acquisition parameters the article reports (for example TR, TE, flip angle)."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasReportedStudyID a owl:AnnotationProperty ;
+    rdfs:label "Reported Study ID" ;
+    dcterms:description "Links a Publication to the Study it reports." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range CDBO:0000002 ;
+    skos:altLabel "Reported_Study_ID" ;
+    cdbo:hasCompactURI "cdbo:hasReportedStudyID" .
+
+cdbo:hasReportingPublicationID a owl:AnnotationProperty ;
+    rdfs:label "Reporting Publication ID" ;
+    dcterms:description "Links a Claim record to the Publication in which it is reported." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range CDBO:0000001 ;
+    skos:altLabel "Reporting_Publication_ID" ;
+    cdbo:hasCompactURI "cdbo:hasReportingPublicationID" .
+
+cdbo:hasScannerManufacturerModel a owl:AnnotationProperty ;
+    rdfs:label "Scanner Manufacturer Model" ;
+    obo:IAO_0000112 "3.0 T Siemens Magnetom Prisma" ;
+    dcterms:description "The manufacturer and model of the MRI scanner." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingMetadata ;
+    skos:altLabel "Scanner_Manufacturer_Model" ;
+    cdbo:hasCompactURI "cdbo:hasScannerManufacturerModel" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Scanner_Manufacturer_Model",
+  "description": "The manufacturer and model of the MRI scanner.",
+  "example": "\\"3.0 T Siemens Magnetom Prisma\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give manufacturer and model together."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasSciScoreDetectedResources a owl:AnnotationProperty ;
+    rdfs:label "SciScore Detected Resources" ;
+    dcterms:description "The key resources detected by SciScore, such as software and datasets, with their RRIDs, as JSON." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Detected_Resources" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreDetectedResources" .
+
+cdbo:hasSciScoreDetectedStatisticalTests a owl:AnnotationProperty ;
+    rdfs:label "SciScore Detected Statistical Tests" ;
+    dcterms:description "The statistical tests detected by SciScore in the Methods section." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Detected_Statistical_Tests" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreDetectedStatisticalTests" .
+
+cdbo:hasSciScoreReportDate a owl:AnnotationProperty ;
+    rdfs:label "SciScore Report Date" ;
+    dcterms:description "The date of the SciScore report." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Report_Date" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreReportDate" .
+
+cdbo:hasSciScoreResourcesSubscore a owl:AnnotationProperty ;
+    rdfs:label "SciScore Resources Subscore" ;
+    dcterms:description "The key-resources part of the SciScore." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Resources_Subscore" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreResourcesSubscore" .
+
+cdbo:hasSciScoreRigorCriteria a owl:AnnotationProperty ;
+    rdfs:label "SciScore Rigor Criteria" ;
+    dcterms:description "The per-criterion rigor results of the SciScore report, as JSON." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Rigor_Criteria" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreRigorCriteria" .
+
+cdbo:hasSciScoreRigorSubscore a owl:AnnotationProperty ;
+    rdfs:label "SciScore Rigor Subscore" ;
+    dcterms:description "The rigor part of the SciScore." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Rigor_Subscore" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreRigorSubscore" .
+
+cdbo:hasSciScoreSupportingSentences a owl:AnnotationProperty ;
+    rdfs:label "SciScore Supporting Sentences" ;
+    dcterms:description "The Methods sentences SciScore quotes as support, as JSON." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Supporting_Sentences" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreSupportingSentences" .
+
+cdbo:hasSciScoreTotal a owl:AnnotationProperty ;
+    rdfs:label "SciScore Total" ;
+    dcterms:description "The total SciScore of the article, from 0 to 10." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:decimal ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Total" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreTotal" .
+
+cdbo:hasSciScoreVersion a owl:AnnotationProperty ;
+    rdfs:label "SciScore Version" ;
+    dcterms:description "The SciScore version that produced the report." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasSciScoreMetadata ;
+    skos:altLabel "SciScore_Version" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreVersion" .
+
+cdbo:hasSourceSheetColumnLabel a owl:AnnotationProperty ;
+    rdfs:label "source sheet column label"@en ;
+    dcterms:description "The name of the column or API field in an external source (for example a SciScore report) from which the value is taken."@en ;
+    rdfs:subPropertyOf skos:hiddenLabel .
+
+cdbo:hasSourceStudyID a owl:AnnotationProperty ;
+    rdfs:label "Source Study ID" ;
+    dcterms:description "Links a Claim record to the Study whose data produced it." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range CDBO:0000002 ;
+    skos:altLabel "Source_Study_ID" ;
+    cdbo:hasCompactURI "cdbo:hasSourceStudyID" .
+
+cdbo:hasStatisticalTest a owl:AnnotationProperty ;
+    rdfs:label "Statistical Test" ;
+    obo:IAO_0000112 "Two-sample t-test" ;
+    dcterms:description "The statistical test or model used for the group comparison or association." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasStatisticalMethodsMetadata ;
+    skos:altLabel "Statistical_Test" ;
+    cdbo:hasCompactURI "cdbo:hasStatisticalTest" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Statistical_Test",
+  "description": "The statistical test or model used for the group comparison or association.",
+  "example": "\\"Two-sample t-test\\"",
+  "normalization": "Name the statistical test or model used for the group comparison or association, as the article names it. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasStudyDatasetRRID a owl:AnnotationProperty ;
+    rdfs:label "Study Dataset RRID" ;
+    dcterms:description "The RRID of the dataset, where the article or the SciScore report gives one. Derived, not extracted from free text by the LLM." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasStudyDataset ;
+    skos:altLabel "Study_Dataset_RRID" ;
+    cdbo:hasCompactURI "cdbo:hasStudyDatasetRRID" .
+
+cdbo:hasStudyDesignType a owl:AnnotationProperty ;
+    rdfs:label "Study Design Type" ;
+    obo:IAO_0000112 "Cross-sectional case-control study using voxel-based morphometry." ;
+    dcterms:description "The design of the study, for example case-control, longitudinal, cross-sectional or mega-analysis." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasStudyMetadata ;
+    skos:altLabel "Study_Design_Type" ;
+    cdbo:hasCompactURI "cdbo:hasStudyDesignType" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Study_Design_Type",
+  "description": "The design of the study, for example case-control, longitudinal, cross-sectional or mega-analysis.",
+  "example": "\\"Cross-sectional case-control study using voxel-based morphometry.\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Use the authors' own design term (for example case-control, longitudinal, cross-sectional, mega-analysis)."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Methods" .
+
+cdbo:hasStudyID a owl:AnnotationProperty ;
+    rdfs:label "Study ID" ;
+    dcterms:description "A unique identifier for one Study, generated by the registry." ;
+    dcterms:type cdbo:preprocessing ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Study_ID" ;
+    cdbo:hasCompactURI "cdbo:hasStudyID" .
+
+cdbo:hasStudyMetadataExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "Study Metadata Extraction Prompt"@en ;
+    rdfs:range rdf:JSON ;
+    rdfs:subPropertyOf cdbo:hasLLMExtractionPrompt ;
+    skos:altLabel "Study_Metadata_Extraction_Prompt" .
+
+cdbo:hasSynonym a owl:AnnotationProperty ;
+    rdfs:label "Synonym"@en ;
+    dcterms:description "A synonym of the term. Kept apart from skos:altLabel, which is reserved for the single ASCII-safe key."@en ;
+    rdfs:subPropertyOf obo:IAO_0000118 .
+
+cdbo:hasTypicalArticleSection a owl:AnnotationProperty ;
+    rdfs:label "Typical Article Section"@en ;
+    dcterms:description "The article section in which the value is typically found. Used to route extraction and to check quotes."@en ;
+    rdfs:range cdbo:articleSectionType .
+
+cdbo:hasUnmappableClaimCondition a owl:AnnotationProperty ;
+    rdfs:label "Claim Condition Unmappable" ;
+    dcterms:description "The condition string that no ontology term matched. Held for curator review and contribution to InterLex." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimCondition ;
+    skos:altLabel "Claim_Condition_Unmappable" ;
+    cdbo:hasCompactURI "cdbo:hasUnmappableClaimCondition" .
+
+cdbo:hasUnmappableClaimMeasure a owl:AnnotationProperty ;
+    rdfs:label "Claim Measure Unmappable" ;
+    dcterms:description "The measure string that no PATO quality matched, for example fractional anisotropy or gyrification index. Held for curator review and contribution to InterLex." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimMeasure ;
+    skos:altLabel "Claim_Measure_Unmappable" ;
+    cdbo:hasCompactURI "cdbo:hasUnmappableClaimMeasure" .
+
+cdbo:hasUnmappableClaimRegion a owl:AnnotationProperty ;
+    rdfs:label "Claim Region Unmappable" ;
+    dcterms:description "The region string that no ontology term matched. Held for curator review and contribution to InterLex." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimRegion ;
+    skos:altLabel "Claim_Region_Unmappable" ;
+    cdbo:hasCompactURI "cdbo:hasUnmappableClaimRegion" .
+
+cdbo:hasUnmappableImagingModality a owl:AnnotationProperty ;
+    rdfs:label "Imaging Modality Unmappable" ;
+    dcterms:description "The imaging modality string that no NIDM term matched. Held for curator review and contribution to NIDM-Terms in InterLex." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingModality ;
+    skos:altLabel "Imaging_Modality_Unmappable" ;
+    cdbo:hasCompactURI "cdbo:hasUnmappableImagingModality" .
+
+obo:IAO_0000118 a owl:AnnotationProperty ;
+    rdfs:label "alternative label"@en ;
+    rdfs:subPropertyOf cdbo:iaoAnnotationProperty .
+
+obo:UBERON_0001062 a owl:Class ;
+    rdfs:label "Anatomical Entity"@en .
+
+dcterms:identifier a owl:AnnotationProperty ;
+    rdfs:subPropertyOf cdbo:dctermsMetadata .
+
+CDBO:0000004 a owl:Class ;
+    rdfs:label "Disease or Disorder"@en ;
+    dcterms:description "A disease, disorder or phenotypic abnormality that is the condition of a claim. Grounded to MONDO, then HP."@en .
+
+cdbo:ageGroupType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Child" "Adolescent" "Adult" "Older Adult" "Mixed" "Not Specified" ) ] .
+
+cdbo:articleClassType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Primary" "Secondary" ) ] .
+
+cdbo:claimRoleType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Main" "Supporting" ) ] .
+
+cdbo:directionType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Increased" "Decreased" "No Difference" "Positive Association" "Negative Association" "No Association" ) ] .
+
+cdbo:documentType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Native PDF" "Scanned PDF" ) ] .
+
+cdbo:evidenceLevelType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Full Text" "Abstract Only" ) ] .
+
+cdbo:hasClaimKey a owl:AnnotationProperty ;
+    rdfs:label "Claim Key" ;
+    dcterms:description "A deterministic key built from the grounded condition, region, laterality, measure and direction. Claim records with the same key are the same claim reported by different publications." ;
+    dcterms:type cdbo:mapping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimRegistrationMetadata ;
+    skos:altLabel "Claim_Key" ;
+    cdbo:hasCompactURI "cdbo:hasClaimKey" .
+
+cdbo:hasClaimLaterality a owl:AnnotationProperty ;
+    rdfs:label "Claim Laterality" ;
+    obo:IAO_0000112 "Right" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The side of the brain to which the region refers." ;
+    rdfs:comment "Outcome (PICO and PECO): part of the finding of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range cdbo:lateralityType ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Laterality" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Laterality",
+  "description": "The side of the brain to which the region refers.",
+  "example": "\\"Right\\"",
+  "allowed_values": [
+    "Left",
+    "Right",
+    "Bilateral",
+    "Not Specified"
+  ],
+  "normalization": "Write Left or Right if the article gives the side for this region, and Bilateral only if the article says bilateral or both hemispheres. If no side is given, write 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimLaterality" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasDatasetMetadata a owl:AnnotationProperty ;
+    rdfs:label "Dataset Metadata" ;
+    dcterms:description "Grouping property for the dataset or cohort whose participants were studied." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:subPropertyOf cdbo:hasStudyMetadata ;
+    skos:altLabel "Dataset_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasDatasetMetadata" .
+
+cdbo:hasPublicationDate a owl:AnnotationProperty ;
+    rdfs:label "Publication Date" ;
+    dcterms:description "The date the article was published." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:dateTime ;
+    rdfs:subPropertyOf cdbo:hasBibliographicMetadata ;
+    skos:altLabel "Publication_Date" ;
+    cdbo:hasCompactURI "cdbo:hasPublicationDate" .
+
+cdbo:hasStudyDataset a owl:AnnotationProperty ;
+    rdfs:label "Study Dataset" ;
+    obo:IAO_0000112 "Autism Brain Imaging Data Exchange (ABIDE)" ;
+    dcterms:description "The dataset or cohort whose participants were studied, as named in the article. Used to flag claims that share a cohort and are therefore not independent." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasDatasetMetadata ;
+    skos:altLabel "Study_Dataset" ;
+    cdbo:hasCompactURI "cdbo:hasStudyDataset" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Study_Dataset",
+  "description": "The dataset or cohort whose participants were studied, as named in the article. Used to flag claims that share a cohort and are therefore not independent.",
+  "example": "\\"Autism Brain Imaging Data Exchange (ABIDE)\\"",
+  "normalization": "Give the name of the dataset or cohort as the article names it (for example ABCD Study, ABIDE). If the authors recruited the participants themselves and name no dataset, write 'Local recruitment'. If several datasets were pooled, list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:lateralityType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Left" "Right" "Bilateral" "Not Specified" ) ] .
+
+cdbo:morphometryMethodType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Voxel-Based Morphometry" "Surface-Based Morphometry" "Region-of-Interest Volumetry" "Manual Tracing" "Tensor-Based Morphometry" "Other" "Not Specified" ) ] .
+
+cdbo:sexGroupType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Male Only" "Female Only" "Mixed" "Not Specified" ) ] .
+
+cdbo:variableType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Diagnosis" "Trait or Phenotype" "Exposure" "Demographic" "Other" ) ] .
+
+cdbo:articleSectionType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Abstract" "Conclusion" "Discussion" "Figures" "Introduction" "Methods" "References" "Results" "Tables" "Title" ) ] .
+
+cdbo:hasAnalysisSoftware a owl:AnnotationProperty ;
+    rdfs:label "Analysis Software" ;
+    obo:IAO_0000112 "FreeSurfer" ;
+    dcterms:description "The software used to analyze the images, as named in the article." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasAnalysisMetadata ;
+    skos:altLabel "Analysis_Software" ;
+    cdbo:hasCompactURI "cdbo:hasAnalysisSoftware" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Analysis_Software",
+  "description": "The software used to analyze the images, as named in the article.",
+  "example": "\\"FreeSurfer\\"",
+  "normalization": "List each analysis tool as named in the article, without version numbers, separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasClaimMeasure a owl:AnnotationProperty ;
+    rdfs:label "Claim Measure" ;
+    obo:IAO_0000112 "gray matter volume" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The imaging-derived measure the claim is about, exactly as written in the article." ;
+    rdfs:comment "Outcome (PICO and PECO): part of the finding of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Measure" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Measure",
+  "description": "The imaging-derived measure the claim is about, exactly as written in the article.",
+  "example": "\\"gray matter volume\\"",
+  "normalization": "Copy the words the article uses for the imaging-derived measure (for example gray matter volume, cortical thickness). One measure per claim."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimMeasure" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimRegistrationMetadata a owl:AnnotationProperty ;
+    rdfs:label "Claim Registration Metadata" ;
+    dcterms:bibliographicCitation "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "Grouping property for values that scripts derive after extraction: the claim key and the ontology versions used for grounding." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:comment "Derived values, including the ontology versions used for grounding, recorded as provenance of the assertion."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:subPropertyOf cdbo:hasClaimRecordMetadata ;
+    skos:altLabel "Claim_Registration_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimRegistrationMetadata" .
+
+cdbo:hasImagingModality a owl:AnnotationProperty ;
+    rdfs:label "Imaging Modality" ;
+    obo:IAO_0000112 "T1-weighted structural MRI" ;
+    dcterms:description "The imaging modality and contrast analyzed." ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasImagingMetadata ;
+    skos:altLabel "Imaging_Modality" ;
+    cdbo:hasCompactURI "cdbo:hasImagingModality" ;
+    cdbo:hasStudyMetadataExtractionPrompt """{
+  "field": "Imaging_Modality",
+  "description": "The imaging modality and contrast analyzed.",
+  "example": "\\"T1-weighted structural MRI\\"",
+  "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+}"""^^rdf:JSON ;
+    cdbo:hasTypicalArticleSection "Methods" .
+
+cdbo:hasClaimCondition a owl:AnnotationProperty ;
+    rdfs:label "Claim Condition" ;
+    obo:IAO_0000112 "autism spectrum disorder" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The condition or variable of interest of the claim, exactly as written in the article. It is not normalized by the LLM." ;
+    rdfs:comment "Population (PICO) or exposure group (PECO): the target group of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Condition" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Condition",
+  "description": "The condition or variable of interest of the claim, exactly as written in the article. It is not normalized by the LLM.",
+  "example": "\\"autism spectrum disorder\\"",
+  "normalization": "Copy the words the article uses for the group or variable of interest, without normalizing or expanding them (keep 'ASD' if the article writes 'ASD'). If the claim compares one group with another, give the target group here and the reference group in Claim_Comparator."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimCondition" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasClaimRegion a owl:AnnotationProperty ;
+    rdfs:label "Claim Region" ;
+    obo:IAO_0000112 "medial superior frontal gyrus" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "The brain region of the claim, exactly as written in the article, without the laterality." ;
+    rdfs:comment "Outcome (PICO and PECO): part of the finding of the claim."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf cdbo:hasClaimSlotMetadata ;
+    skos:altLabel "Claim_Region" ;
+    cdbo:hasClaimExtractionPrompt """{
+  "field": "Claim_Region",
+  "description": "The brain region of the claim, exactly as written in the article, without the laterality.",
+  "example": "\\"medial superior frontal gyrus\\"",
+  "normalization": "Copy the region name exactly as written, without the words left, right or bilateral, which belong in Claim_Laterality. Keep any other modifiers (for example 'medial superior frontal gyrus'). One region per claim."
+}"""^^rdf:JSON ;
+    cdbo:hasCompactURI "cdbo:hasClaimRegion" ;
+    cdbo:hasTypicalArticleSection "Abstract",
+        "Results" .
+
+cdbo:hasPublicationLink a owl:AnnotationProperty ;
+    rdfs:label "Publication Link" ;
+    dcterms:description "A link to the article." ;
+    dcterms:type cdbo:lookupOnly ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf cdbo:hasBibliographicMetadata ;
+    skos:altLabel "Publication_Link" ;
+    cdbo:hasCompactURI "cdbo:hasPublicationLink" .
+
+cdbo:hasStatisticalMethodsMetadata a owl:AnnotationProperty ;
+    rdfs:label "Statistical Methods Metadata" ;
+    dcterms:description "Grouping property for the statistical methods described in the Methods section." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:subPropertyOf cdbo:hasStudyMetadata ;
+    skos:altLabel "Statistical_Methods_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasStatisticalMethodsMetadata" .
+
+cdbo:yesNoType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Yes" "No" "Not Specified" ) ] .
+
+cdbo:hasClaimRecordMetadata a owl:AnnotationProperty ;
+    rdfs:label "Claim Record Metadata" ;
+    dcterms:description "Grouping property for everything recorded about one Claim record. Fields are extracted from the article by the claims call, except the registration fields, which scripts derive afterwards." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "Claim_Record_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimRecordMetadata" ;
+    cdbo:hasGeneralClaimExtractionPrompt """{
+  "role": "You are extracting every claim that one neuroimaging article makes about regional brain anatomy from its own results.",
+  "task": "You are given the article text and a set of fields, each supplied separately as a compact fragment (field, description, example, allowed values and extraction rule). Return one JSON object with a single key 'claims', an array with one object per claim. Each object has one key per fragment, named by the fragment's 'field' value.",
+  "output_schema": {
+    "type": "object",
+    "keys": [
+      "claims"
+    ],
+    "claims": "array of objects, one per atomic claim"
+  },
+  "claim_rules": [
+    "Extract only claims that this study reports from its own data. Do not extract findings the article attributes to earlier studies, hypotheses, predictions or recommendations.",
+    "Extract every distinct main claim and every supporting claim about a brain region and an imaging-derived measure, including explicit findings of no difference or no association.",
+    "One claim covers one condition, one region, one measure and one direction against one comparator. Split a sentence that reports several regions, measures, directions or population subgroups (for example children and adults, or males and females) into several claims, each with the age, sex and sample of its own subgroup.",
+    "Every claim needs an evidence quote copied exactly from the supplied text. If no supporting passage exists, do not return the claim.",
+    "Findings given only in a figure that the text does not state are not extracted.",
+    "If the article reports no qualifying claim, return an empty array."
+  ],
+  "global_rules": [
+    "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+    "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+    "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+    "Do not invent identifiers, links or numbers."
+  ]
+}"""^^rdf:JSON .
+
+cdbo:iaoAnnotationProperty a owl:AnnotationProperty ;
+    rdfs:label "iao:topAnnotationProperty"@en .
+
+cdbo:hasAnalysisMetadata a owl:AnnotationProperty ;
+    rdfs:label "Analysis Metadata" ;
+    dcterms:description "Grouping property for image analysis details: software, atlas, settings and operating system." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:subPropertyOf cdbo:hasStudyMetadata ;
+    skos:altLabel "Analysis_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasAnalysisMetadata" .
+
+cdbo:hasBibliographicMetadata a owl:AnnotationProperty ;
+    rdfs:label "Bibliographic Metadata" ;
+    dcterms:description "Grouping property for the bibliographic identity of a publication: title, authors, date, venue and links." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "Bibliographic_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasBibliographicMetadata" .
+
+cdbo:hasExtractionProvenanceMetadata a owl:AnnotationProperty ;
+    rdfs:label "Extraction Provenance Metadata" ;
+    dcterms:bibliographicCitation "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "Grouping property for the versions and dates needed to reproduce an extraction run." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:comment "Provenance of the extraction run, as in the provenance graph of a nanopublication."@en ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "Extraction_Provenance_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasExtractionProvenanceMetadata" .
+
+cdbo:hasImagingMetadata a owl:AnnotationProperty ;
+    rdfs:label "Imaging Metadata" ;
+    dcterms:description "Grouping property for image acquisition details." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:subPropertyOf cdbo:hasStudyMetadata ;
+    skos:altLabel "Imaging_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasImagingMetadata" .
+
+cdbo:hasStudyMetadata a owl:AnnotationProperty ;
+    rdfs:label "Study Metadata" ;
+    dcterms:description "Grouping property for what is reported once per study and shared by all of its claims: design, dataset, imaging, analysis and statistical methods." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000002 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "Study_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasStudyMetadata" ;
+    cdbo:hasGeneralStudyMetadataExtractionPrompt """{
+  "role": "You are extracting the study-level methods metadata of one neuroimaging article.",
+  "task": "You are given the article text and a set of fields, each supplied separately as a compact fragment (field, description, example, allowed values and extraction rule). Return one JSON object whose keys are the field names given by each fragment's 'field' value.",
+  "output_schema": {
+    "type": "object",
+    "keys": "the 'field' value of each fragment",
+    "values": "the extracted string"
+  },
+  "rules": [
+    "Take values from the Methods section first, then from other sections.",
+    "Report what the authors report; do not infer a value that is not stated.",
+    "If the article reports several studies or samples, describe the sample that produced the main results."
+  ],
+  "global_rules": [
+    "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+    "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+    "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+    "Do not invent identifiers, links or numbers."
+  ]
+}"""^^rdf:JSON .
+
+cdbo:hasClaimStatementMetadata a owl:AnnotationProperty ;
+    rdfs:label "Claim Statement Metadata" ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "Grouping property for what the paper says and where it says it: the atomic claim, its supporting quote and its location." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:comment "The statement is the assertion of a nanopublication; the quote and its location are the evidence of a micropublication."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:subPropertyOf cdbo:hasClaimRecordMetadata ;
+    skos:altLabel "Claim_Statement_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimStatementMetadata" .
+
+cdbo:hasClaimsDBMetadata a owl:AnnotationProperty ;
+    rdfs:label "ClaimsDB Metadata" ;
+    dcterms:description "Root grouping property for all ClaimsDB metadata: registry, bibliographic, study, claim record, SciScore and extraction provenance. General extraction instructions that apply to every extracted field are attached to this property." ;
+    dcterms:type cdbo:grouping ;
+    skos:altLabel "ClaimsDB_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimsDBMetadata" ;
+    cdbo:hasGeneralClaimsDBExtractionPrompt """{
+  "role": "You are extracting structured metadata and claims from one full-text neuroimaging article into a predefined set of fields, guided by the ClaimsDB Ontology (CDBO).",
+  "task": "The article text is loaded once and reused, with prompt caching, across two sequential extraction calls: (1) Study Metadata (see hasStudyMetadata's hasGeneralStudyMetadataExtractionPrompt) and (2) Claims (see hasClaimRecordMetadata's hasGeneralClaimExtractionPrompt). Registry, bibliographic, SciScore, mapping and provenance fields are filled by scripts and are never requested from you.",
+  "article_classification": "Whether the article is primary or secondary is decided by the registry before extraction and is authoritative. Secondary articles (for example reviews and meta-analyses) are not sent to these calls in version 0.1.",
+  "scope": "Only MRI-based anatomical observations in humans are in scope. Ignore animal studies, functional-only measures and purely behavioral findings.",
+  "global_rules": [
+    "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+    "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+    "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+    "Do not invent identifiers, links or numbers."
+  ]
+}"""^^rdf:JSON .
+
+cdbo:hasRegistryMetadata a owl:AnnotationProperty ;
+    rdfs:label "Registry Metadata" ;
+    dcterms:description "Grouping property for facts about a publication that are known before extraction begins: file type, full-text availability, article classification and duplicate detection." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "Registry_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasRegistryMetadata" .
+
+cdbo:hasClaimSlotMetadata a owl:AnnotationProperty ;
+    rdfs:label "Claim Slot Metadata" ;
+    dcterms:bibliographicCitation "Morgan RL, Whaley P, Thayer KA, Schünemann HJ. Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes. Environment International 2018;121(Pt 1):1027-1031. doi:10.1016/j.envint.2018.07.015",
+        "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "Grouping property for the claim parsed into slots: condition, comparator, region, laterality, measure and direction. Each slot that is grounded to an ontology carries mapped, CURIE and unmappable sibling properties." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:comment "The slots map to the elements of PICO and PECO: condition and variable type are the population or the exposure group, the comparator is the comparison, and region, laterality, measure and direction are the outcome. PECO fits observational neuroimaging contrasts better than PICO."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:subPropertyOf cdbo:hasClaimRecordMetadata ;
+    skos:altLabel "Claim_Slot_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimSlotMetadata" .
+
+cdbo:hasLLMExtractionPrompt a owl:AnnotationProperty ;
+    rdfs:label "LLM Extraction Prompt"@en ;
+    dcterms:description "Container for serialized JSON prompts and the grouping parent of the prompt properties."@en ;
+    rdfs:range rdf:JSON ;
+    skos:altLabel "LLM_Extraction_Prompt" .
+
+cdbo:dctermsMetadata a owl:AnnotationProperty ;
+    rdfs:label "dcterms:topMetadataProperty"@en .
+
+cdbo:hasSciScoreMetadata a owl:AnnotationProperty ;
+    rdfs:label "SciScore Metadata" ;
+    dcterms:description "Grouping property for the reporting-quality profile of a publication returned by SciScore. Populated by an API call per unique article, not by the LLM." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:domain CDBO:0000001 ;
+    rdfs:subPropertyOf cdbo:hasClaimsDBMetadata ;
+    skos:altLabel "SciScore_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasSciScoreMetadata" .
+
+cdbo:hasClaimContextMetadata a owl:AnnotationProperty ;
+    rdfs:label "Claim Context Metadata" ;
+    dcterms:bibliographicCitation "Richardson WS, Wilson MC, Nishikawa J, Hayward RS. The well-built clinical question: a key to evidence-based decisions. ACP Journal Club 1995;123(3):A12-3." ;
+    dcterms:description "Grouping property for the paper-specific context of a claim that is displayed to experts for comparison: the population the claim applies to and its statistics." ;
+    dcterms:type cdbo:grouping ;
+    rdfs:comment "Population details of the group or subgroup to which the claim applies, and the statistics reported for it."@en ;
+    rdfs:domain CDBO:0000003 ;
+    rdfs:subPropertyOf cdbo:hasClaimRecordMetadata ;
+    skos:altLabel "Claim_Context_Metadata" ;
+    cdbo:hasCompactURI "cdbo:hasClaimContextMetadata" .
+
+cdbo:preprocessing a owl:NamedIndividual ;
+    rdfs:label "Preprocessing"@en ;
+    dcterms:description "Marks a property whose value is known before extraction begins, from the registry (file inspection, identifiers, classification). It is never requested from the LLM."@en .
+
+cdbo:grouping a owl:NamedIndividual ;
+    rdfs:label "Grouping"@en ;
+    dcterms:description "Marks a property that only organizes related sub-properties and holds no extractable value of its own."@en .
+
+cdbo:mapping a owl:NamedIndividual ;
+    rdfs:label "Mapping"@en ;
+    dcterms:description "Marks a property whose value is derived by a script from an already-extracted value, for example an ontology term matched to an exact term, or the claim key. It is never requested from the LLM."@en .
+
+cdbo:lookupOnly a owl:NamedIndividual ;
+    rdfs:label "Lookup Only"@en ;
+    dcterms:description "Marks a property populated by an external lookup, an API call or the pipeline itself after extraction, such as a bibliographic lookup, a SciScore report or an extraction-run record. It is never requested from the LLM."@en .
+
+CDBO:0000002 a owl:Class ;
+    rdfs:label "Study"@en ;
+    dcterms:description "A research study reported in a publication, with its participants, imaging, analysis and statistical methods."@en .
+
+CDBO:0000001 a owl:Class ;
+    rdfs:label "Publication"@en ;
+    dcterms:description "A published article or preprint that reports one or more studies."@en .
+
+CDBO:0000003 a owl:Class ;
+    rdfs:label "Claim"@en ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28",
+        "Groth P, Gibson A, Velterop J. The anatomy of a nanopublication. Information Services and Use 2010;30:51-56. doi:10.3233/ISU-2010-0613" ;
+    dcterms:description "One atomic claim as reported by one publication, identified by a registry-generated ID. Records with the same claim key are the same claim reported by different publications."@en ;
+    rdfs:comment "A Claim record corresponds to the assertion of a nanopublication and to the claim of a micropublication. Claims can be exported as nanopublications, with the evidence and extraction fields as provenance. The supports and challenges relations of micropublications correspond to the Concordant relation and to the Opposite and NullVsEffect relations computed between claim groups in CSDO."@en .
+

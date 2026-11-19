@@ -1,0 +1,18 @@
+{
+  "path": "SE-P1_curation_workbook.xlsx",
+  "articles": 1,
+  "claims": 13,
+  "errors": [],
+  "highlighted_cells": 41,
+  "queue_items": 30,
+  "queue_by_issue": {
+    "Unmatched": 3,
+    "Not looked up": 6,
+    "Fallback or review": 21
+  },
+  "queue_by_priority": {
+    "High": 3,
+    "Medium": 15,
+    "Low": 12
+  }
+}

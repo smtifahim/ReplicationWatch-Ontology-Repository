@@ -1,0 +1,221 @@
+{
+ "_comment": "Editable layout for the Excel template. Not part of the ontology. Change order, colours, widths or tab membership here, then rebuild.",
+ "banding_color": "DDEBF7",
+ "max_rows": 2000,
+ "tabs": [
+  {
+   "name": "Registry_Metadata",
+   "group": "Registry_Metadata",
+   "entity": "Publication"
+  },
+  {
+   "name": "Bibliographic_Metadata",
+   "group": "Bibliographic_Metadata",
+   "entity": "Publication"
+  },
+  {
+   "name": "SciScore_Metadata",
+   "group": "SciScore_Metadata",
+   "entity": "Publication"
+  },
+  {
+   "name": "Extraction_Provenance_Metadata",
+   "group": "Extraction_Provenance_Metadata",
+   "entity": "Publication"
+  },
+  {
+   "name": "Study_Metadata",
+   "group": "Study_Metadata",
+   "entity": "Study"
+  },
+  {
+   "name": "Claim_Record_Metadata",
+   "group": "Claim_Record_Metadata",
+   "entity": "Claim"
+  }
+ ],
+ "identity": {
+  "Publication": [
+   "Publication_ID",
+   "Reported_Study_ID"
+  ],
+  "Study": [
+   "Study_ID",
+   "Publication_ID"
+  ],
+  "Claim": [
+   "Claim_ID",
+   "Source_Study_ID",
+   "Reporting_Publication_ID"
+  ]
+ },
+ "span_order": {
+  "Study_Metadata": [
+   "Study_Metadata",
+   "Dataset_Metadata",
+   "Imaging_Metadata",
+   "Analysis_Metadata",
+   "Statistical_Methods_Metadata"
+  ],
+  "Claim_Record_Metadata": [
+   "Claim_Statement_Metadata",
+   "Claim_Slot_Metadata",
+   "Claim_Registration_Metadata",
+   "Claim_Context_Metadata"
+  ]
+ },
+ "group_colors": {
+  "Identity": "D9D9D9",
+  "Registry_Metadata": "FCE4D6",
+  "Bibliographic_Metadata": "E2EFDA",
+  "SciScore_Metadata": "FFF2CC",
+  "Extraction_Provenance_Metadata": "E4DFEC",
+  "Study_Metadata": "D0ECE7",
+  "Dataset_Metadata": "F8D7E6",
+  "Imaging_Metadata": "EAD9C6",
+  "Analysis_Metadata": "FFD9D9",
+  "Statistical_Methods_Metadata": "D8E8C0",
+  "Claim_Statement_Metadata": "FFE0B2",
+  "Claim_Slot_Metadata": "C8E6C9",
+  "Claim_Registration_Metadata": "F0D9F5",
+  "Claim_Context_Metadata": "FFF3BF"
+ },
+ "field_order": {
+  "Registry_Metadata": [
+   "Document_Type",
+   "Full_Text_Available",
+   "Available_Sections",
+   "Article_Classification",
+   "Content_Hash",
+   "Duplicate_Of_ID"
+  ],
+  "Bibliographic_Metadata": [
+   "Article_Title",
+   "Listed_Authors",
+   "Publication_Date",
+   "Publication_Year",
+   "Publication_Venue",
+   "Publication_Link",
+   "DOI_Link",
+   "Pub_Med_Link",
+   "PMC_Link"
+  ],
+  "Study_Metadata": [
+   "Study_Design_Type"
+  ],
+  "Dataset_Metadata": [
+   "Study_Dataset",
+   "Study_Dataset_RRID"
+  ],
+  "Imaging_Metadata": [
+   "Imaging_Modality",
+   "Imaging_Modality_Mapped_Curie",
+   "Imaging_Modality_Unmappable",
+   "Scanner_Manufacturer_Model",
+   "Magnetic_Field_Strength",
+   "Pulse_Sequence",
+   "Image_Resolution"
+  ],
+  "Analysis_Metadata": [
+   "Analysis_Software",
+   "Analysis_Software_Version",
+   "Analysis_Software_RRID",
+   "Morphometry_Method",
+   "Atlas_Parcellation",
+   "Analysis_Settings",
+   "Operating_System"
+  ],
+  "Statistical_Methods_Metadata": [
+   "Statistical_Test",
+   "Covariates",
+   "Multiple_Comparison_Correction"
+  ],
+  "Claim_Statement_Metadata": [
+   "Claim_Statement",
+   "Claim_Evidence_Quote",
+   "Claim_Source_Section",
+   "Claim_Source_Reference",
+   "Claim_Role",
+   "Claim_Evidence_Level"
+  ],
+  "Claim_Slot_Metadata": [
+   "Claim_Variable_Type",
+   "Claim_Condition",
+   "Claim_Condition_Mapped",
+   "Claim_Condition_Mapped_Curie",
+   "Claim_Condition_Unmappable",
+   "Claim_Comparator",
+   "Claim_Region",
+   "Claim_Region_Mapped",
+   "Claim_Region_Mapped_Curie",
+   "Claim_Region_Unmappable",
+   "Claim_Laterality",
+   "Claim_Laterality_Mapped_Curie",
+   "Claim_Measure",
+   "Claim_Measure_Mapped_Curie",
+   "Claim_Measure_Unmappable",
+   "Claim_Direction"
+  ],
+  "Claim_Registration_Metadata": [
+   "Claim_Key",
+   "Claim_Key_Complete",
+   "Grounding_Ontology_Versions"
+  ],
+  "Claim_Context_Metadata": [
+   "Claim_Sample_Size",
+   "Claim_Age_Range",
+   "Claim_Age_Group",
+   "Claim_Sex_Distribution",
+   "Claim_Sex_Group",
+   "Claim_Diagnostic_Criteria",
+   "Claim_Population_Qualifiers",
+   "Claim_Effect_Size",
+   "Claim_P_Value",
+   "Claim_Survived_Correction"
+  ],
+  "SciScore_Metadata": [
+   "SciScore_Total",
+   "SciScore_Rigor_Subscore",
+   "SciScore_Resources_Subscore",
+   "SciScore_Rigor_Criteria",
+   "SciScore_Detected_Statistical_Tests",
+   "SciScore_Detected_Resources",
+   "SciScore_Supporting_Sentences",
+   "SciScore_Version",
+   "SciScore_Report_Date"
+  ],
+  "Extraction_Provenance_Metadata": [
+   "Extraction_Model_ID",
+   "Extraction_Prompt_Version",
+   "Ontology_Version",
+   "Parser_Version",
+   "Extraction_Date"
+  ]
+ },
+ "column_widths": {
+  "default": 22,
+  "Claim_Statement": 60,
+  "Claim_Evidence_Quote": 70,
+  "Claim_Source_Reference": 24,
+  "Claim_Comparator": 30,
+  "Claim_Population_Qualifiers": 32,
+  "Claim_Diagnostic_Criteria": 30,
+  "Article_Title": 50,
+  "Listed_Authors": 40,
+  "Analysis_Settings": 40,
+  "Covariates": 32,
+  "Statistical_Test": 32,
+  "Multiple_Comparison_Correction": 32,
+  "Study_Dataset": 32,
+  "Available_Sections": 30,
+  "SciScore_Rigor_Criteria": 40,
+  "SciScore_Detected_Resources": 40,
+  "SciScore_Supporting_Sentences": 50,
+  "Claim_ID": 16,
+  "Study_ID": 16,
+  "Publication_ID": 16,
+  "Reported_Study_ID": 16,
+  "Source_Study_ID": 16,
+  "Reporting_Publication_ID": 18
+ }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/replicationwatch/cdbo/study.schema.json",
+  "title": "CDBO study metadata call output",
+  "description": "Generated from CDBO 0.4.1-draft. Do not edit by hand.",
+  "type": "object",
+  "properties": {
+    "Analysis_Settings": {
+      "type": "string",
+      "description": "Analysis settings that affect results, such as smoothing kernel, thresholds and preprocessing choices."
+    },
+    "Analysis_Software": {
+      "type": "string",
+      "description": "The software used to analyze the images, as named in the article."
+    },
+    "Analysis_Software_Version": {
+      "type": "string",
+      "description": "The version of the analysis software."
+    },
+    "Atlas_Parcellation": {
+      "type": "string",
+      "description": "The atlas or parcellation used to define brain regions."
+    },
+    "Covariates": {
+      "type": "string",
+      "description": "The covariates included in the statistical model."
+    },
+    "Image_Resolution": {
+      "type": "string",
+      "description": "The spatial resolution of the acquired images."
+    },
+    "Imaging_Modality": {
+      "type": "string",
+      "description": "The imaging modality and contrast analyzed."
+    },
+    "Magnetic_Field_Strength": {
+      "type": "string",
+      "description": "The magnetic field strength of the scanner."
+    },
+    "Morphometry_Method": {
+      "description": "The analysis technique used to measure brain structure, as a coarse category for filtering. The software, version and settings are recorded in their own fields. Candidate values for the NIDM-Terms vocabulary in InterLex.",
+      "$ref": "#/$defs/morphometryMethodType"
+    },
+    "Multiple_Comparison_Correction": {
+      "type": "string",
+      "description": "The method used to correct for multiple comparisons, with its threshold."
+    },
+    "Operating_System": {
+      "type": "string",
+      "description": "The operating system on which the analysis ran."
+    },
+    "Pulse_Sequence": {
+      "type": "string",
+      "description": "The pulse sequence and its main acquisition parameters."
+    },
+    "Scanner_Manufacturer_Model": {
+      "type": "string",
+      "description": "The manufacturer and model of the MRI scanner."
+    },
+    "Statistical_Test": {
+      "type": "string",
+      "description": "The statistical test or model used for the group comparison or association."
+    },
+    "Study_Dataset": {
+      "type": "string",
+      "description": "The dataset or cohort whose participants were studied, as named in the article. Used to flag claims that share a cohort and are therefore not independent."
+    },
+    "Study_Design_Type": {
+      "type": "string",
+      "description": "The design of the study, for example case-control, longitudinal, cross-sectional or mega-analysis."
+    }
+  },
+  "required": [
+    "Analysis_Settings",
+    "Analysis_Software",
+    "Analysis_Software_Version",
+    "Atlas_Parcellation",
+    "Covariates",
+    "Image_Resolution",
+    "Imaging_Modality",
+    "Magnetic_Field_Strength",
+    "Morphometry_Method",
+    "Multiple_Comparison_Correction",
+    "Operating_System",
+    "Pulse_Sequence",
+    "Scanner_Manufacturer_Model",
+    "Statistical_Test",
+    "Study_Dataset",
+    "Study_Design_Type"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "morphometryMethodType": {
+      "type": "string",
+      "enum": [
+        "Voxel-Based Morphometry",
+        "Surface-Based Morphometry",
+        "Region-of-Interest Volumetry",
+        "Manual Tracing",
+        "Tensor-Based Morphometry",
+        "Other",
+        "Not Specified"
+      ]
+    }
+  }
+}

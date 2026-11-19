@@ -1,0 +1,817 @@
+{
+  "versions": {
+    "UBERON": "sha256:af71fe0b6e23",
+    "MONDO": "sha256:510054a0b4b9",
+    "HP": "hp/releases/2026-09-01",
+    "PATO": "slice 62acac98393e",
+    "BSPO": "slice 772a69d85c0c",
+    "NIDM": "slice dc0d8360b5f5",
+    "grounding_seed": "28dff6de314a"
+  },
+  "claims": [
+    {
+      "id": "SE-C01",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": null,
+        "status": "unmatched",
+        "related_only": [],
+        "suggestions": [
+          {
+            "curie": "UBERON:0004080",
+            "label": "cerebellum vermis lobule VI",
+            "via": "lobule VI of cerebellum vermis",
+            "score": 0.75
+          },
+          {
+            "curie": "UBERON:0004004",
+            "label": "cerebellum lobule",
+            "via": "cerebellum lobule",
+            "score": 0.67
+          },
+          {
+            "curie": "UBERON:0005350",
+            "label": "lobule simplex",
+            "via": "simple lobule of cerebellum [h VI and VI]",
+            "score": 0.6
+          },
+          {
+            "curie": "UBERON:0028923",
+            "label": "paravermic lobule VI",
+            "via": "paravermic lobule vi",
+            "score": 0.5
+          },
+          {
+            "curie": "UBERON:0005351",
+            "label": "paraflocculus",
+            "via": "parafloccular lobule of cerebellum",
+            "score": 0.5
+          }
+        ]
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C02",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002703",
+        "label": "precentral gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "precentral gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C03",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002581",
+        "label": "postcentral gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "postcentral gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C04",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002771",
+        "label": "middle temporal gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "middle temporal gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C05",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002022",
+        "label": "insula",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "insula",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C06",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002943",
+        "label": "lingual gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "lingual gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C07",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002586",
+        "label": "calcarine sulcus",
+        "ontology": "UBERON",
+        "match": "EXACT",
+        "via": "calcarine fissure",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000915"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000915",
+            "label": "thickness",
+            "ontology": "PATO"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C08",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002702",
+        "label": "middle frontal gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "middle frontal gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C09",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002771",
+        "label": "middle temporal gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "middle temporal gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C10",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002702",
+        "label": "middle frontal gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "middle frontal gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C11",
+      "condition": {
+        "curie": "HP:0010522",
+        "label": "Dyslexia",
+        "ontology": "HP",
+        "match": "EXACT",
+        "via": "Reading disability",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "none"
+          },
+          {
+            "ontology": "HP",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": "UBERON:0002771",
+        "label": "middle temporal gyrus",
+        "ontology": "UBERON",
+        "match": "label",
+        "via": "middle temporal gyrus",
+        "status": "matched"
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000007",
+        "label": "right side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C12",
+      "condition": {
+        "curie": "MONDO:0005489",
+        "label": "dyslexia",
+        "ontology": "MONDO",
+        "match": "label",
+        "via": "dyslexia",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": null,
+        "status": "unmatched",
+        "related_only": [],
+        "suggestions": [
+          {
+            "curie": "UBERON:0001851",
+            "label": "cortex",
+            "via": "cortex",
+            "score": 0.5
+          },
+          {
+            "curie": "UBERON:8440075",
+            "label": "gustatory cortex",
+            "via": "gustatory cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:8440033",
+            "label": "infralimbic area",
+            "via": "infralimbic cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:8440032",
+            "label": "prelimbic area",
+            "via": "prelimbic cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:0035015",
+            "label": "association cortex",
+            "via": "association cortex",
+            "score": 0.33
+          }
+        ]
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000918",
+          "UBERON:0002020"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000918",
+            "label": "volume",
+            "ontology": "PATO"
+          },
+          {
+            "curie": "UBERON:0002020",
+            "label": "gray matter",
+            "ontology": "UBERON"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    },
+    {
+      "id": "SE-C13",
+      "condition": {
+        "curie": "MONDO:0005489",
+        "label": "dyslexia",
+        "ontology": "MONDO",
+        "match": "label",
+        "via": "dyslexia",
+        "status": "matched",
+        "steps": [
+          {
+            "ontology": "MONDO",
+            "status": "matched"
+          }
+        ]
+      },
+      "region": {
+        "curie": null,
+        "status": "unmatched",
+        "related_only": [],
+        "suggestions": [
+          {
+            "curie": "UBERON:0001851",
+            "label": "cortex",
+            "via": "cortex",
+            "score": 0.5
+          },
+          {
+            "curie": "UBERON:8440075",
+            "label": "gustatory cortex",
+            "via": "gustatory cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:8440033",
+            "label": "infralimbic area",
+            "via": "infralimbic cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:8440032",
+            "label": "prelimbic area",
+            "via": "prelimbic cortex",
+            "score": 0.33
+          },
+          {
+            "curie": "UBERON:0035015",
+            "label": "association cortex",
+            "via": "association cortex",
+            "score": 0.33
+          }
+        ]
+      },
+      "measure": {
+        "curies": [
+          "PATO:0000915"
+        ],
+        "terms": [
+          {
+            "curie": "PATO:0000915",
+            "label": "thickness",
+            "ontology": "PATO"
+          }
+        ],
+        "status": "matched"
+      },
+      "laterality": {
+        "curie": "BSPO:0000000",
+        "label": "left side",
+        "status": "matched"
+      }
+    }
+  ],
+  "study": {
+    "modality": {
+      "curies": [
+        "nidm:MagneticResonanceImaging",
+        "nidm:Structural",
+        "nidm:T1Weighted"
+      ],
+      "terms": [
+        {
+          "curie": "nidm:MagneticResonanceImaging",
+          "label": "Magnetic Resonance Imaging"
+        },
+        {
+          "curie": "nidm:Structural",
+          "label": "Structural"
+        },
+        {
+          "curie": "nidm:T1Weighted",
+          "label": "T1 Weighted"
+        }
+      ],
+      "status": "matched"
+    }
+  },
+  "ontology_files": {
+    "UBERON": {
+      "file": "uberon-edit.obo",
+      "sha256": "af71fe0b6e235f90ec565dd249ab72da30bdcf7babf4d660a33376282b9aebca",
+      "version": "sha256:af71fe0b6e23",
+      "terms": 14540
+    },
+    "MONDO": {
+      "file": "mondo-edit.obo",
+      "sha256": "510054a0b4b9e4aa44d4bec23a8dc3921a7366fede60cd82e5b1892caaed061b",
+      "version": "sha256:510054a0b4b9",
+      "terms": 32136
+    },
+    "HP": {
+      "file": "hp.obo",
+      "sha256": "93dace952fcb3ec4728818857f6ba76bc2d5312f4d83266519b8694b8e798f22",
+      "version": "hp/releases/2026-09-01",
+      "terms": 19894
+    }
+  },
+  "fallbacks": {
+    "bioportal_annotator": "skipped: not reachable from this environment",
+    "interlex": "skipped: not reachable from this environment"
+  }
+}

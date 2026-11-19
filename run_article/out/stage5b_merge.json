@@ -1,0 +1,267 @@
+{
+  "claims": [
+    {
+      "id": "SE-C01",
+      "key": "HP:0010522|?|Left|PATO:0000918+UBERON:0002020|Decreased",
+      "complete": false,
+      "cond": "HP:0010522",
+      "reg": null,
+      "lat": "Left",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Decreased"
+    },
+    {
+      "id": "SE-C02",
+      "key": "HP:0010522|UBERON:0002703|Right|PATO:0000918+UBERON:0002020|Decreased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002703",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Decreased"
+    },
+    {
+      "id": "SE-C03",
+      "key": "HP:0010522|UBERON:0002581|Left|PATO:0000918+UBERON:0002020|Increased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002581",
+      "lat": "Left",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Increased"
+    },
+    {
+      "id": "SE-C04",
+      "key": "HP:0010522|UBERON:0002771|Left|PATO:0000918+UBERON:0002020|Increased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002771",
+      "lat": "Left",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Increased"
+    },
+    {
+      "id": "SE-C05",
+      "key": "HP:0010522|UBERON:0002022|Right|PATO:0000918+UBERON:0002020|Increased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002022",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Increased"
+    },
+    {
+      "id": "SE-C06",
+      "key": "HP:0010522|UBERON:0002943|Right|PATO:0000918+UBERON:0002020|Increased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002943",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Increased"
+    },
+    {
+      "id": "SE-C07",
+      "key": "HP:0010522|UBERON:0002586|Left|PATO:0000915|Decreased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002586",
+      "lat": "Left",
+      "mea": [
+        "PATO:0000915"
+      ],
+      "dir": "Decreased"
+    },
+    {
+      "id": "SE-C08",
+      "key": "HP:0010522|UBERON:0002702|Right|PATO:0000918+UBERON:0002020|Decreased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002702",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Decreased"
+    },
+    {
+      "id": "SE-C09",
+      "key": "HP:0010522|UBERON:0002771|Right|PATO:0000918+UBERON:0002020|Decreased",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002771",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "Decreased"
+    },
+    {
+      "id": "SE-C10",
+      "key": "HP:0010522|UBERON:0002702|Right|PATO:0000918+UBERON:0002020|No Difference",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002702",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "No Difference"
+    },
+    {
+      "id": "SE-C11",
+      "key": "HP:0010522|UBERON:0002771|Right|PATO:0000918+UBERON:0002020|No Difference",
+      "complete": true,
+      "cond": "HP:0010522",
+      "reg": "UBERON:0002771",
+      "lat": "Right",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "No Difference"
+    },
+    {
+      "id": "SE-C12",
+      "key": "MONDO:0005489|?|Left|PATO:0000918+UBERON:0002020|No Difference",
+      "complete": false,
+      "cond": "MONDO:0005489",
+      "reg": null,
+      "lat": "Left",
+      "mea": [
+        "PATO:0000918",
+        "UBERON:0002020"
+      ],
+      "dir": "No Difference"
+    },
+    {
+      "id": "SE-C13",
+      "key": "MONDO:0005489|?|Left|PATO:0000915|No Difference",
+      "complete": false,
+      "cond": "MONDO:0005489",
+      "reg": null,
+      "lat": "Left",
+      "mea": [
+        "PATO:0000915"
+      ],
+      "dir": "No Difference"
+    }
+  ],
+  "groups": [
+    {
+      "name": "G01",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/ec72de5feb4ebd8741201b8b22c798b3a09e3296",
+      "claims": [
+        "SE-C01"
+      ]
+    },
+    {
+      "name": "G02",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/9687b67e467d323c040e82c0f4acea88cc6c9595",
+      "claims": [
+        "SE-C02"
+      ]
+    },
+    {
+      "name": "G03",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/349986ecb0fdca7b555955477c68c286138db7db",
+      "claims": [
+        "SE-C03"
+      ]
+    },
+    {
+      "name": "G04",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/6126bf70785713254ff18323090fa1e634b9aae8",
+      "claims": [
+        "SE-C04"
+      ]
+    },
+    {
+      "name": "G05",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/6a4931804f148a9ada4fe4ea006d00eabfe4512c",
+      "claims": [
+        "SE-C05"
+      ]
+    },
+    {
+      "name": "G06",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/5bbcf84c903162cc522a827622324b54dde6fa2b",
+      "claims": [
+        "SE-C06"
+      ]
+    },
+    {
+      "name": "G07",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/bc8588a0edb6e864e088a02b0c2c917a2096ff77",
+      "claims": [
+        "SE-C07"
+      ]
+    },
+    {
+      "name": "G08",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/4ae92c45a8c1354a9481c9101102c199b35ec2d8",
+      "claims": [
+        "SE-C08"
+      ]
+    },
+    {
+      "name": "G09",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/44320f73deb82e2f89a1966de379e343ec4abd90",
+      "claims": [
+        "SE-C09"
+      ]
+    },
+    {
+      "name": "G10",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/e4994846e604226820e57ab5f21f80f5bc5f5592",
+      "claims": [
+        "SE-C10"
+      ]
+    },
+    {
+      "name": "G11",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/c03e5839629829a88dda651f594c863d9608032d",
+      "claims": [
+        "SE-C11"
+      ]
+    },
+    {
+      "name": "G12",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/680919a9020a09fc1185a4f933ec3f06e76582cb",
+      "claims": [
+        "SE-C12"
+      ]
+    },
+    {
+      "name": "G13",
+      "iri": "https://w3id.org/replicationwatch/csdo/group/7a2fe22d553d0824c434d69cee79323d24fa12c0",
+      "claims": [
+        "SE-C13"
+      ]
+    }
+  ],
+  "n_complete": 10,
+  "n_groups": 13,
+  "merged_groups": []
+}

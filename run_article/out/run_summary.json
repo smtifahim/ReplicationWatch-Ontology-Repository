@@ -1,0 +1,78 @@
+{
+  "timings_s": {
+    "1-2 registry and text": 0.23,
+    "3 extraction (load saved LLM output)": 0.0,
+    "4 validation gates": 0.05,
+    "5 grounding": 1.52,
+    "5b claim merge": 0.01,
+    "curation workbook": 0.33,
+    "6 claimsdb": 0.2,
+    "7-8 comparator and portal": 0.05
+  },
+  "article": "efd5369b-test.pdf",
+  "validation": {
+    "claims": 13,
+    "schema_errors": 0,
+    "quotes_exact": 13,
+    "quotes_normalised": 0,
+    "quotes_squeezed": 0,
+    "quotes_failed": 0,
+    "p_value_numbers_not_in_text": 0,
+    "empty_reference": 2,
+    "reference_not_found": 0,
+    "shared_quotes": 4
+  },
+  "grounding_versions": {
+    "UBERON": "sha256:af71fe0b6e23",
+    "MONDO": "sha256:510054a0b4b9",
+    "HP": "hp/releases/2026-09-01",
+    "PATO": "slice 62acac98393e",
+    "BSPO": "slice 772a69d85c0c",
+    "NIDM": "slice dc0d8360b5f5",
+    "grounding_seed": "28dff6de314a"
+  },
+  "merge": {
+    "complete": 10,
+    "groups": 13
+  },
+  "workbook": {
+    "path": "SE-P1_curation_workbook.xlsx",
+    "articles": 1,
+    "claims": 13,
+    "errors": [],
+    "highlighted_cells": 41,
+    "queue_items": 30,
+    "queue_by_issue": {
+      "Unmatched": 3,
+      "Not looked up": 6,
+      "Fallback or review": 21
+    },
+    "queue_by_priority": {
+      "High": 3,
+      "Medium": 15,
+      "Low": 12
+    }
+  },
+  "claimsdb": {
+    "ttl": "SE-P1_claimsdb.ttl",
+    "bytes": 54399,
+    "subjects": 99,
+    "quads_in_file": 840,
+    "roundtrip_identical": true,
+    "load_query_outputs": [
+      101,
+      24
+    ],
+    "records": {
+      "pub": 1,
+      "study": 1,
+      "claims": 13
+    },
+    "terms": 67
+  },
+  "comparator": {
+    "edges": 4,
+    "annotation_rows": 24,
+    "groups_in_edges": 5
+  }
+}

@@ -1,0 +1,673 @@
+[
+  {
+    "Queue_ID": "Q01",
+    "Priority": "High",
+    "Issue": "Unmatched",
+    "Entity": "Claim",
+    "Record_ID": "SE-C01",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Region",
+    "Value_Seen": "cerebellum lobule VI",
+    "Detail": "No UBERON label or EXACT synonym (unmatched). The claim key is incomplete, so this record stays its own group and cannot be compared.",
+    "Advisory_Candidates": "UBERON:0004080 cerebellum vermis lobule VI (via 'lobule VI of cerebellum vermis', 0.75); UBERON:0004004 cerebellum lobule (via 'cerebellum lobule', 0.67); UBERON:0005350 lobule simplex (via 'simple lobule of cerebellum [h VI and VI]', 0.6); UBERON:0028923 paravermic lobule VI (via 'paravermic lobule vi', 0.5); UBERON:0005351 paraflocculus (via 'parafloccular lobule of cerebellum', 0.5)",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Region_Unmappable",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped_Curie",
+        "Unmatched"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q02",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C01",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q03",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C02",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q04",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C03",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q05",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C04",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q06",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C05",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q07",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C06",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q08",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C07",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q09",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C08",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q10",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C09",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q11",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C10",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q12",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C11",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability",
+    "Detail": "MONDO had no exact match; grounded by the HP fallback to HP:0010522 (Dyslexia). Check whether MONDO has a usable disease term.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Condition_Mapped",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q13",
+    "Priority": "High",
+    "Issue": "Unmatched",
+    "Entity": "Claim",
+    "Record_ID": "SE-C12",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Region",
+    "Value_Seen": "language cortex",
+    "Detail": "No UBERON label or EXACT synonym (unmatched). The claim key is incomplete, so this record stays its own group and cannot be compared.",
+    "Advisory_Candidates": "UBERON:0001851 cortex (via 'cortex', 0.5); UBERON:8440075 gustatory cortex (via 'gustatory cortex', 0.33); UBERON:8440033 infralimbic area (via 'infralimbic cortex', 0.33); UBERON:8440032 prelimbic area (via 'prelimbic cortex', 0.33); UBERON:0035015 association cortex (via 'association cortex', 0.33)",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Region_Unmappable",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped_Curie",
+        "Unmatched"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q14",
+    "Priority": "High",
+    "Issue": "Unmatched",
+    "Entity": "Claim",
+    "Record_ID": "SE-C13",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Region",
+    "Value_Seen": "language cortex",
+    "Detail": "No UBERON label or EXACT synonym (unmatched). The claim key is incomplete, so this record stays its own group and cannot be compared.",
+    "Advisory_Candidates": "UBERON:0001851 cortex (via 'cortex', 0.5); UBERON:8440075 gustatory cortex (via 'gustatory cortex', 0.33); UBERON:8440033 infralimbic area (via 'infralimbic cortex', 0.33); UBERON:8440032 prelimbic area (via 'prelimbic cortex', 0.33); UBERON:0035015 association cortex (via 'association cortex', 0.33)",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Claim_Region_Unmappable",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped",
+        "Unmatched"
+      ],
+      [
+        "Claim_Region_Mapped_Curie",
+        "Unmatched"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q15",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Condition",
+    "Value_Seen": "reading disability -> HP:0010522 | dyslexia -> MONDO:0005489",
+    "Detail": "The same population is named with different condition strings and they ground to different terms, so the claims never share an anchor. reading disability: SE-C01, SE-C02, SE-C03, SE-C04, SE-C05, SE-C06, SE-C07, SE-C08, SE-C09, SE-C10, SE-C11; dyslexia: SE-C12, SE-C13",
+    "Advisory_Candidates": "A curator alias (condition string to one term) would unify them. Not applied in this run. MONDO:0005489 lists HP:0010522 as a cross-reference in MONDO {source=\"MONDO:otherHierarchy\"}; a cross-reference is not an equivalence, so it is shown but not used.",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": []
+  },
+  {
+    "Queue_ID": "Q16",
+    "Priority": "Medium",
+    "Issue": "Not looked up",
+    "Entity": "Study",
+    "Record_ID": "SE-S1",
+    "Sheet": "Study_Metadata",
+    "Field_Key": "Analysis_Software_RRID",
+    "Value_Seen": "",
+    "Detail": "RRID resolver not reachable from this environment; software named: SPM12; CAT12; Template-O-Matic (TOM8) toolbox; label4MRI.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Analysis_Software_RRID",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q17",
+    "Priority": "Medium",
+    "Issue": "Not looked up",
+    "Entity": "Study",
+    "Record_ID": "SE-S1",
+    "Sheet": "Study_Metadata",
+    "Field_Key": "Study_Dataset_RRID",
+    "Value_Seen": "",
+    "Detail": "RRID resolver not reachable from this environment; dataset named: ABCD Study, Annual Release 3.0, baseline time point (NDA DOI 10.15154/gx74-8w05).",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Study_Dataset_RRID",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q18",
+    "Priority": "Medium",
+    "Issue": "Fallback or review",
+    "Entity": "Study",
+    "Record_ID": "SE-S1",
+    "Sheet": "Study_Metadata",
+    "Field_Key": "Morphometry_Method",
+    "Value_Seen": "Voxel-Based Morphometry",
+    "Detail": "The article uses two methods: voxel-based morphometry for gray matter volume and CAT12 vertex-wise analysis for cortical thickness. The field holds one value per study, so one of the two is lost.",
+    "Advisory_Candidates": "Schema question for the ontology: per-analysis rather than per-study value, or allow a list.",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Morphometry_Method",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q19",
+    "Priority": "Low",
+    "Issue": "Not looked up",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Pub_Med_Link",
+    "Value_Seen": "",
+    "Detail": "Crossref, PubMed and PMC lookups are not reachable from this environment.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Pub_Med_Link",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q20",
+    "Priority": "Low",
+    "Issue": "Not looked up",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "PMC_Link",
+    "Value_Seen": "",
+    "Detail": "Crossref, PubMed and PMC lookups are not reachable from this environment.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "PMC_Link",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q21",
+    "Priority": "Low",
+    "Issue": "Not looked up",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Publication_Date",
+    "Value_Seen": "",
+    "Detail": "Crossref, PubMed and PMC lookups are not reachable from this environment.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Publication_Date",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q22",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Article_Title",
+    "Value_Seen": "Role of Bilingualism in the Neuroanatomical Differences in Children With Reading Disability (dyslexia)",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Article_Title",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q23",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Listed_Authors",
+    "Value_Seen": "Alison K. Schug; Guinevere F. Eden",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Listed_Authors",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q24",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Publication_Year",
+    "Value_Seen": "2026",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Publication_Year",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q25",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Publication_Venue",
+    "Value_Seen": "Developmental Science",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Publication_Venue",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q26",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "DOI_Link",
+    "Value_Seen": "https://doi.org/10.1111/desc.70086",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "DOI_Link",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q27",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "Bibliographic_Metadata",
+    "Field_Key": "Publication_Link",
+    "Value_Seen": "https://doi.org/10.1111/desc.70086",
+    "Detail": "Read from the PDF as a fallback. Verify against Crossref when the lookup is available.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "Publication_Link",
+        "Fallback or review"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q28",
+    "Priority": "Low",
+    "Issue": "Not looked up",
+    "Entity": "Publication",
+    "Record_ID": "SE-P1",
+    "Sheet": "SciScore_Metadata",
+    "Field_Key": "SciScore_Total",
+    "Value_Seen": "",
+    "Detail": "SciScore API is not reachable from this environment. All SciScore fields are empty. [CONFIRM: FDI LAB]",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": [
+      [
+        "SciScore_Total",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Rigor_Subscore",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Resources_Subscore",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Rigor_Criteria",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Detected_Statistical_Tests",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Detected_Resources",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Supporting_Sentences",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Version",
+        "Not looked up"
+      ],
+      [
+        "SciScore_Report_Date",
+        "Not looked up"
+      ]
+    ]
+  },
+  {
+    "Queue_ID": "Q29",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C12",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Source_Reference",
+    "Value_Seen": "",
+    "Detail": "Abstract claim with no table or figure reference. Allowed by the schema; shown for completeness.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": []
+  },
+  {
+    "Queue_ID": "Q30",
+    "Priority": "Low",
+    "Issue": "Fallback or review",
+    "Entity": "Claim",
+    "Record_ID": "SE-C13",
+    "Sheet": "Claim_Record_Metadata",
+    "Field_Key": "Claim_Source_Reference",
+    "Value_Seen": "",
+    "Detail": "Abstract claim with no table or figure reference. Allowed by the schema; shown for completeness.",
+    "Advisory_Candidates": "",
+    "Status": "Open",
+    "Curator_Decision": "",
+    "Curator_Notes": "",
+    "_hl": []
+  }
+]

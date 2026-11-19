@@ -1,0 +1,18 @@
+{
+  "Analysis_Settings": "GMV: SPM12 VBM, images co-registered to the white matter tissue probability map, segmented, study-specific template spatially normalized to MNI space with DARTEL, 8 mm FWHM Gaussian smoothing, intensity threshold 0.2. CT: custom tissue probability map from Template-O-Matic (TOM8), segmentation in CAT12, 10 mm smoothing. Both: 2 x 2 full factorial model, voxel-wise height threshold p < 0.005 uncorrected, cluster-level extent threshold p < 0.05 FDR corrected.",
+  "Analysis_Software": "SPM12; CAT12; Template-O-Matic (TOM8) toolbox; label4MRI",
+  "Analysis_Software_Version": "Not Specified",
+  "Atlas_Parcellation": "Brodmann areas and anatomical labels assigned with the label4MRI package",
+  "Covariates": "GMV: total GMV, study site, scanner type, ADHD scores. CT: study site, scanner type, ADHD scores. Age and sex were not included.",
+  "Image_Resolution": "1 x 1 x 1 mm3 voxel resolution",
+  "Imaging_Modality": "Structural MRI (whole-brain T1-weighted)",
+  "Magnetic_Field_Strength": "3T",
+  "Morphometry_Method": "Voxel-Based Morphometry",
+  "Multiple_Comparison_Correction": "Cluster-level FDR correction at p < 0.05 (voxel-wise height threshold p < 0.005, uncorrected)",
+  "Operating_System": "Not Specified",
+  "Pulse_Sequence": "T1-weighted; acquisition parameters are not given in the article (referred to the ABCD imaging protocol document)",
+  "Scanner_Manufacturer_Model": "Not Specified",
+  "Statistical_Test": "2 x 2 full factorial analysis (ANOVA): main effect of Reading Ability, main effect of Language Background, and their interaction",
+  "Study_Dataset": "ABCD Study, Annual Release 3.0, baseline time point (NDA DOI 10.15154/gx74-8w05)",
+  "Study_Design_Type": "2 x 2 factorial group comparison (Reading Ability by Language Background) on ABCD baseline data"
+}

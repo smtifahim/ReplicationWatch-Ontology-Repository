@@ -1,0 +1,416 @@
+@prefix cdbo: <https://w3id.org/replicationwatch/cdbo/> .
+@prefix csdo: <https://w3id.org/replicationwatch/csdo/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+csdo:AnchorPlusMeasure a owl:NamedIndividual,
+        csdo:CSDO_0000002 ;
+    rdfs:label "Anchor plus measure"@en ;
+    dcterms:description "The anchor plus the same grounded measure. Evaluated at request time by the portal query."@en ;
+    skos:altLabel "Anchor_Plus_Measure" ;
+    cdbo:hasCompactURI "csdo:AnchorPlusMeasure" ;
+    csdo:requiresCondition true ;
+    csdo:requiresDirection false ;
+    csdo:requiresLaterality false ;
+    csdo:requiresMeasure true ;
+    csdo:requiresRegion true .
+
+csdo:DefaultAnchor a owl:NamedIndividual,
+        csdo:CSDO_0000002 ;
+    rdfs:label "Default anchor"@en ;
+    dcterms:description "The default criteria set: the same grounded condition and the same grounded region. This is the only set whose edges are stored by the load queries."@en ;
+    skos:altLabel "Default_Anchor" ;
+    cdbo:hasCompactURI "csdo:DefaultAnchor" ;
+    csdo:requiresCondition true ;
+    csdo:requiresDirection false ;
+    csdo:requiresLaterality false ;
+    csdo:requiresMeasure false ;
+    csdo:requiresRegion true .
+
+csdo:comparableTo a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "comparable to"@en ;
+    dcterms:bibliographicCitation "RDF-star Community Group. RDF-star and SPARQL-star. Community Group report, version of 13 April 2021. https://w3c.github.io/rdf-star/cg-spec/2021-04-13.html" ;
+    dcterms:description "A candidate comparison between two Claim Groups that share the required anchor. It is stored once per pair, in IRI order, and is symmetric in meaning. It is used as an RDF-star edge: the quoted triple is the subject of the edge properties (criteria set, the three relations and the versions used). The link says that experts should compare the two groups. It does not say that one confirms or refutes the other."@en ;
+    rdfs:comment "Edge properties are expressed with RDF-star quoted triples, which are the subject of the edge properties. Stardog is the reference deployment; the same model can be used in other graph databases that support RDF-star."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    rdfs:range csdo:CSDO_0000001 ;
+    skos:altLabel "Comparable_To" ;
+    cdbo:hasCompactURI "csdo:comparableTo" ;
+    csdo:hasExecutionOrder 2 ;
+    csdo:hasLoadConstructQuery """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Pass 2 (load). One RDF-star edge for each pair of Claim Groups that share the anchor of the default criteria set
+# (same grounded condition and same grounded region). Pairs are written once, in IRI order. The edge is also asserted
+# explicitly so that stores that do not assert quoted triples behave the same way.
+CONSTRUCT {
+  ?g1 csdo:comparableTo ?g2 .
+  << ?g1 csdo:comparableTo ?g2 >> csdo:criteriaSet csdo:DefaultAnchor ;
+     csdo:lateralityRelation ?latRel ; csdo:measureRelation ?meaRel ; csdo:directionRelation ?dirRel ;
+     csdo:computedWithVersions "CSDO 0.1.0-draft; CDBO 0.4.1-draft" .
+}
+WHERE {
+  ?g1 a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg .
+  ?g2 a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg .
+  FILTER (STR(?g1) < STR(?g2))
+  OPTIONAL { ?g1 csdo:hasLaterality ?lat1 } OPTIONAL { ?g2 csdo:hasLaterality ?lat2 }
+  OPTIONAL { ?g1 csdo:hasMeasure ?mea1 }    OPTIONAL { ?g2 csdo:hasMeasure ?mea2 }
+  OPTIONAL { ?g1 csdo:hasDirection ?dir1 }  OPTIONAL { ?g2 csdo:hasDirection ?dir2 }
+  VALUES (?dir1 ?pol1 ?kind1) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  VALUES (?dir2 ?pol2 ?kind2) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  BIND (IF(!BOUND(?lat1) || !BOUND(?lat2) || ?lat1 = "Not Specified" || ?lat2 = "Not Specified", "Unknown",
+           IF(?lat1 = ?lat2, "Same", "Different")) AS ?latRel)
+  BIND (IF(!BOUND(?mea1) || !BOUND(?mea2), "Unknown", IF(?mea1 = ?mea2, "Same", "Different")) AS ?meaRel)
+  BIND (IF(?kind1 != ?kind2, "NotComparable",
+           IF(?pol1 = ?pol2, "Concordant", IF(?pol1 * ?pol2 = -1, "Opposite", "NullVsEffect"))) AS ?dirRel)
+}
+""" .
+
+csdo:computedWithVersions a owl:DatatypeProperty ;
+    rdfs:label "computed with versions"@en ;
+    dcterms:description "Edge property. The CSDO and CDBO versions used to compute the edge, so edges can be rebuilt when the ontologies change."@en ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Computed_With_Versions" ;
+    cdbo:hasCompactURI "csdo:computedWithVersions" .
+
+csdo:criteriaSet a owl:ObjectProperty ;
+    rdfs:label "criteria set"@en ;
+    dcterms:description "Edge property. The criteria set under which the two groups were compared."@en ;
+    rdfs:range csdo:CSDO_0000002 ;
+    skos:altLabel "Criteria_Set_Used" ;
+    cdbo:hasCompactURI "csdo:criteriaSet" .
+
+csdo:csdo-core.owl a owl:Ontology ;
+    dc:creator "Fahim Imam - https://orcid.org/0000-0003-4752-543X" ;
+    dc:date "November 5, 2026" ;
+    dc:description "This ontology defines how claims in ClaimsDB are compared. Claim records that report the same finding are grouped, and two groups that share the required anchor (the same grounded condition and brain region) are linked by an RDF-star edge whose properties record how the groups relate on laterality, measure and direction. The links are candidates for expert review, not verdicts. The SPARQL queries that build and read the groups and edges are stored in the ontology as annotation properties. The reference deployment uses Stardog. The model uses standard RDF and RDF-star edges, so other standard graph databases that support RDF-star can be used with at most changes to the query dialect."@en ;
+    dc:title "Claim Similarity Dimension Ontology (CSDO) Core" ;
+    rdfs:comment """DRAFT v0.1.0-draft. Imports the ClaimsDB Ontology (CDBO), version 0.4.1-draft. Contents:
+- Two classes: Claim Group and Criteria Set.
+- Group slot properties and the edge properties (relations) with restricted datatypes.
+- Two criteria sets: the default anchor (condition and region) and the anchor plus measure.
+- SPARQL queries as annotation properties: load queries (run in order after each finished batch, results merged into the knowledge base), load reports, and portal queries.
+- The namespace IRI is a placeholder and no license is set yet."""@en ;
+    owl:imports cdbo:claimsdb-core.owl ;
+    owl:versionInfo "0.1.0-draft"@en .
+
+csdo:directionRelation a owl:DatatypeProperty ;
+    rdfs:label "direction relation"@en ;
+    dcterms:bibliographicCitation "Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic model for claims, evidence, arguments and annotations in biomedical communications. Journal of Biomedical Semantics 2014;5:28. doi:10.1186/2041-1480-5-28" ;
+    dcterms:description "Edge property. Concordant when both groups report the same direction. Opposite when one reports an increase (or positive association) and the other a decrease (or negative association). NullVsEffect when one reports no difference (or no association) and the other reports an effect. NotComparable when one group reports a group difference and the other an association."@en ;
+    rdfs:comment "Concordant corresponds to the supports relation of micropublications. Opposite and NullVsEffect correspond to challenges. The system proposes candidate links and does not issue replicated or refuted verdicts."@en ;
+    rdfs:range csdo:directionRelationType ;
+    skos:altLabel "Direction_Relation" ;
+    cdbo:hasCompactURI "csdo:directionRelation" .
+
+csdo:hasCondition a owl:ObjectProperty ;
+    rdfs:label "has condition"@en ;
+    dcterms:description "The grounded condition or variable of interest of the group, copied from its member records (a community ontology IRI, or a provisional local IRI until curated)."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    skos:altLabel "Group_Condition" ;
+    cdbo:hasCompactURI "csdo:hasCondition" .
+
+csdo:hasDirection a owl:DatatypeProperty ;
+    rdfs:label "has direction"@en ;
+    dcterms:description "The direction of the finding of the group, copied from its member records."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    rdfs:range cdbo:directionType ;
+    skos:altLabel "Group_Direction" ;
+    cdbo:hasCompactURI "csdo:hasDirection" .
+
+csdo:hasExecutionOrder a owl:AnnotationProperty ;
+    rdfs:label "has execution order"@en ;
+    dcterms:description "The position in which the load CONSTRUCT queries of different terms are run. Each value is unique."@en ;
+    rdfs:range xsd:integer ;
+    skos:altLabel "Has_Execution_Order" ;
+    cdbo:hasCompactURI "csdo:hasExecutionOrder" .
+
+csdo:hasLaterality a owl:DatatypeProperty ;
+    rdfs:label "has laterality"@en ;
+    dcterms:description "The laterality of the group, copied from its member records."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    rdfs:range cdbo:lateralityType ;
+    skos:altLabel "Group_Laterality" ;
+    cdbo:hasCompactURI "csdo:hasLaterality" .
+
+csdo:hasLoadConstructQuery a owl:AnnotationProperty ;
+    rdfs:label "has load CONSTRUCT query"@en ;
+    dcterms:description "A CONSTRUCT query that the loader runs after each finished batch, in the order given by csdo:hasExecutionOrder. The returned graph is merged into the knowledge base."@en ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf csdo:hasSparqlQuery ;
+    skos:altLabel "Has_Load_Construct_Query" ;
+    cdbo:hasCompactURI "csdo:hasLoadConstructQuery" .
+
+csdo:hasLoadReportQuery a owl:AnnotationProperty ;
+    rdfs:label "has load report query"@en ;
+    dcterms:description "A SELECT query that the loader runs after the load queries to report how many records are invisible to the default anchor and how large the anchors are."@en ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf csdo:hasSparqlQuery ;
+    skos:altLabel "Has_Load_Report_Query" ;
+    cdbo:hasCompactURI "csdo:hasLoadReportQuery" .
+
+csdo:hasMeasure a owl:DatatypeProperty ;
+    rdfs:label "has measure"@en ;
+    dcterms:description "The grounded measure of the group as a string, copied from its member records."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Group_Measure" ;
+    cdbo:hasCompactURI "csdo:hasMeasure" .
+
+csdo:hasPortalConstructQuery a owl:AnnotationProperty ;
+    rdfs:label "has portal CONSTRUCT query"@en ;
+    dcterms:description "A CONSTRUCT query that the portal runs for one selected claim group. Parameters in double braces are replaced by IRIs."@en ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf csdo:hasSparqlQuery ;
+    skos:altLabel "Has_Portal_Construct_Query" ;
+    cdbo:hasCompactURI "csdo:hasPortalConstructQuery" .
+
+csdo:hasPortalSelectQuery a owl:AnnotationProperty ;
+    rdfs:label "has portal SELECT query"@en ;
+    dcterms:description "A SELECT query that the portal runs. Parameters in double braces are replaced by IRIs."@en ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf csdo:hasSparqlQuery ;
+    skos:altLabel "Has_Portal_Select_Query" ;
+    cdbo:hasCompactURI "csdo:hasPortalSelectQuery" .
+
+csdo:hasRegion a owl:ObjectProperty ;
+    rdfs:label "has region"@en ;
+    dcterms:description "The grounded brain region of the group, copied from its member records."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    skos:altLabel "Group_Region" ;
+    cdbo:hasCompactURI "csdo:hasRegion" .
+
+csdo:inClaimGroup a owl:ObjectProperty ;
+    rdfs:label "in claim group"@en ;
+    dcterms:description "Links a Claim record to the Claim Group that contains it."@en ;
+    rdfs:domain cdbo:CDBO_0000003 ;
+    rdfs:range csdo:CSDO_0000001 ;
+    skos:altLabel "In_Claim_Group" ;
+    cdbo:hasCompactURI "csdo:inClaimGroup" .
+
+csdo:isComplete a owl:DatatypeProperty ;
+    rdfs:label "is complete"@en ;
+    dcterms:description "True when the group was formed from a complete claim key. False for a group made of a single record with an incomplete key."@en ;
+    rdfs:domain csdo:CSDO_0000001 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Group_Is_Complete" ;
+    cdbo:hasCompactURI "csdo:isComplete" .
+
+csdo:lateralityRelation a owl:DatatypeProperty ;
+    rdfs:label "laterality relation"@en ;
+    dcterms:description "Edge property. Same or Different when both groups state a laterality, otherwise Unknown (Not Specified counts as Unknown)."@en ;
+    rdfs:range csdo:sameDifferentUnknownType ;
+    skos:altLabel "Laterality_Relation" ;
+    cdbo:hasCompactURI "csdo:lateralityRelation" .
+
+csdo:measureRelation a owl:DatatypeProperty ;
+    rdfs:label "measure relation"@en ;
+    dcterms:description "Edge property. Same or Different when both groups have a grounded measure, otherwise Unknown."@en ;
+    rdfs:range csdo:sameDifferentUnknownType ;
+    skos:altLabel "Measure_Relation" ;
+    cdbo:hasCompactURI "csdo:measureRelation" .
+
+csdo:requiresCondition a owl:DatatypeProperty ;
+    rdfs:label "requires condition"@en ;
+    dcterms:description "True when two groups must have the same grounded condition for the criteria set to propose a comparison."@en ;
+    rdfs:domain csdo:CSDO_0000002 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Requires_Condition" ;
+    cdbo:hasCompactURI "csdo:requiresCondition" .
+
+csdo:requiresDirection a owl:DatatypeProperty ;
+    rdfs:label "requires direction"@en ;
+    dcterms:description "True when two groups must have the same grounded direction for the criteria set to propose a comparison."@en ;
+    rdfs:domain csdo:CSDO_0000002 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Requires_Direction" ;
+    cdbo:hasCompactURI "csdo:requiresDirection" .
+
+csdo:requiresLaterality a owl:DatatypeProperty ;
+    rdfs:label "requires laterality"@en ;
+    dcterms:description "True when two groups must have the same grounded laterality for the criteria set to propose a comparison."@en ;
+    rdfs:domain csdo:CSDO_0000002 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Requires_Laterality" ;
+    cdbo:hasCompactURI "csdo:requiresLaterality" .
+
+csdo:requiresMeasure a owl:DatatypeProperty ;
+    rdfs:label "requires measure"@en ;
+    dcterms:description "True when two groups must have the same grounded measure for the criteria set to propose a comparison."@en ;
+    rdfs:domain csdo:CSDO_0000002 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Requires_Measure" ;
+    cdbo:hasCompactURI "csdo:requiresMeasure" .
+
+csdo:requiresRegion a owl:DatatypeProperty ;
+    rdfs:label "requires region"@en ;
+    dcterms:description "True when two groups must have the same grounded region for the criteria set to propose a comparison."@en ;
+    rdfs:domain csdo:CSDO_0000002 ;
+    rdfs:range xsd:boolean ;
+    skos:altLabel "Requires_Region" ;
+    cdbo:hasCompactURI "csdo:requiresRegion" .
+
+csdo:directionRelationType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Concordant" "Opposite" "NullVsEffect" "NotComparable" ) ] .
+
+csdo:sameDifferentUnknownType a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:oneOf ( "Same" "Different" "Unknown" ) ] .
+
+csdo:hasSparqlQuery a owl:AnnotationProperty ;
+    rdfs:label "has SPARQL query"@en ;
+    dcterms:bibliographicCitation "RDF Data Shapes Working Group. SHACL Advanced Features. W3C Working Group Note, 8 June 2017. https://www.w3.org/TR/2017/NOTE-shacl-af-20170608" ;
+    dcterms:description "A SPARQL query, as a self-contained string that includes its PREFIX declarations, attached to the term it produces or reads. Queries use standard SPARQL 1.1 and RDF-star quoted triples as the subject of edge properties."@en ;
+    rdfs:comment "Storing a SPARQL CONSTRUCT query as an xsd:string property value follows the SPARQL rules of SHACL Advanced Features (sh:construct), a W3C Working Group Note. CSDO uses its own properties and does not rely on SHACL rule execution."@en ;
+    rdfs:range xsd:string ;
+    skos:altLabel "Has_Sparql_Query" ;
+    cdbo:hasCompactURI "csdo:hasSparqlQuery" .
+
+csdo:CSDO_0000002 a owl:Class ;
+    rdfs:label "Criteria Set"@en ;
+    dcterms:description "A choice of which slots two claim groups must share for a comparison to be proposed. Each required slot is an exact match of the grounded value."@en ;
+    skos:altLabel "Criteria_Set" ;
+    cdbo:hasCompactURI "csdo:CSDO_0000002" ;
+    csdo:hasPortalConstructQuery """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Portal. Groups comparable to ONE focus group under a SELECTED criteria set. Returns a graph and persists nothing.
+# Parameters: {{FOCUS}} and {{CRITERIA_SET}} are replaced by IRIs in angle brackets, for example <https://.../group/abc> and csdo:DefaultAnchor.
+# The focus group is fixed, so any criteria set costs one scan of the groups.
+CONSTRUCT {
+  << ?focus csdo:comparableTo ?other >> csdo:criteriaSet ?set ;
+     csdo:lateralityRelation ?latRel ; csdo:measureRelation ?meaRel ; csdo:directionRelation ?dirRel .
+  ?other a csdo:CSDO_0000001 ; csdo:hasCondition ?c2 ; csdo:hasRegion ?r2 ; csdo:hasLaterality ?lat2 ;
+     csdo:hasMeasure ?mea2 ; csdo:hasDirection ?dir2 .
+}
+WHERE {
+  VALUES (?focus ?set) { ({{FOCUS}} {{CRITERIA_SET}}) }
+  ?set csdo:requiresCondition ?rc ; csdo:requiresRegion ?rr ; csdo:requiresLaterality ?rl ; csdo:requiresMeasure ?rm ; csdo:requiresDirection ?rd .
+  ?focus a csdo:CSDO_0000001 .
+  ?other a csdo:CSDO_0000001 . FILTER (?other != ?focus)
+  OPTIONAL { ?focus csdo:hasCondition ?c1 }    OPTIONAL { ?other csdo:hasCondition ?c2 }
+  OPTIONAL { ?focus csdo:hasRegion ?r1 }       OPTIONAL { ?other csdo:hasRegion ?r2 }
+  OPTIONAL { ?focus csdo:hasLaterality ?lat1 } OPTIONAL { ?other csdo:hasLaterality ?lat2 }
+  OPTIONAL { ?focus csdo:hasMeasure ?mea1 }    OPTIONAL { ?other csdo:hasMeasure ?mea2 }
+  OPTIONAL { ?focus csdo:hasDirection ?dir1 }  OPTIONAL { ?other csdo:hasDirection ?dir2 }
+  FILTER ( !?rc || (BOUND(?c1) && ?c1 = ?c2) )
+  FILTER ( !?rr || (BOUND(?r1) && ?r1 = ?r2) )
+  FILTER ( !?rl || (BOUND(?lat1) && ?lat1 = ?lat2) )
+  FILTER ( !?rm || (BOUND(?mea1) && ?mea1 = ?mea2) )
+  FILTER ( !?rd || (BOUND(?dir1) && ?dir1 = ?dir2) )
+  VALUES (?dir1 ?pol1 ?kind1) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  VALUES (?dir2 ?pol2 ?kind2) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  BIND (IF(!BOUND(?lat1) || !BOUND(?lat2) || ?lat1 = "Not Specified" || ?lat2 = "Not Specified", "Unknown", IF(?lat1 = ?lat2, "Same", "Different")) AS ?latRel)
+  BIND (IF(!BOUND(?mea1) || !BOUND(?mea2), "Unknown", IF(?mea1 = ?mea2, "Same", "Different")) AS ?meaRel)
+  BIND (IF(?kind1 != ?kind2, "NotComparable", IF(?pol1 = ?pol2, "Concordant", IF(?pol1 * ?pol2 = -1, "Opposite", "NullVsEffect"))) AS ?dirRel)
+}
+""" .
+
+csdo:CSDO_0000001 a owl:Class ;
+    rdfs:label "Claim Group"@en ;
+    dcterms:description "A derived node that stands for all Claim records with the same complete claim key (condition, region, laterality, measure and direction). A Claim record with an incomplete key forms a group of its own and is never merged. Groups are rebuilt from the Claim records, so they can be regenerated at any time. The number of member records, split by age group and evidence level, is the support for the finding."@en ;
+    skos:altLabel "Claim_Group" ;
+    cdbo:hasCompactURI "csdo:CSDO_0000001" ;
+    csdo:hasExecutionOrder 1 ;
+    csdo:hasLoadConstructQuery """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Pass 1 (load). Derive Claim Groups from Claim records: one group per complete Claim_Key; an incomplete record is its own group.
+# Group IRIs are deterministic hashes, so re-running after every batch is safe and the merged result is a set union.
+CONSTRUCT {
+  ?g a csdo:CSDO_0000001 ; csdo:isComplete ?complete ;
+     csdo:hasCondition ?cond ; csdo:hasRegion ?reg ; csdo:hasLaterality ?lat ;
+     csdo:hasMeasure ?mea ; csdo:hasDirection ?dir .
+  ?c csdo:inClaimGroup ?g .
+}
+WHERE {
+  ?c a cdbo:CDBO_0000003 ; cdbo:hasClaimKeyComplete ?kc .
+  OPTIONAL { ?c cdbo:hasClaimKey ?key }
+  OPTIONAL { ?c cdbo:hasMappedClaimCondition ?cond }
+  OPTIONAL { ?c cdbo:hasMappedClaimRegion ?reg }
+  OPTIONAL { ?c cdbo:hasClaimLaterality ?lat }
+  OPTIONAL { ?c cdbo:hasMappedClaimMeasureCurie ?meaRaw }
+  OPTIONAL { ?c cdbo:hasClaimDirection ?dir }
+  BIND (STR(?meaRaw) AS ?mea)
+  BIND ((?kc = "Yes" && BOUND(?key)) AS ?complete)
+  BIND (IRI(CONCAT("https://w3id.org/replicationwatch/csdo/group/", SHA1(IF(?complete, ?key, STR(?c))))) AS ?g)
+}
+""" ;
+    csdo:hasLoadReportQuery """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Load report: records that the default anchor cannot see (no grounded condition or region) and records with incomplete keys.
+SELECT (COUNT(DISTINCT ?noAnchor) AS ?recordsWithoutAnchor) (COUNT(DISTINCT ?incomplete) AS ?incompleteKeys)
+WHERE {
+  { ?noAnchor a cdbo:CDBO_0000003 . FILTER NOT EXISTS { ?noAnchor cdbo:hasMappedClaimCondition ?x } }
+  UNION
+  { ?noAnchor a cdbo:CDBO_0000003 . FILTER NOT EXISTS { ?noAnchor cdbo:hasMappedClaimRegion ?y } }
+  UNION
+  { ?incomplete a cdbo:CDBO_0000003 ; cdbo:hasClaimKeyComplete "No" }
+}
+""",
+        """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Load report: the largest anchors. n groups under one anchor give n(n-1)/2 edges, so this is the cost driver.
+SELECT ?cond ?reg (COUNT(?g) AS ?groups) ((COUNT(?g) * (COUNT(?g) - 1) / 2) AS ?edges)
+WHERE { ?g a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg }
+GROUP BY ?cond ?reg ORDER BY DESC(?groups) LIMIT 10
+""" ;
+    csdo:hasPortalSelectQuery """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Portal. Groups with the same condition whose region is BROADER than the focus region ("N more claims at the next broader level").
+# Parameter: {{FOCUS}} is replaced by an IRI in angle brackets. rdfs:subClassOf+ stands for the simplified is_a and part_of closure
+# of the imported UBERON slice; replace the predicate if the closure is materialized with another one.
+SELECT ?other ?otherRegion (COUNT(?member) AS ?claims)
+WHERE {
+  VALUES ?focus { {{FOCUS}} }
+  ?focus csdo:hasCondition ?cond ; csdo:hasRegion ?r1 .
+  ?other csdo:hasCondition ?cond ; csdo:hasRegion ?otherRegion .
+  ?r1 rdfs:subClassOf+ ?otherRegion .
+  OPTIONAL { ?member csdo:inClaimGroup ?other }
+} GROUP BY ?other ?otherRegion
+""",
+        """PREFIX cdbo: <https://w3id.org/replicationwatch/cdbo/>
+PREFIX csdo: <https://w3id.org/replicationwatch/csdo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+# Portal. Support behind each group, split by age group and evidence level (the facets that let experts see whether a
+# conflict between two groups is explained by age or by abstract-only evidence).
+# Parameter: {{GROUPS}} is replaced by a space-separated list of group IRIs in angle brackets.
+SELECT ?group ?ageGroup ?evidenceLevel (COUNT(?claim) AS ?claims)
+WHERE {
+  VALUES ?group { {{GROUPS}} }
+  ?claim csdo:inClaimGroup ?group .
+  OPTIONAL { ?claim cdbo:hasClaimAgeGroup ?ag }
+  OPTIONAL { ?claim cdbo:hasClaimEvidenceLevel ?ev }
+  BIND (COALESCE(?ag, "Not Specified") AS ?ageGroup)
+  BIND (COALESCE(?ev, "Not Specified") AS ?evidenceLevel)
+} GROUP BY ?group ?ageGroup ?evidenceLevel
+""" .
+

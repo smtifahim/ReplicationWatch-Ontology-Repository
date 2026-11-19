@@ -1,0 +1,74 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix iao: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+obo:PATO_0000122 a owl:Class ;
+    rdfs:label "length"@en ;
+    iao:0000115 "A 1-D extent quality which is equal to the distance between two points."@en ;
+    rdfs:subClassOf obo:PATO_0001708 .
+
+obo:PATO_0000618 a owl:Class ;
+    rdfs:label "bilateral"@en ;
+    iao:0000115 "A positional quality inhering in a bearer by virtue of the bearer's having two sides; two-sided."@en .
+
+obo:PATO_0000915 a owl:Class ;
+    rdfs:label "thickness"@en ;
+    iao:0000115 "A 1-D extent quality which is equal to the dimension through an object as opposed to its length or width."@en ;
+    rdfs:subClassOf obo:PATO_0001708 .
+
+obo:PATO_0000918 a owl:Class ;
+    rdfs:label "volume"@en ;
+    iao:0000115 "A 3-D extent quality inhering in a bearer by virtue of the bearer's amount of 3-dimensional space it occupies."@en ;
+    rdfs:subClassOf obo:PATO_0001710 .
+
+obo:PATO_0000921 a owl:Class ;
+    rdfs:label "width"@en ;
+    iao:0000115 "A 1-D extent quality which is equal to the distance from one side of an object to another side which is opposite."@en ;
+    rdfs:subClassOf obo:PATO_0001708 .
+
+obo:PATO_0001323 a owl:Class ;
+    rdfs:label "area"@en ;
+    iao:0000115 "A 2-D extent quality inhering in a bearer by virtue of the bearer's two dimensional extent."@en ;
+    rdfs:subClassOf obo:PATO_0001709 .
+
+obo:PATO_0001591 a owl:Class ;
+    rdfs:label "curvature"@en ;
+    iao:0000115 "A surface shape quality inhering in a bearer by virtue of the bearer's exhibiting a degree of bending."@en ;
+    rdfs:subClassOf obo:PATO_0000052 .
+
+obo:PATO_0001595 a owl:Class ;
+    rdfs:label "depth"@en ;
+    iao:0000115 "A 1-D extent quality inhering in a bearer by virtue of the bearer's downward or backward or inward dimension."@en ;
+    rdfs:subClassOf obo:PATO_0001708 .
+
+<https://w3id.org/replicationwatch/cdbo/imports/pato-imaging-slice> a owl:Ontology ;
+    rdfs:label "PATO quality terms for imaging measures and laterality (slice)" ;
+    dcterms:created "2026-11-05" ;
+    dcterms:license <https://creativecommons.org/licenses/by/3.0/> ;
+    dcterms:source <https://github.com/pato-ontology/pato/tree/f16927f> .
+
+obo:PATO_0000052 a owl:Class ;
+    rdfs:label "shape"@en ;
+    iao:0000115 "A morphological quality inhering in a bearer by virtue of the bearer's ratios of distances between its features (points, edges, surfaces and also holes etc)."@en .
+
+obo:PATO_0001709 a owl:Class ;
+    rdfs:label "2-D extent"@en ;
+    iao:0000115 "A size quality inhering in an bearer by virtue of the bearer's extension in two dimensions."@en ;
+    rdfs:subClassOf obo:PATO_0000117 .
+
+obo:PATO_0001710 a owl:Class ;
+    rdfs:label "3-D extent"@en ;
+    iao:0000115 "A size quality inhering in an bearer by virtue of the bearer's extension in three dimensions."@en ;
+    rdfs:subClassOf obo:PATO_0000117 .
+
+obo:PATO_0000117 a owl:Class ;
+    rdfs:label "size"@en ;
+    iao:0000115 "A morphology quality inhering in a bearer by virtue of the bearer's physical magnitude."@en .
+
+obo:PATO_0001708 a owl:Class ;
+    rdfs:label "1-D extent"@en ;
+    iao:0000115 "A size quality inhering in an bearer by virtue of the bearer's extension in one dimension."@en ;
+    rdfs:subClassOf obo:PATO_0000117 .
+

@@ -1,0 +1,13 @@
+@prefix cdbo: <https://w3id.org/replicationwatch/cdbo/> .
+@prefix ex: <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+ex:R1 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R1" ; cdbo:hasClaimKey "ASD|MedSFG|Right|GMV|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R2 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R2" ; cdbo:hasClaimKey "ASD|MedSFG|Right|GMV|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Abstract Only" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R3 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R3" ; cdbo:hasClaimKey "ASD|MedSFG|Right|GMV|Decreased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Decreased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ASD ; cdbo:hasClaimLaterality "Right" .
+
+ex:R7 a cdbo:CDBO_0000003 ; cdbo:hasClaimID "R7" ; cdbo:hasClaimKey "ADHD|MedSFG|Right|GMV|Increased" ; cdbo:hasClaimKeyComplete "Yes" ; cdbo:hasClaimEvidenceLevel "Full Text" ; cdbo:hasClaimDirection "Increased" ; cdbo:hasMappedClaimRegion ex:MedSFG ; cdbo:hasMappedClaimMeasureCurie "[\"ex:GMV\"]" ; cdbo:hasMappedClaimCondition ex:ADHD ; cdbo:hasClaimLaterality "Right" .
+
+ex:MedSFG <http://www.w3.org/2000/01/rdf-schema#subClassOf> ex:SFG .

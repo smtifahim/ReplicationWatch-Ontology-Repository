@@ -1,0 +1,11 @@
+# Portal. Groups with the same condition whose region is BROADER than the focus region ("N more claims at the next broader level").
+# Parameter: {{FOCUS}} is replaced by an IRI in angle brackets. rdfs:subClassOf+ stands for the simplified is_a and part_of closure
+# of the imported UBERON slice; replace the predicate if the closure is materialized with another one.
+SELECT ?other ?otherRegion (COUNT(?member) AS ?claims)
+WHERE {
+  VALUES ?focus { {{FOCUS}} }
+  ?focus csdo:hasCondition ?cond ; csdo:hasRegion ?r1 .
+  ?other csdo:hasCondition ?cond ; csdo:hasRegion ?otherRegion .
+  ?r1 rdfs:subClassOf+ ?otherRegion .
+  OPTIONAL { ?member csdo:inClaimGroup ?other }
+} GROUP BY ?other ?otherRegion

@@ -1,0 +1,226 @@
+{
+  "study_schema": [],
+  "claims_schema": [],
+  "claims": [
+    {
+      "id": "SE-C01",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C02",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C03",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C04",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C05",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C06",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S1",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C07",
+      "quote_tier": "exact",
+      "quote_page": 8,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table S3",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C08",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [
+        "264",
+        "3.368",
+        "0.005"
+      ],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table 2",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C09",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [
+        "264",
+        "3.2804",
+        "0.006"
+      ],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table 2",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C10",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [
+        "264",
+        "0.220",
+        "0.996"
+      ],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table 2",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C11",
+      "quote_tier": "exact",
+      "quote_page": 6,
+      "quote_ok": true,
+      "p_numbers": [
+        "264",
+        "1.6137",
+        "0.373"
+      ],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "Table 2",
+      "reference_empty": false,
+      "reference_ok": true,
+      "section": "Results"
+    },
+    {
+      "id": "SE-C12",
+      "quote_tier": "exact",
+      "quote_page": 1,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "",
+      "reference_empty": true,
+      "reference_ok": true,
+      "section": "Abstract"
+    },
+    {
+      "id": "SE-C13",
+      "quote_tier": "exact",
+      "quote_page": 1,
+      "quote_ok": true,
+      "p_numbers": [],
+      "p_numbers_missing": [],
+      "p_ok": true,
+      "reference": "",
+      "reference_empty": true,
+      "reference_ok": true,
+      "section": "Abstract"
+    }
+  ],
+  "shared_quotes": {
+    "the RD Groups (Bilingual and Monolingual combined) had less GMV than the Control": [
+      "SE-C01",
+      "SE-C02"
+    ],
+    "For the opposite contrast, there were four regions where the Control Groups had ": [
+      "SE-C03",
+      "SE-C04",
+      "SE-C05",
+      "SE-C06"
+    ],
+    "while there was less GMV in Monolinguals with RD relative to Monolinguals withou": [
+      "SE-C08",
+      "SE-C09",
+      "SE-C10",
+      "SE-C11"
+    ],
+    "They also reveal no differences in left-hemisphere language cortex in dyslexia (": [
+      "SE-C12",
+      "SE-C13"
+    ]
+  },
+  "duplicate_statements": {},
+  "summary": {
+    "claims": 13,
+    "schema_errors": 0,
+    "quotes_exact": 13,
+    "quotes_normalised": 0,
+    "quotes_squeezed": 0,
+    "quotes_failed": 0,
+    "p_value_numbers_not_in_text": 0,
+    "empty_reference": 2,
+    "reference_not_found": 0,
+    "shared_quotes": 4
+  }
+}

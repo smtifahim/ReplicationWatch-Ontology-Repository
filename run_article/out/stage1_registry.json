@@ -1,0 +1,60 @@
+{
+  "registry": {
+    "Publication_ID": "SE-P1",
+    "Reported_Study_ID": "SE-S1",
+    "Document_Type": "Native PDF",
+    "Full_Text_Available": "Yes",
+    "Available_Sections": "Title, Abstract, Introduction, Methods, Results, Discussion, References, Tables, Figures",
+    "Article_Classification": "Primary",
+    "Content_Hash": "sha256:0dfba6f26225eb69a9e214952c383a69e3ebf5d6b895ab170ce82d81c6dddf2c"
+  },
+  "bibliographic": {
+    "Publication_ID": "SE-P1",
+    "Reported_Study_ID": "SE-S1",
+    "Article_Title": "Role of Bilingualism in the Neuroanatomical Differences in Children With Reading Disability (dyslexia)",
+    "Listed_Authors": "Alison K. Schug; Guinevere F. Eden",
+    "Publication_Year": "2026",
+    "Publication_Venue": "Developmental Science",
+    "DOI_Link": "https://doi.org/10.1111/desc.70086",
+    "Publication_Link": "https://doi.org/10.1111/desc.70086"
+  },
+  "parser": {
+    "Parser_Version": "pdftotext (poppler 24.02.0) used as fallback; Docling not installed in this run; bibliographic fields read from the PDF, no Crossref lookup"
+  },
+  "log": {
+    "pdf": "efd5369b-test.pdf",
+    "pages": 14,
+    "chars": 82562,
+    "chars_per_page": 5897,
+    "md5": "0dfba6f26225eb69",
+    "sections": [
+      "Title",
+      "Abstract",
+      "Introduction",
+      "Methods",
+      "Results",
+      "Discussion",
+      "References",
+      "Tables",
+      "Figures"
+    ],
+    "pdf_title": "Role of Bilingualism in the Neuroanatomical Differences in Children With Reading Disability (dyslexia)",
+    "doi": "10.1111/desc.70086"
+  },
+  "page_chars": [
+    3900,
+    7181,
+    7307,
+    6720,
+    5013,
+    6380,
+    1181,
+    3039,
+    7392,
+    7396,
+    7218,
+    7023,
+    8234,
+    4565
+  ]
+}

@@ -1,0 +1,82 @@
+[
+ {
+  "publication": {
+   "Publication_ID": "EXAMPLE-P1",
+   "Article_Title": "Example article 1 (Table 1 abstract)"
+  },
+  "study": {
+   "Analysis_Settings": "Not Specified",
+   "Analysis_Software": "Not Specified",
+   "Analysis_Software_Version": "Not Specified",
+   "Atlas_Parcellation": "Not Specified",
+   "Covariates": "Not Specified",
+   "Image_Resolution": "Not Specified",
+   "Imaging_Modality": "Structural MRI",
+   "Magnetic_Field_Strength": "Not Specified",
+   "Multiple_Comparison_Correction": "Not Specified",
+   "Operating_System": "Not Specified",
+   "Pulse_Sequence": "Not Specified",
+   "Scanner_Manufacturer_Model": "Not Specified",
+   "Statistical_Test": "Not Specified",
+   "Study_Dataset": "Not Specified",
+   "Study_Design_Type": "Not Specified",
+   "Study_ID": "EXAMPLE-S1",
+   "Morphometry_Method": "Voxel-Based Morphometry",
+   "Imaging_Modality_Mapped_Curie": "[\"nidm:MagneticResonanceImaging\", \"nidm:Structural\"]"
+  },
+  "claims": [
+   {
+    "Claim_Age_Group": "Child",
+    "Claim_Age_Range": "2 to 7 years",
+    "Claim_Comparator": "TD group",
+    "Claim_Condition": "ASD",
+    "Claim_Diagnostic_Criteria": "Not Specified",
+    "Claim_Direction": "Increased",
+    "Claim_Effect_Size": "Not Specified",
+    "Claim_Evidence_Quote": "Results demonstrated young children with ASD had increased gray matter volumes (GMVs) in the right medial superior frontal gyrus and left fusiform gyrus compared with the TD group.",
+    "Claim_Measure": "gray matter volumes",
+    "Claim_P_Value": "Not Specified",
+    "Claim_Population_Qualifiers": "Not Specified",
+    "Claim_Role": "Main",
+    "Claim_Sample_Size": "Not Specified",
+    "Claim_Sex_Distribution": "Not Specified",
+    "Claim_Source_Reference": "Abstract",
+    "Claim_Source_Section": "Abstract",
+    "Claim_Survived_Correction": "Not Specified",
+    "Claim_Variable_Type": "Diagnosis",
+    "Claim_ID": "EXAMPLE-C11",
+    "Claim_Region": "medial superior frontal gyrus",
+    "Claim_Laterality": "Right",
+    "Claim_Statement": "Young children with ASD have increased gray matter volumes in the right medial superior frontal gyrus compared with the TD group.",
+    "Claim_Sex_Group": "Not Specified",
+    "Claim_Laterality_Mapped_Curie": "[\"BSPO:0000007\"]"
+   },
+   {
+    "Claim_Age_Group": "Child",
+    "Claim_Age_Range": "2 to 7 years",
+    "Claim_Comparator": "TD group",
+    "Claim_Condition": "ASD",
+    "Claim_Diagnostic_Criteria": "Not Specified",
+    "Claim_Direction": "Increased",
+    "Claim_Effect_Size": "Not Specified",
+    "Claim_Evidence_Quote": "Results demonstrated young children with ASD had increased gray matter volumes (GMVs) in the right medial superior frontal gyrus and left fusiform gyrus compared with the TD group.",
+    "Claim_Measure": "gray matter volumes",
+    "Claim_P_Value": "Not Specified",
+    "Claim_Population_Qualifiers": "Not Specified",
+    "Claim_Role": "Main",
+    "Claim_Sample_Size": "Not Specified",
+    "Claim_Sex_Distribution": "Not Specified",
+    "Claim_Source_Reference": "Abstract",
+    "Claim_Source_Section": "Abstract",
+    "Claim_Survived_Correction": "Not Specified",
+    "Claim_Variable_Type": "Diagnosis",
+    "Claim_ID": "EXAMPLE-C12",
+    "Claim_Region": "fusiform gyrus",
+    "Claim_Laterality": "Left",
+    "Claim_Statement": "Young children with ASD have increased gray matter volumes in the left fusiform gyrus compared with the TD group.",
+    "Claim_Sex_Group": "Not Specified",
+    "Claim_Laterality_Mapped_Curie": "[\"BSPO:0000000\"]"
+   }
+  ]
+ }
+]

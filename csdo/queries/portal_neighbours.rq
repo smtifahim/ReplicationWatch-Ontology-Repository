@@ -1,0 +1,32 @@
+# Portal. Groups comparable to ONE focus group under a SELECTED criteria set. Returns a graph and persists nothing.
+# Parameters: {{FOCUS}} and {{CRITERIA_SET}} are replaced by IRIs in angle brackets, for example <https://.../group/abc> and csdo:DefaultAnchor.
+# The focus group is fixed, so any criteria set costs one scan of the groups.
+CONSTRUCT {
+  << ?focus csdo:comparableTo ?other >> csdo:criteriaSet ?set ;
+     csdo:lateralityRelation ?latRel ; csdo:measureRelation ?meaRel ; csdo:directionRelation ?dirRel .
+  ?other a csdo:CSDO_0000001 ; csdo:hasCondition ?c2 ; csdo:hasRegion ?r2 ; csdo:hasLaterality ?lat2 ;
+     csdo:hasMeasure ?mea2 ; csdo:hasDirection ?dir2 .
+}
+WHERE {
+  VALUES (?focus ?set) { ({{FOCUS}} {{CRITERIA_SET}}) }
+  ?set csdo:requiresCondition ?rc ; csdo:requiresRegion ?rr ; csdo:requiresLaterality ?rl ; csdo:requiresMeasure ?rm ; csdo:requiresDirection ?rd .
+  ?focus a csdo:CSDO_0000001 .
+  ?other a csdo:CSDO_0000001 . FILTER (?other != ?focus)
+  OPTIONAL { ?focus csdo:hasCondition ?c1 }    OPTIONAL { ?other csdo:hasCondition ?c2 }
+  OPTIONAL { ?focus csdo:hasRegion ?r1 }       OPTIONAL { ?other csdo:hasRegion ?r2 }
+  OPTIONAL { ?focus csdo:hasLaterality ?lat1 } OPTIONAL { ?other csdo:hasLaterality ?lat2 }
+  OPTIONAL { ?focus csdo:hasMeasure ?mea1 }    OPTIONAL { ?other csdo:hasMeasure ?mea2 }
+  OPTIONAL { ?focus csdo:hasDirection ?dir1 }  OPTIONAL { ?other csdo:hasDirection ?dir2 }
+  FILTER ( !?rc || (BOUND(?c1) && ?c1 = ?c2) )
+  FILTER ( !?rr || (BOUND(?r1) && ?r1 = ?r2) )
+  FILTER ( !?rl || (BOUND(?lat1) && ?lat1 = ?lat2) )
+  FILTER ( !?rm || (BOUND(?mea1) && ?mea1 = ?mea2) )
+  FILTER ( !?rd || (BOUND(?dir1) && ?dir1 = ?dir2) )
+  VALUES (?dir1 ?pol1 ?kind1) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  VALUES (?dir2 ?pol2 ?kind2) { ("Increased" 1 "difference") ("Decreased" -1 "difference") ("No Difference" 0 "difference")
+                                ("Positive Association" 1 "association") ("Negative Association" -1 "association") ("No Association" 0 "association") }
+  BIND (IF(!BOUND(?lat1) || !BOUND(?lat2) || ?lat1 = "Not Specified" || ?lat2 = "Not Specified", "Unknown", IF(?lat1 = ?lat2, "Same", "Different")) AS ?latRel)
+  BIND (IF(!BOUND(?mea1) || !BOUND(?mea2), "Unknown", IF(?mea1 = ?mea2, "Same", "Different")) AS ?meaRel)
+  BIND (IF(?kind1 != ?kind2, "NotComparable", IF(?pol1 = ?pol2, "Concordant", IF(?pol1 * ?pol2 = -1, "Opposite", "NullVsEffect"))) AS ?dirRel)
+}

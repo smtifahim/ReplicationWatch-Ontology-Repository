@@ -1,0 +1,9 @@
+# Load report: records that the default anchor cannot see (no grounded condition or region) and records with incomplete keys.
+SELECT (COUNT(DISTINCT ?noAnchor) AS ?recordsWithoutAnchor) (COUNT(DISTINCT ?incomplete) AS ?incompleteKeys)
+WHERE {
+  { ?noAnchor a cdbo:CDBO_0000003 . FILTER NOT EXISTS { ?noAnchor cdbo:hasMappedClaimCondition ?x } }
+  UNION
+  { ?noAnchor a cdbo:CDBO_0000003 . FILTER NOT EXISTS { ?noAnchor cdbo:hasMappedClaimRegion ?y } }
+  UNION
+  { ?incomplete a cdbo:CDBO_0000003 ; cdbo:hasClaimKeyComplete "No" }
+}

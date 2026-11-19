@@ -1,0 +1,18 @@
+{
+ "_comment": "Seed lookups for the deterministic grounding script. Editable. Every CURIE must exist in the vendored slices under imports/ (checked by tools/check_grounding_seed.py). Laterality is a direct lookup from the Claim_Laterality value. Measure text is matched by whole words, longest pattern first, to a PATO quality. A tissue named in the measure (for example gray matter) is looked up separately in UBERON and appended to the list, so gray matter volume and white matter volume stay different measures. Measures with no match go to Claim_Measure_Unmappable for curators (for example fractional anisotropy, mean diffusivity, gyrification index, gray matter density).",
+ "laterality": {
+  "Left": "BSPO:0000000",
+  "Right": "BSPO:0000007",
+  "Bilateral": "PATO:0000618",
+  "Not Specified": null
+ },
+ "measure_quality": [
+  {"patterns": ["surface area", "cortical surface area", "area"], "curie": "PATO:0001323"},
+  {"patterns": ["cortical thickness", "thickness"], "curie": "PATO:0000915"},
+  {"patterns": ["volume", "volumes", "volumetric"], "curie": "PATO:0000918"},
+  {"patterns": ["sulcal depth", "depth"], "curie": "PATO:0001595"},
+  {"patterns": ["curvature", "mean curvature"], "curie": "PATO:0001591"},
+  {"patterns": ["width"], "curie": "PATO:0000921"},
+  {"patterns": ["length"], "curie": "PATO:0000122"}
+ ]
+}

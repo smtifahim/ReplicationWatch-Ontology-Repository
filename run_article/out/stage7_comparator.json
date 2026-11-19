@@ -1,0 +1,140 @@
+{
+  "xlsx": "SE-P1_rdfstar_edges_for_comparator.xlsx",
+  "edges": [
+    {
+      "id": "E01",
+      "a": "G09",
+      "b": "G04",
+      "lat": "Different",
+      "mea": "Same",
+      "dir": "Opposite",
+      "cand": "none",
+      "why": "laterality is Different and measure is Same; both must be Same before a supports or challenges reading is suggested",
+      "a_claims": [
+        "SE-C09"
+      ],
+      "b_claims": [
+        "SE-C04"
+      ],
+      "region": "middle temporal gyrus (UBERON:0002771)"
+    },
+    {
+      "id": "E02",
+      "a": "G04",
+      "b": "G11",
+      "lat": "Different",
+      "mea": "Same",
+      "dir": "NullVsEffect",
+      "cand": "none",
+      "why": "laterality is Different and measure is Same; both must be Same before a supports or challenges reading is suggested",
+      "a_claims": [
+        "SE-C04"
+      ],
+      "b_claims": [
+        "SE-C11"
+      ],
+      "region": "middle temporal gyrus (UBERON:0002771)"
+    },
+    {
+      "id": "E03",
+      "a": "G08",
+      "b": "G10",
+      "lat": "Same",
+      "mea": "Same",
+      "dir": "NullVsEffect",
+      "cand": "mp:challenges (candidate)",
+      "why": "same laterality, same measure, one reports an effect, the other reports none",
+      "a_claims": [
+        "SE-C08"
+      ],
+      "b_claims": [
+        "SE-C10"
+      ],
+      "region": "middle frontal gyrus (UBERON:0002702)"
+    },
+    {
+      "id": "E04",
+      "a": "G09",
+      "b": "G11",
+      "lat": "Same",
+      "mea": "Same",
+      "dir": "NullVsEffect",
+      "cand": "mp:challenges (candidate)",
+      "why": "same laterality, same measure, one reports an effect, the other reports none",
+      "a_claims": [
+        "SE-C09"
+      ],
+      "b_claims": [
+        "SE-C11"
+      ],
+      "region": "middle temporal gyrus (UBERON:0002771)"
+    }
+  ],
+  "n_edges": 4,
+  "n_annotation_rows": 24,
+  "buckets": [
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002771",
+      "groups": 3,
+      "edges": 3
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002702",
+      "groups": 2,
+      "edges": 1
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002581",
+      "groups": 1,
+      "edges": 0
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002703",
+      "groups": 1,
+      "edges": 0
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002586",
+      "groups": 1,
+      "edges": 0
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002022",
+      "groups": 1,
+      "edges": 0
+    },
+    {
+      "cond": "http://purl.obolibrary.org/obo/HP_0010522",
+      "reg": "http://purl.obolibrary.org/obo/UBERON_0002943",
+      "groups": 1,
+      "edges": 0
+    }
+  ],
+  "groups_in_edges": 5,
+  "groups_total": 13,
+  "portal": {
+    "neighbours_DefaultAnchor": [
+      "G04",
+      "G11"
+    ],
+    "neighbours_AnchorPlusMeasure": [
+      "G04",
+      "G11"
+    ],
+    "broader_region_groups": [],
+    "support_by_facet": [
+      {
+        "age": "Child",
+        "evidence": "Full Text",
+        "claims": 1
+      }
+    ],
+    "focus": "G09"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/replicationwatch/cdbo/claims.schema.json",
+  "title": "CDBO claims call output",
+  "description": "Generated from CDBO 0.4.1-draft. Do not edit by hand.",
+  "type": "object",
+  "properties": {
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Claim"
+      }
+    }
+  },
+  "required": [
+    "claims"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "ageGroupType": {
+      "type": "string",
+      "enum": [
+        "Child",
+        "Adolescent",
+        "Adult",
+        "Older Adult",
+        "Mixed",
+        "Not Specified"
+      ]
+    },
+    "articleSectionType": {
+      "type": "string",
+      "enum": [
+        "Abstract",
+        "Conclusion",
+        "Discussion",
+        "Figures",
+        "Introduction",
+        "Methods",
+        "References",
+        "Results",
+        "Tables",
+        "Title"
+      ]
+    },
+    "claimRoleType": {
+      "type": "string",
+      "enum": [
+        "Main",
+        "Supporting"
+      ]
+    },
+    "directionType": {
+      "type": "string",
+      "enum": [
+        "Increased",
+        "Decreased",
+        "No Difference",
+        "Positive Association",
+        "Negative Association",
+        "No Association"
+      ]
+    },
+    "lateralityType": {
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right",
+        "Bilateral",
+        "Not Specified"
+      ]
+    },
+    "sexGroupType": {
+      "type": "string",
+      "enum": [
+        "Male Only",
+        "Female Only",
+        "Mixed",
+        "Not Specified"
+      ]
+    },
+    "variableType": {
+      "type": "string",
+      "enum": [
+        "Diagnosis",
+        "Trait or Phenotype",
+        "Exposure",
+        "Demographic",
+        "Other"
+      ]
+    },
+    "yesNoType": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No",
+        "Not Specified"
+      ]
+    },
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "Claim_Age_Group": {
+          "description": "The age group of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable ages.",
+          "$ref": "#/$defs/ageGroupType"
+        },
+        "Claim_Age_Range": {
+          "type": "string",
+          "description": "The age of the participants to which the claim applies."
+        },
+        "Claim_Comparator": {
+          "type": "string",
+          "description": "The reference group the finding is measured against, as written in the article. It is not part of the claim key and is displayed to experts. Not Applicable for association claims."
+        },
+        "Claim_Condition": {
+          "type": "string",
+          "description": "The condition or variable of interest of the claim, exactly as written in the article. It is not normalized by the LLM."
+        },
+        "Claim_Diagnostic_Criteria": {
+          "type": "string",
+          "description": "The criteria or instruments used to establish the diagnosis."
+        },
+        "Claim_Direction": {
+          "description": "The direction of the finding relative to the comparator, or of the association.",
+          "$ref": "#/$defs/directionType"
+        },
+        "Claim_Effect_Size": {
+          "type": "string",
+          "description": "The effect size reported for the claim."
+        },
+        "Claim_Evidence_Quote": {
+          "type": "string",
+          "description": "The verbatim passage of the article that supports the claim. The pipeline rejects a claim whose quote cannot be found in the source text."
+        },
+        "Claim_Laterality": {
+          "description": "The side of the brain to which the region refers.",
+          "$ref": "#/$defs/lateralityType"
+        },
+        "Claim_Measure": {
+          "type": "string",
+          "description": "The imaging-derived measure the claim is about, exactly as written in the article."
+        },
+        "Claim_P_Value": {
+          "type": "string",
+          "description": "The p-value reported for the claim."
+        },
+        "Claim_Population_Qualifiers": {
+          "type": "string",
+          "description": "Other qualifiers of the population, such as comorbidity or medication status."
+        },
+        "Claim_Region": {
+          "type": "string",
+          "description": "The brain region of the claim, exactly as written in the article, without the laterality."
+        },
+        "Claim_Role": {
+          "description": "Whether the claim is a main claim of the article or a supporting one.",
+          "$ref": "#/$defs/claimRoleType"
+        },
+        "Claim_Sample_Size": {
+          "type": "string",
+          "description": "The number of participants in each group the claim compares."
+        },
+        "Claim_Sex_Distribution": {
+          "type": "string",
+          "description": "The sex distribution of the participants to which the claim applies."
+        },
+        "Claim_Sex_Group": {
+          "description": "The sex composition of the participants to which the claim applies. It is a coarse facet used to show whether claims about the same finding come from comparable samples.",
+          "$ref": "#/$defs/sexGroupType"
+        },
+        "Claim_Source_Reference": {
+          "type": "string",
+          "description": "The table or figure the claim draws on, if any."
+        },
+        "Claim_Source_Section": {
+          "description": "The article section from which the quote was taken.",
+          "$ref": "#/$defs/articleSectionType"
+        },
+        "Claim_Statement": {
+          "type": "string",
+          "description": "One atomic claim written as a single self-contained sentence: one finding about one condition, one region, one measure and one direction, against one comparator. A sentence that reports several regions yields several claims."
+        },
+        "Claim_Survived_Correction": {
+          "description": "Whether the finding remained significant after multiple-comparison correction.",
+          "$ref": "#/$defs/yesNoType"
+        },
+        "Claim_Variable_Type": {
+          "description": "The kind of variable the condition slot holds: a diagnosis, a trait or phenotype, an exposure, a demographic variable or something else.",
+          "$ref": "#/$defs/variableType"
+        }
+      },
+      "required": [
+        "Claim_Age_Group",
+        "Claim_Age_Range",
+        "Claim_Comparator",
+        "Claim_Condition",
+        "Claim_Diagnostic_Criteria",
+        "Claim_Direction",
+        "Claim_Effect_Size",
+        "Claim_Evidence_Quote",
+        "Claim_Laterality",
+        "Claim_Measure",
+        "Claim_P_Value",
+        "Claim_Population_Qualifiers",
+        "Claim_Region",
+        "Claim_Role",
+        "Claim_Sample_Size",
+        "Claim_Sex_Distribution",
+        "Claim_Sex_Group",
+        "Claim_Source_Reference",
+        "Claim_Source_Section",
+        "Claim_Statement",
+        "Claim_Survived_Correction",
+        "Claim_Variable_Type"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

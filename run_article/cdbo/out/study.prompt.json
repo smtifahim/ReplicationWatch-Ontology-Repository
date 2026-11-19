@@ -1,0 +1,144 @@
+{
+  "system": {
+    "pipeline": {
+      "role": "You are extracting structured metadata and claims from one full-text neuroimaging article into a predefined set of fields, guided by the ClaimsDB Ontology (CDBO).",
+      "task": "The article text is loaded once and reused, with prompt caching, across two sequential extraction calls: (1) Study Metadata (see hasStudyMetadata's hasGeneralStudyMetadataExtractionPrompt) and (2) Claims (see hasClaimRecordMetadata's hasGeneralClaimExtractionPrompt). Registry, bibliographic, SciScore, mapping and provenance fields are filled by scripts and are never requested from you.",
+      "article_classification": "Whether the article is primary or secondary is decided by the registry before extraction and is authoritative. Secondary articles (for example reviews and meta-analyses) are not sent to these calls in version 0.1.",
+      "scope": "Only MRI-based anatomical observations in humans are in scope. Ignore animal studies, functional-only measures and purely behavioral findings.",
+      "global_rules": [
+        "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+        "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+        "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+        "Do not invent identifiers, links or numbers."
+      ]
+    },
+    "this_call": {
+      "role": "You are extracting the study-level methods metadata of one neuroimaging article.",
+      "task": "You are given the article text and a set of fields, each supplied separately as a compact fragment (field, description, example, allowed values and extraction rule). Return one JSON object whose keys are the field names given by each fragment's 'field' value.",
+      "output_schema": {
+        "type": "object",
+        "keys": "the 'field' value of each fragment",
+        "values": "the extracted string"
+      },
+      "rules": [
+        "Take values from the Methods section first, then from other sections.",
+        "Report what the authors report; do not infer a value that is not stated.",
+        "If the article reports several studies or samples, describe the sample that produced the main results."
+      ],
+      "global_rules": [
+        "Use only the supplied article text. Do not use outside knowledge to fill a value.",
+        "If a value is not reported, write the literal string 'Not Specified', except where a field's own rule says otherwise.",
+        "Repair obvious text-extraction artifacts in values (words split across lines or columns, stray hyphens, spaces inserted inside words), but never alter the characters of an evidence quote.",
+        "Do not invent identifiers, links or numbers."
+      ]
+    }
+  },
+  "field_fragments": [
+    {
+      "field": "Analysis_Settings",
+      "description": "Analysis settings that affect results, such as smoothing kernel, thresholds and preprocessing choices.",
+      "example": "\"Smoothing kernel of 8 mm FWHM; default recon-all settings.\"",
+      "normalization": "Summarize only the settings that the article reports and that could change results (for example smoothing kernel, thresholds, preprocessing choices) in one short passage. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Analysis_Software",
+      "description": "The software used to analyze the images, as named in the article.",
+      "example": "\"FreeSurfer\"",
+      "normalization": "List each analysis tool as named in the article, without version numbers, separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Analysis_Software_Version",
+      "description": "The version of the analysis software.",
+      "example": "\"7.1.1\"",
+      "normalization": "Give the version of each tool listed in Analysis_Software, in the same order, separated by semicolons. Use 'Not Specified' for any tool whose version is not reported."
+    },
+    {
+      "field": "Atlas_Parcellation",
+      "description": "The atlas or parcellation used to define brain regions.",
+      "example": "\"Desikan-Killiany atlas\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Name the atlas or parcellation used to define the regions."
+    },
+    {
+      "field": "Morphometry_Method",
+      "description": "The analysis technique used to measure brain structure, as a coarse category for filtering. The software, version and settings are recorded in their own fields. Candidate values for the NIDM-Terms vocabulary in InterLex.",
+      "example": "\"Voxel-Based Morphometry\"",
+      "allowed_values": [
+        "Voxel-Based Morphometry",
+        "Surface-Based Morphometry",
+        "Region-of-Interest Volumetry",
+        "Manual Tracing",
+        "Tensor-Based Morphometry",
+        "Other",
+        "Not Specified"
+      ],
+      "normalization": "Choose the category that matches how the article measured brain structure: Voxel-Based Morphometry (voxel-wise comparison of tissue maps), Surface-Based Morphometry (cortical thickness, surface area or gyrification on a reconstructed surface), Region-of-Interest Volumetry (volumes of predefined regions from automated segmentation), Manual Tracing (regions outlined by hand), Tensor-Based Morphometry (deformation fields). Use Other for any other method and Not Specified if the article does not say. If several methods are used, give the one that produced the claim's finding."
+    },
+    {
+      "field": "Operating_System",
+      "description": "The operating system on which the analysis ran.",
+      "example": "\"Ubuntu 20.04\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Study_Dataset",
+      "description": "The dataset or cohort whose participants were studied, as named in the article. Used to flag claims that share a cohort and are therefore not independent.",
+      "example": "\"Autism Brain Imaging Data Exchange (ABIDE)\"",
+      "normalization": "Give the name of the dataset or cohort as the article names it (for example ABCD Study, ABIDE). If the authors recruited the participants themselves and name no dataset, write 'Local recruitment'. If several datasets were pooled, list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Image_Resolution",
+      "description": "The spatial resolution of the acquired images.",
+      "example": "\"1 mm isotropic voxels\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give the voxel size with units."
+    },
+    {
+      "field": "Imaging_Modality",
+      "description": "The imaging modality and contrast analyzed.",
+      "example": "\"T1-weighted structural MRI\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Magnetic_Field_Strength",
+      "description": "The magnetic field strength of the scanner.",
+      "example": "\"3 T\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give the value with its unit (for example 3 T)."
+    },
+    {
+      "field": "Pulse_Sequence",
+      "description": "The pulse sequence and its main acquisition parameters.",
+      "example": "\"MPRAGE, TR 2300 ms, TE 2.98 ms, flip angle 9 degrees\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Include the main acquisition parameters the article reports (for example TR, TE, flip angle)."
+    },
+    {
+      "field": "Scanner_Manufacturer_Model",
+      "description": "The manufacturer and model of the MRI scanner.",
+      "example": "\"3.0 T Siemens Magnetom Prisma\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Give manufacturer and model together."
+    },
+    {
+      "field": "Covariates",
+      "description": "The covariates included in the statistical model.",
+      "example": "\"Age, sex, site and total intracranial volume\"",
+      "normalization": "List the covariates entered into the statistical model, separated by commas. If the article states that no covariates were used, write 'None'. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Multiple_Comparison_Correction",
+      "description": "The method used to correct for multiple comparisons, with its threshold.",
+      "example": "\"False discovery rate correction at q < 0.05\"",
+      "normalization": "Name the correction method and its threshold as reported (for example FDR q < 0.05). If the article states that no correction was applied, write 'None'. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Statistical_Test",
+      "description": "The statistical test or model used for the group comparison or association.",
+      "example": "\"Two-sample t-test\"",
+      "normalization": "Name the statistical test or model used for the group comparison or association, as the article names it. If the article does not report the value, write the literal string 'Not Specified'."
+    },
+    {
+      "field": "Study_Design_Type",
+      "description": "The design of the study, for example case-control, longitudinal, cross-sectional or mega-analysis.",
+      "example": "\"Cross-sectional case-control study using voxel-based morphometry.\"",
+      "normalization": "Report the value as written in the article. If several values apply (for example several scanners or sites), list them separated by semicolons. If the article does not report the value, write the literal string 'Not Specified'. Use the authors' own design term (for example case-control, longitudinal, cross-sectional, mega-analysis)."
+    }
+  ],
+  "output_schema_file": "study.schema.json"
+}

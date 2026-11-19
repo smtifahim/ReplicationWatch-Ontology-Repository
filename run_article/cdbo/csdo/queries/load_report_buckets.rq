@@ -1,0 +1,4 @@
+# Load report: the largest anchors. n groups under one anchor give n(n-1)/2 edges, so this is the cost driver.
+SELECT ?cond ?reg (COUNT(?g) AS ?groups) ((COUNT(?g) * (COUNT(?g) - 1) / 2) AS ?edges)
+WHERE { ?g a csdo:CSDO_0000001 ; csdo:hasCondition ?cond ; csdo:hasRegion ?reg }
+GROUP BY ?cond ?reg ORDER BY DESC(?groups) LIMIT 10
